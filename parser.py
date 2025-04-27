@@ -337,7 +337,7 @@ def generate_json_schema_from_raml_file(raml_file_path):
 if __name__ == "__main__": # Ensures this block runs only when script is executed directly
     # Set the path to the main RAML specification file.
     # Assumes 'spec.raml' is in the same directory as 'parser.py' or provide a full path.
-    raml_path = 'spec.raml' # <--- MODIFIED TO POINT TO spec.raml
+    raml_path = 'dataTypes/bookings/get-by-id-response.raml' # <--- MODIFIED TO POINT TO spec.raml
 
     print("-" * 30)
     print("Starting RAML to JSON Schema Generation")
