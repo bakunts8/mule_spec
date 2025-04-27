@@ -1,0 +1,24 @@
+#%RAML 1.0 NamedExample
+Complete Web Identity Profile Response Example with Warnings:
+  token: eyJhbGciOiJIUzI1NiIsIn
+  crmasisId: CRM38951234
+  loginMode: full
+  name: John
+  surname: Wick
+  goldenId: "123456"
+  _warnings: 
+    - code: data_validation
+      message: Field name value is invalid.
+      traceId: 73b309b81fd54d7fb43ead4052210959
+      errorId: 79b309b81fd54d7fb43ead4000010959
+      dateTime: "2024-04-23T10:00:00Z"
+      source:
+        name: api-name
+        layer: API
+      causes: 
+        - code: invalid_value
+          message: <Field name> does not match regex pattern:'^(e|p|s)\\-(s2p)-(\\S)*$'
+          field: fieldParent.fieldName
+          source:
+            name: api-name
+            layer: API

@@ -1,0 +1,42 @@
+#%RAML 1.0 DataType
+
+displayName: Error
+description: Definition of an error response payload, as defined in the MSC Mule Error Handling guidelines.
+properties:
+  code:
+    description: Pattern based scheme that identifies a specific and unique error condition.
+    type: string
+    required: true
+    example: data_validation
+  message:
+    description: Human readable description of the error that occurred.   
+    type: string
+    required: true
+    example: Field name value is invalid.
+  traceId:
+    description: A unique identifier that provides the ability to rapidly identify and trace distributed request processing.
+    type: string
+    required: true
+    example: 73b309b81fd54d7fb43ead4052210959
+  errorId:
+    description: A unique identifier that provides the ability to identify errors and link them with logs.
+    type: string
+    required: true
+    example: 79b309b81fd54d7fb43ead4000010959
+  dateTime:
+    description: An accurate timestamp indicating the exact moment when the error occurred.
+    type: datetime
+    required: true
+    example: 2024-04-23T10:00:00Z  
+  source:
+    description: Used to indicate the error originated elsewhere or self-reference when error was generated internally or as a direct consequence of consuming a downstream events.
+    type: !include error-source.raml
+    required: false
+  causes:
+    description: Provides additional information regarding the cause of the error.
+    type: array
+    xml:
+      wrapped: true
+    items:
+      !include error-cause.raml
+    required: false

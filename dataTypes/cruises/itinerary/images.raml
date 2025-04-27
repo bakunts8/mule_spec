@@ -1,0 +1,10 @@
+#%RAML 1.0 DataType
+displayName: Image details definition
+description: Image details
+type: object
+additionalProperties: false
+properties:
+  desktop: 
+    type: !include ../../common/base-image-details.raml
+  mobile:
+    type: !include ../../common/base-image-details.raml

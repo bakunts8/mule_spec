@@ -1,0 +1,80 @@
+#%RAML 1.0 DataType
+displayName: Booking details
+description: Booking details definition
+additionalProperties: false
+properties:
+  bookings:
+    type: array
+    description: List of booking details
+    minItems: 0
+    items:
+      type: object
+      description: Booking details
+      additionalProperties: false
+      properties:
+        number:
+          type: string
+          description: The booking number
+          required: true
+          example: "123456"
+        email:
+          type: email
+          required: true
+        agencyId:
+          type: string
+          description: The agency identifier used when booking
+          required: true
+          example: "UK123456"
+        cruiseId:
+          type: string
+          description: The cruise ID
+          required: true
+          example: "DI20241115MIAMIA"
+        channel:
+          type: string
+          description: The origin when booking
+          required: true
+          example: "B2C"
+        cabinNumber:
+          type: string
+          description: Booking cabin number
+          required: true
+          example: "10161"
+        marketCode:
+          type: !include ../primitives/market-code.raml
+          description: The market code used when booking
+          required: true
+          example: USA
+        createdDate:
+          type: date-only
+          description: Date when booking was created
+          required: true
+          example: "2025-01-10"  
+        region:
+          type: string
+          description: The booking region
+          required: true
+          example: CAR
+        cruiseLength:
+          type: number
+          description: The duration of the cruise in days
+          required: true
+          example: 7
+        status:
+          type: string
+          description: The booking status
+          enum:
+            - BOOKED
+            - CANCELLED
+            - OPTION
+            - QUOTE
+            - WAITLIST
+          required: true
+          example: BOOKED
+        officeCode:
+          type: !include ../primitives/office-code.raml
+          description: The office code used when booking
+          required: true
+          example: USA
+
+examples: !include ../../examples/bookings/get-response.raml

@@ -1,0 +1,40 @@
+#%RAML 1.0 DataType
+displayName: Token details
+description: Token details definition
+additionalProperties: false
+properties:
+  token:
+    type: string
+    description: The updated token
+    required: true
+    example: "eyJhbGciOiJIUzI1NiIsIn"
+  loginMode:
+    type: string
+    enum:
+      - full
+    description: Field to identify full login or a light login
+    required: true
+    example: "full"
+  crmasisId:
+    type: string
+    description: The identifier of the customer in CRM AS IS
+    required: false
+    example: "CRM123456"
+  goldenId:
+    type: string
+    description: The identifier of the customer in CHUB
+    required: false
+    example: "12345678"
+  name:
+    type: string
+    description: First name of the customer
+    required: false
+    example: "sam"
+  surname:
+    type: string
+    description: Last name of the customer
+    required: false
+    example: "speed"
+
+
+examples: !include ../../examples/loginTokenExchange/response.raml

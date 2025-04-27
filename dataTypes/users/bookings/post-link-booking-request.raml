@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+displayName: Link booking
+description: Link booking
+additionalProperties: false
+properties:
+  number:
+    type: bookingNumber
+    description: The booking number
+    required: true
+    example: "58630003"
+
+examples: !include ../../../examples/users/bookings/post-link-booking-request.raml

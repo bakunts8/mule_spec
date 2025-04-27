@@ -1,0 +1,11 @@
+#%RAML 1.0 DataType
+displayName: Excursions Response
+description: Excursions Response definition
+type: object
+additionalProperties: false
+properties:
+  excursions:
+    type: array
+    items: !include excursion.raml
+
+examples: !include ../../../examples/cruises/excursions/get-response.raml

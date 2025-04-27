@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+displayName: Upgrades
+description: Upgrades details
+additionalProperties: false
+properties:
+  cruiseId:
+    type: string
+    description: Id of cruise
+    required: true
+    example: SC20240928MIAMIA
+
+examples: !include /examples/bookings/post-upgrades-request.raml

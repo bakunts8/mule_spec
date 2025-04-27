@@ -1,0 +1,305 @@
+#%RAML 1.0 DataType
+displayName: Cabin 
+description: Information about cabin
+type: !include ./items-info.raml
+additionalProperties: false
+properties:
+  categoryCode:
+    type: string
+    description: The value of the sailing category code
+    required: true
+    example: "CAT123"
+  categoryDescription:
+    type: string
+    description: The value of the sailing category description
+    required: true
+    example: "Category description"
+  pricedCategoryCode:
+    type: string
+    description: The value of the priced category code
+    required: true
+    example: "PRC123"
+  priceCode:
+    type: string
+    description: The value of the promotion code
+    required: true
+    example: "PRC123"
+  priceDescription:
+    type: string
+    description: The value of the promotion description
+    required: true
+    example: "Price description"
+  priceType:
+    type: string
+    description: The value of price type
+    required: true
+    example: "PRC123"
+  isEligibleForETickets:
+    type: boolean
+    description: Flag to indicate if eligible for e-ticket
+    required: false
+    example: true
+  number:
+    type: string
+    description: The value of the cabin number
+    required: true
+    example: "123"
+  checkInTime:
+    type: string
+    description: The value of the sailing check-in time
+    required: true
+    example: "10:30:30"
+  hasObstructedView:
+    type: boolean
+    description: The value for checking if the view is obstructed – port, window etc.
+    required: false
+    example: true
+  isInstantConfirmation:
+    type: boolean
+    description: The value representing if instant confirmation is enabled or not
+    required: true
+    example: true
+  isComplimentary:
+    type: boolean
+    description: The complimentary status
+    required: true
+    example: true
+  isGuaranteeClearable:
+    type: boolean
+    description: The value representing if the sailing is guard clearable
+    required: true
+    example: true
+  isCruiseChangeAllowed:
+    type: boolean
+    description: The value representing if the cruise is moveable
+    required: false
+    example: true
+  isBiometricCheckInEnabled:
+    type: boolean
+    description: The value for the biometric check-in
+    required: true
+    example: true
+  assemblyStation:
+    type: string
+    description: The value of assembly station
+    required: true
+    example: "Station1"
+  bookingStatus:
+    type: !include ./booking-status.raml
+    additionalProperties: false
+    required: false
+  cruise:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      id:
+        type: string
+        description: The unique reference for a cruise
+        required: true
+        example: "CRU123456"
+      departureDate:
+        type: date-only
+        description: The date of the sailing
+        required: true
+        example: 2025-03-20
+      departureTime:
+        type: string
+        description: The time of the sailing
+        required: true
+        example: "10:30:30"
+      arrivalDate:
+        type: date-only
+        description: The value of the sailing return date
+        required: true
+        example: 2025-03-20
+      arrivalPort:
+        type: string
+        description: The value of the return port
+        required: true
+        example: "PRT"
+      numberOfSailingDays:
+        type: string
+        description: The sailing duration in days
+        required: true
+        example: "5"
+      demographicArea:
+        type: string
+        description: The value of the demographic area
+        required: true
+        example: "Area"
+      isAccessibilityFriendly:
+        type: boolean
+        description: The status of challenging the sailing from physical perspective
+        required: false
+        example: true
+      departurePort:
+        type: object
+        additionalProperties: false
+        required: true
+        properties:
+          code:
+            type: string
+            description: The port code
+            required: true
+            example: "PRT"
+      ship:
+        type: object
+        additionalProperties: false
+        required: true
+        properties:
+          code:
+            type: string
+            description: The reference code for a ship
+            required: true
+            example: "SH1234"
+          name:
+            type: string
+            description: The name of a ship
+            required: true
+            example: "Ship"
+      itinerary:
+        type: object
+        additionalProperties: false
+        required: true
+        properties:
+          code:
+            type: string
+            description: The code for the sailing itinerary
+            required: true
+            example: "IT1234"
+          description:
+            type: string
+            description: The description of the itinerary for the sailing
+            required: true
+            example: "Itinerary description"
+  deck:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      code:
+        type: string
+        description: The value of the deck code
+        required: true
+        example: "D123"
+      description:
+        type: string
+        description: The value of the deck description
+        required: true
+        example: "Deck description"
+  discounts:
+    type: array
+    required: false
+    items:
+      properties:
+        code:
+          type: string
+          description: The code of the discount
+          required: false
+          example: "TEST123"
+        rules:
+          type: string
+          description: The value containing the rules applied to the discount
+          required: false
+          example: "RL123"
+        description:
+          type: string
+          description: The description of the discount
+          required: false
+          example: "Discount description"
+        'type':
+          type: string
+          enum:
+            - AMOUNT
+            - PERCENTAGE
+            - UNCLASSIFIED
+          description: The type of the discount
+          required: false
+          example: "AMOUNT"
+        value:
+          type: string
+          description: The value of the discount
+          required: false
+          example: "100"
+        amount:
+          type: amount
+          description: The amount of the discount
+          required: false
+  diningDetails:
+    type: object
+    additionalProperties: false
+    required: false
+    properties:
+      code:
+        type: string
+        description: The value of the dining room code
+        required: false
+        example: "DD123"
+      seatingInformation:
+        type: string
+        description: The value of the dining seating request
+        required: false
+        example: "12"
+      description:
+        type: string
+        description: The value of the dining additional preferences
+        required: false
+        example: "Dining details"
+      notes:
+        type: string
+        description: Additional dining notes
+        required: false
+        example: "Note"
+      passengers:
+        type: array
+        items:
+          properties:
+            number:
+              type: number
+              description: Passenger number
+              required: false
+              example: 3
+            id:
+              type: string
+              description: Passenger id
+              required: false
+              example: "12345678"
+  promotion:
+    type: object
+    additionalProperties: false
+    required: false
+    properties:
+      isApplied:
+        type: boolean
+        description: The presence or absence of promotion
+        required: false
+        example: true
+      shouldBeDisplayed:
+        type: boolean
+        description: Whether to display the promotion or not
+        required: false
+        example: true
+  cruiseChangeReason:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      code:
+        type: string
+        description: The value representing the reason code
+        required: true
+        example: "CHG123"
+      description:
+        type: string
+        description: The value of reason code description
+        required: true
+        example: "Change reason description"
+  total:
+    type: !include ./item-totals.raml
+    additionalProperties: false
+    required: false
+  relatedItem:
+    type: !include ./related-item.raml
+    additionalProperties: false
+    required: false

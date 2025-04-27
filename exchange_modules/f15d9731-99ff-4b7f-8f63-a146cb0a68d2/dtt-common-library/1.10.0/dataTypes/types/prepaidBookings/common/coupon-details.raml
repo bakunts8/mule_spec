@@ -1,0 +1,34 @@
+#%RAML 1.0 DataType
+type: object
+description: The coupon details
+additionalProperties: false
+properties:
+  isApplicable:
+    type: boolean
+    description: Indicates whether it is applicable
+    required: false
+    example: true
+  code:
+    type: string
+    description: The code of the coupon
+    required: false
+    example: "RM01"
+  'type':
+    type: string
+    enum:
+      - UNIQUE
+      - GENERIC
+    description: The type of coupon code redeemed
+    required: false
+    example: "UNIQUE"
+  isFree: 
+    type: boolean
+    description: Whether it is a free coupon
+    required: false
+    example: false
+  percentage: 
+    type: string
+    pattern: \d+\.\d+
+    description: The coupon percentage
+    required: false
+    example: "10.00"

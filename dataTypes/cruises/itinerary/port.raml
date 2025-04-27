@@ -1,0 +1,26 @@
+#%RAML 1.0 DataType
+displayName: Port details definition
+description: Port details
+type: !include ../../common/base-port-details.raml
+additionalProperties: false
+properties:
+  code:
+    type: string
+    description: The port code
+    required: false
+    example: MIA
+    pattern: "^[a-zA-Z0-9]{3}$"
+  description:
+    type: string
+    description: The port description
+    required: false
+    example: "Description"
+  isTender:  
+    type: boolean
+    description: Describes whether a tender boat is required or not in the port.
+    required: false
+    example: false
+  images:
+    type: !include images.raml
+    description: Images of the port
+    required: false

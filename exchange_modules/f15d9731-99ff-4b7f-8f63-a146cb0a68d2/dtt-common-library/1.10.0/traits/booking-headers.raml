@@ -1,0 +1,17 @@
+#%RAML 1.0 Trait
+headers:
+  MSC-Language-Code: 
+    description: ISO 639-1 language code used for item descriptions.
+    pattern: '^[a-z]{2}$'
+    example: en
+    required: false
+  MSC-Office-Code:
+    description: Office Code. Required for proper functioning of office specific business logic.
+    pattern: '[a-zA-Z]{3}'
+    example: GBR
+    required: false
+  MSC-Market-Code:  
+    description: Market Code
+    pattern: '[a-zA-Z]{3}'
+    example: GBR
+    required: true

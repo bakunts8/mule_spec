@@ -1,0 +1,11 @@
+#%RAML 1.0 DataType
+displayName: Cabin slots details
+description: Cabin slots details definition
+additionalProperties: false
+properties:
+  slots:
+    description: List of slots details
+    type: array
+    items: !include slotDetails.raml
+
+examples: !include ../../examples/bookings/get-cabin-slots-response.raml

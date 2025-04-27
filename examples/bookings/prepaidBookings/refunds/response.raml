@@ -1,0 +1,53 @@
+#%RAML 1.0 NamedExample
+Prepaid Booking Refund Success Response for excusrions:
+  excursions:
+    - id: "9208604"
+      amount: "37.00"
+      passenger:
+        id: "150768847"
+      status: "SUCCESS"
+    - id: "9208605"
+      amount: "39.00"
+      cabin:
+        id: "150768801"
+      status: "SUCCESS"
+    - id: "9208695"
+      amount: "39.00"
+      cabin:
+        id: "150768809"
+      status: "SUCCESS"
+
+Prepaid Booking Refund Success Response for onboard services:
+  onboardServices:
+    - id: "9208609"
+      amount: "57.00"
+      passenger:
+        id: "150768848"
+      status: "SUCCESS"
+    - id: "9208615"
+      amount: "59.00"
+      cabin:
+        id: "150768802"
+      status: "SUCCESS"
+
+Prepaid Booking Refund Response with warnings:
+  excursions:
+    - id: "9208604"
+      amount: "37.00"
+      passenger:
+        id: "150768847"
+      status: "SUCCESS"
+    - id: "9208605"
+      amount: "39.00"
+      cabin:
+        id: "150768801"
+      status: "FAILURE"
+      _warnings:
+        - code: server_error
+          message: An internal or downstream error prevented the request from being processed successfully.
+          traceId: 73b309b81fd54d7fb43ead4052210959
+          errorId: 79b309b81fd54d7fb43ead4000010959
+          dateTime: 2024-04-23T10:00:00Z
+          source: 
+            name: api-name
+            layer: API_SYSTEM 

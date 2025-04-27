@@ -1,0 +1,207 @@
+#%RAML 1.0 DataType
+displayName: Search Excursion Response
+description: Search Excursion Response definition
+type: object
+additionalProperties: false
+properties: 
+  code:
+    description: Excursion code
+    type: string
+    pattern: '^\w{1,15}$'
+    required: true
+    example: UK900000
+  description:
+    description: Excursion description
+    type: string
+    required: true
+    example: PALMA DI MAIORCA, DAL CASTELLO ALLA CATTEDRALE
+  location:
+    description: Location details
+    type: object
+    required: true
+    additionalProperties: false
+    properties:
+      code:
+        description: Location’s code where the activity occurs.
+        type: string
+        required: true
+        example: SB1
+      name:
+        description: Location’s full name where the activity occurs.
+        type: string
+        required: true
+        example: Location
+  startDate:
+    description: The date on which the activity occurs.
+    type: date-only
+    required: true
+    example: 2023-04-21
+  startTime:
+    description: The time of the activity occurrence
+    type: string
+    required: false
+    example: "12:39:57"
+  applicableFor:
+    description: Indicates if the activity is applicable to Individuals, Group, or everyone. 
+    type: string
+    enum:
+      - INDIVIDUAL
+      - GROUP
+      - ALL
+    required: true
+    example: INDIVIDUAL
+  type:
+    description: Service Type
+    type: string
+    required: true
+    example: FORFAI
+  priceBasis:
+    description: Price basis of the excursion. Indicates if it’s per person or per booking.
+    enum:
+      - PER_PERSON
+      - PER_CABIN
+    required: true
+    example: PER_PERSON
+  minimumPassengersRequired:
+    type: integer
+    description: Minimum number of passengers required.
+    required: true
+    example: 40
+  isPackage:
+    type: boolean
+    description: Flag to indicate if the excursion is a package
+    required: true
+    example: false
+  ageRequirements:
+    description: Allowed age details
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      minimum:
+        description: The value contains the possible minimum age
+        type: integer
+        required: false
+        example: 15
+      maximum:
+        description: The value contains the possible maximum age
+        type: integer
+        required: false
+        example: 45
+  guideLanguages:
+    description: Guide Languages
+    type: array
+    required: true
+    items: string
+    example: ["ENG","ITA"]
+  prices:
+    description: Price details
+    type: object
+    required: true
+    additionalProperties: false
+    properties:
+      total:
+        description: Total price details
+        type: object
+        required: true
+        additionalProperties: false
+        properties:
+          beforeDiscount: 
+            description: The value contains the total price before discount
+            type: amount
+            required: true
+            example: "100.00"
+          afterDiscount: 
+            description: The value contains the total price of the item
+            type: amount
+            required: true
+            example: "90.00"
+      taxes:
+        description: Tax details
+        type: object
+        required: true
+        additionalProperties: false
+        properties:
+          beforeDiscount: 
+            description: The value contains the total tax before discount
+            type: amount
+            required: true
+            example: "0.00"
+          afterDiscount: 
+            description: The value contains total tax amount for the item
+            type: amount
+            required: true
+            example: "1.00"
+      perPassenger:
+        description: List of all passengers.
+        type: array
+        required: true
+        items:
+          type: object
+          additionalProperties: false
+          properties:
+            isApplicable:
+              description: Indicates if the excursion is applicable to the passenger.
+              type: boolean
+              required: true
+              example: true
+            ageCategory:
+              type: string
+              description: The age category that the passenger falls into.
+              required: true
+              enum:
+                - SENIOR
+                - ADULT
+                - CHILD
+                - JUNIOR
+                - INFANT
+              example: ADULT
+            age:
+              description: Provides the age of the passenger
+              type: integer
+              required: true
+              example: 30
+            number:
+              description: The value contains the passenger number details.
+              type: integer
+              required: true
+              example: 1
+            id:
+              type: string
+              description: The passenger's identifier
+              required: true
+              example: "150774035"
+            total:
+              description: Total price details
+              type: object
+              required: false
+              additionalProperties: false
+              properties:
+                beforeDiscount: 
+                  description: The value contains per passenger total price before discoun
+                  type: amount
+                  required: true
+                  example: "80.00"
+                afterDiscount: 
+                  description: The value contains per passenger total price
+                  type: amount
+                  required: true
+                  example: "70.00"
+            taxes:
+              description: Tax details
+              type: object
+              required: false
+              additionalProperties: false
+              properties:
+                beforeDiscount: 
+                  description: The value contains per passenger tax amount before discount
+                  type: amount
+                  required: true
+                  example: "0.00"
+                afterDiscount: 
+                  description: The value contains per passenger tax amount
+                  type: amount
+                  required: true
+                  example: "1.00"
+
+examples: !include ../../../examples/cruises/excursions/get-excursions-by-id-response.raml

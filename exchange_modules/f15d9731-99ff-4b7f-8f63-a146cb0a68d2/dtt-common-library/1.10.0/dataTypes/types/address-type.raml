@@ -1,0 +1,60 @@
+#%RAML 1.0 Library
+usage: Reusable Data Types for address
+
+types:
+  baseAddressDetails:
+    description: base address details
+    type: object
+    additionalProperties: false
+    properties:
+      addressLine1:
+        description: address line containing details of house no, roads etc.
+        type: string
+        required: false
+        example: "TEST ADDRESS"
+      town:
+        description: city name
+        type: string
+        required: false
+        example: "DARLINGTON"
+      postCode:
+        description: postal code
+        type: string
+        required: false
+        example: "28001"
+
+  fullAddressDetails:
+    description: base address details
+    type: baseAddressDetails
+    additionalProperties: false
+    properties:
+      province:
+        description: Province bane 
+        type: string
+        required: false
+        example: RM
+      region:
+        description: Region name 
+        type: string
+        required: false
+        example: CAMPANIA
+      state:
+        description: State name 
+        type: string
+        required: false
+        example: GBR
+      districtName:
+        description: District name 
+        type: string
+        required: false
+        example: VIERA 
+      country:
+        description: Country name 
+        type: string
+        required: false
+        example: ITALY
+      additionalInformation: 
+        description: Additional information
+        type: string
+        required: false
+        example: Additional information here

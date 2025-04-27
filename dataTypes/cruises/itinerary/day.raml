@@ -1,0 +1,52 @@
+#%RAML 1.0 DataType
+displayName: Itinerary day details definition
+description: Itinerary day details
+type: object
+additionalProperties: false
+properties:
+  date:
+    type: date-only
+    description: The date for the day
+    required: false
+    example: 2025-03-14
+  dayOfWeek:
+    type: string
+    description: The day of the week
+    required: false
+    example: FRIDAY
+    enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+  arrivalTime:
+    type: time-only
+    description: The arrival time for the day
+    required: false
+    example: 07:00:00
+  departureTime:
+    type: time-only
+    description: The departure time for the day
+    required: false
+    example: 17:00:00
+  shipPosition:
+    type: object
+    required: false
+    properties:
+      code: 
+        type: string
+        description: The ship position
+        required: false
+        example: "1"
+      description:
+        type: string
+        description: Description of the ship position code
+        required: false
+        example: ALONGSIDE
+  port:
+    type: !include port.raml
+    description: The port for the day
+    required: false

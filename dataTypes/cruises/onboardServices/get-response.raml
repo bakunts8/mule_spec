@@ -1,0 +1,324 @@
+#%RAML 1.0 DataType
+displayName: Onboard services details
+description: Onboard services definition
+type: partialSuccessResponse
+
+additionalProperties: false
+properties:
+  onboardServices:
+    type: array
+    description: List of onboard services
+    minItems: 0
+    items:
+      type: object
+      description: Onboard service details
+      additionalProperties: false
+      properties:
+        type:
+          type: object
+          description: Onboard service type
+          additionalProperties: false
+          properties:
+            code:
+              type: string
+              description: The onboard service type code
+              required: true
+              example: "ALLINC"
+            description:
+              type: string
+              description: The onboard service type description
+              required: false
+              example: "All Inclusive"
+            shipDepartment:
+              type: string
+              description: The onboard service type ship department
+              required: false
+              example: "ALL-FB"
+        code:
+          type: string
+          description: The onboard service code
+          required: true
+          example: "LAUB111"
+        description:
+          type: string
+          description: The onboard service description
+          required: true
+          example: "LAUNDRY 10 PIECES"
+        longDescription:
+          type: string
+          description: The onboard service long description
+          required: false
+          example: "More information"
+        isAlcoholic:
+          type: boolean
+          description: Whether the onboard service contains alcohol
+          required: true
+          example: false
+        applicability:
+          type: object
+          description: Onboard service applicability
+          additionalProperties: false
+          properties:
+            isApplicableForSenior:
+              type: boolean
+              description: The onboard service type code
+              required: true
+              example: false
+            isApplicableForAdult:
+              type: boolean
+              description: The onboard service type code
+              required: true
+              example: false
+            isApplicableForChild:
+              type: boolean
+              description: The onboard service type code
+              required: true
+              example: false
+            isApplicableForJunior:
+              type: boolean
+              description: The onboard service type code
+              required: true
+              example: false
+            isApplicableForInfant:
+              type: boolean
+              description: The onboard service type code
+              required: true
+              example: false
+        deliveryDate:
+          type: date-only
+          description: The onboard service delivery date
+          required: true
+          example: 2025-01-01
+        categoryCode:
+          type: string
+          description: The onboard service category code
+          required: true
+          example: "*"
+        priceMultiplier:
+          type: integer
+          description: The onboard service price multiplier
+          required: true
+          example: 1
+        quantity:
+          type: integer
+          description: The onboard service quantity
+          required: true
+          example: 2
+        prices:
+          type: object
+          description: Onboard service applicability
+          additionalProperties: false
+          properties:
+            perCabin:
+              type: !include price-amounts.raml
+              description: Total amounts for price per cabin
+              required: true
+            perSenior:
+              type: !include price-amounts.raml
+              description: Total amounts for price per senior
+              required: true
+            perAdult:
+              type: !include price-amounts.raml
+              description: Total amounts for price per adult
+              required: true
+            perChild:
+              type: !include price-amounts.raml
+              description: Total amounts for price per child
+              required: true
+            perJunior:
+              type: !include price-amounts.raml
+              description: Total amounts for price per junior
+              required: true
+            perInfant:
+              type: !include price-amounts.raml
+              description: Total amounts for price per infant
+              required: true
+        priceBasis:
+          type: string
+          enum:
+            - PER_PERSON
+            - PER_CABIN
+          description: The onboard service price basis
+          required: true
+          example: "PER_CABIN"
+        priceType:
+          type: string
+          enum:
+            - PER_NIGHT
+            - PER_STAY
+          description: The onboard service price type
+          required: true
+          example: "PER_STAY"
+        promotion:
+          type: object
+          description: Onboard service promotion
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: Promotion ID
+              required: true
+              example: "2181"
+            mode:
+              type: string
+              description: Promotion mode
+              required: true
+              example: "MARKDOWN"
+            type:
+              type: string
+              description: Promotion type
+              required: true
+              example: "PERCENTAGE"
+            description:
+              type: string
+              description: Promotion description
+              required: true
+              example: "Sample promotion description"
+            webDescription:
+              type: string
+              description: Promotion web description
+              required: true
+              example: "Sample promotion web description"
+            validFrom:
+              type: datetime
+              description: Promotion valid from
+              required: false
+              example: 2025-01-01T12:00:00Z
+            validTo:
+              type: datetime
+              description: Promotion valid to
+              required: false
+              example: 2025-01-01T14:00:00Z
+            availability:
+              type: integer
+              description: Promotion availability
+              required: false
+              example: 2
+            amount:
+              type: object
+              description: Onboard service promotion amounts
+              additionalProperties: false
+              properties:
+                perCabin:
+                  type: amount
+                  description: Per cabin amount
+                  required: false
+                  example: "10.00"
+                perSenior:
+                  type: amount
+                  description: Per senior amount
+                  required: false
+                  example: "10.00"
+                perAdult:
+                  type: amount
+                  description: Per adult amount
+                  required: false
+                  example: "10.00"
+                perJunior:
+                  type: amount
+                  description: Per junior amount
+                  required: false
+                  example: "10.00"
+                perChild:
+                  type: amount
+                  description: Per child amount
+                  required: false
+                  example: "10.00"
+                perInfant:
+                  type: amount
+                  description: Per infant amount
+                  required: false
+                  example: "10.00"
+        promotionBasis:
+          type: string
+          enum:
+            - PER_PERSON
+            - PER_CABIN
+          description: Promotion basis
+          required: false
+          example: "PER_PERSON"
+        promotionType:
+          type: string
+          enum:
+            - PER_NIGHT
+            - PER_STAY
+          description: Promotion type
+          required: false
+          example: "PER_STAY"
+        ageRequirements:
+          type: object
+          description: Onboard service promotion amounts
+          additionalProperties: false
+          required: true
+          properties:
+            senior:
+              type: !include age-requirement-min.raml
+            child:
+              type: !include age-requirement-max.raml
+            junior:
+              type: !include age-requirement-max.raml
+            infant:
+              type: !include age-requirement-max.raml
+        diningRooms:
+          type: object
+          description: Onboard service dining rooms
+          additionalProperties: false
+          properties:
+            code:
+              description: The value contains the code of the respective dining room available for the onboard service
+              type: string
+              required: true
+              example: "BC"
+            description:
+              description: Dining room description
+              type: string
+              required: false
+              example: "BUTCHER CUT"
+            'options':
+              description: Dining room options
+              type: array
+              required: false
+              items: string
+              example: ["MEAT","FISH","VEG"]
+        prepaidItems:
+          type: object
+          description: Onboard service prepaid items
+          additionalProperties: false
+          properties:
+            image:
+              type: string
+              description: Prepaid item image
+              required: false
+              example: "/content/msc-cruises/sample/about.jpg"
+            optimisedImage:
+              type: string
+              description: Prepaid item optimised image
+              required: false
+              example: "https://sampledomain.com/image/msccruisesdev/about"
+            isAllInclusive:
+              type: boolean
+              description: Prepaid item is all inclusive
+              required: false
+              example: false
+            isPerCouple:
+              type: boolean
+              description: Prepaid item is per couple
+              required: false
+              example: true
+            serviceCodes:
+              type: object
+              description: Prepaid items service codes
+              additionalProperties: false
+              properties:
+                adults:
+                  type: string
+                  description: Prepaid item adults service codes
+                  required: false
+                  example: "BAL50"
+                minors:
+                  type: string
+                  description: Prepaid item minors service codes
+                  required: false
+                  example: "BAL25"
+
+examples: !include ../../../examples/cruises/onboardServices/get-response.raml

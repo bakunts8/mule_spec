@@ -1,0 +1,22 @@
+#%RAML 1.0 SecurityScheme
+description: |
+  This scheme validates request by using a token
+type: OAuth 2.0
+describedBy:
+  headers:
+    Authorization:
+      type: string
+      required: true
+      pattern: '^[B,b]earer .+$'
+  responses:
+    401:
+      description: |
+          Invalid token. Re-authenticate the user and try again.
+          the user.
+    403:
+      description: |
+          Access denied. Not enough permissions to access the resource requested or invalid OAuth request.
+settings:
+  authorizationUri: https://www.tbd.com/1/oauth2/authorize
+  accessTokenUri: https://api.tbd.com/1/oauth2/token
+  authorizationGrants: [ authorization_code, implicit, urn:ietf:params:oauth:grant-type:saml2-bearer' ]

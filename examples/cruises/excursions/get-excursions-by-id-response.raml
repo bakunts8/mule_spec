@@ -1,0 +1,72 @@
+#%RAML 1.0 NamedExample
+Fetch Excursions By Id Full Response:
+  code: UK900000
+  description: PALMA DI MAIORCA DAL CASTELLO ALLA CATTEDRALE
+  location: 
+    code: SB1
+    name: Location
+  startDate: 2023-04-21
+  startTime: 12:39:57
+  applicableFor: INDIVIDUAL
+  type: FORFAI
+  priceBasis: PER_PERSON
+  minimumPassengersRequired: 40
+  isPackage: false
+  ageRequirements: 
+    minimum: 15
+    maximum: 45
+  guideLanguages:
+    - ENG
+    - ITA
+  prices: 
+    total: 
+      beforeDiscount: "80.00"
+      afterDiscount: "70.00"
+    taxes: 
+      beforeDiscount: "1.00"
+      afterDiscount: "0.00"
+    perPassenger: 
+      - isApplicable: true
+        ageCategory: SENIOR
+        age: 30
+        number: 1
+        id: "1234"
+        total: 
+          beforeDiscount: "80.00"
+          afterDiscount: "70.00"
+        taxes: 
+          beforeDiscount: "1.00"
+          afterDiscount: "0.00"
+
+Fetch Excursions By Id Only Mandatory:
+
+  code: UK900000
+  description: PALMA DI MAIORCA DAL CASTELLO ALLA CATTEDRALE
+  location: 
+    code: SB1
+    name: Location
+  startDate: 2023-04-21
+  applicableFor: INDIVIDUAL
+  type: FORFAI
+  priceBasis: PER_PERSON
+  minimumPassengersRequired: 40
+  isPackage: false
+  guideLanguages:
+    - ENG
+    - ITA
+  prices: 
+    total: 
+      beforeDiscount: "80.00"
+      afterDiscount: "70.00"
+    taxes: 
+      beforeDiscount: "1.00"
+      afterDiscount: "0.00"
+    perPassenger: 
+      - isApplicable: true
+        ageCategory: SENIOR
+        age: 30
+        number: 1
+        id: "1234"
+        
+      
+    

@@ -1,0 +1,49 @@
+#%RAML 1.0 DataType
+displayName: Booking details
+description: Booking details definition
+additionalProperties: false
+properties:
+  token:
+    type: string
+    description: The updated token
+    required: true
+    example: "eyJhbGciOiJIUzI1NiIsIn"
+  loginMode:
+    type: string
+    enum:
+      - full
+    description: The login mode
+    required: true
+    example: "full"
+  goldenId:
+    type: string
+    description: The customer golden ID
+    required: true
+    example: "123456"
+  crmasisId:
+    type: string
+    description: The CRM AS IS ID
+    required: true
+    example: "CRM38951234"
+  passengerId:
+    type: string
+    description: The passenger ID
+    required: true
+    example: "1"
+  bookingNumber:
+    type: bookingNumber
+    description: The booking numbder
+    required: true
+    example: "12345"
+  name:
+    type: string
+    description: First name of the customer
+    required: true
+    example: "sam"
+  surname:
+    type: string
+    description: Last name of the customer
+    required: true
+    example: "speed"
+
+examples: !include ../../examples/loginTokenUpgrade/response.raml

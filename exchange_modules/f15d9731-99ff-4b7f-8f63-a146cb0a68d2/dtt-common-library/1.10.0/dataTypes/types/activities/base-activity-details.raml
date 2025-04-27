@@ -1,0 +1,75 @@
+#%RAML 1.0 DataType
+displayName: Activity base details
+description: Activity base details definition
+type: object
+additionalProperties: false
+properties:
+  isBusTransportAvailable:
+    description: Is transport via bus available for activity?
+    type: boolean
+    required: false
+    example: false
+  difficultyLevel:
+    description: The value contains the ‘Ground Difficulties’ information
+    type: string
+    enum:
+      - EASY
+      - MEDIUM
+      - DIFFICULT
+    required: false
+    example: "EASY"
+  isSnackIncluded: 
+    description: Is snacks included in the tour?
+    type: boolean
+    required: false
+    example: true
+  isGuideAvailable:
+    description: Is guide avilable for the tour
+    type: boolean
+    required: false
+    example: true
+  isFilmingAllowed: 
+    description: Is shooting videos and/or taking pictures allowed?
+    type: boolean
+    required: false
+    example: true
+  isShoppingIncluded:
+    description: Is shopping opportunities included?
+    type: boolean
+    required: false
+    example: false
+  isWheelchairFriendly:
+    description: Is suitable for wheelchair-bound passengers?
+    type: boolean
+    required: false
+    example: true
+  guideLanguageCodes:
+    description: 
+    type: string[]
+    required: false
+    example: ["ENG"]
+  isDrinkIncluded:
+    description: Is drink included?
+    type: boolean
+    required: false
+    example: false
+  isMealIncluded:
+    description: Is meal included?
+    type: boolean
+    required: false
+    example: true
+  isTastingIncluded:
+    description:  Is tasting experiences included?
+    type: boolean
+    required: false
+    example: false
+  isBestSeller:
+    description: Is it best seller?
+    type: boolean
+    required: false
+    example: true
+  isSwimmingIncluded:
+    description: Is swimming activity included?
+    type: boolean
+    required: false
+    example: false

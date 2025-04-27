@@ -1,0 +1,88 @@
+#%RAML 1.0 DataType
+displayName: Prepaid Bookings Prices Response
+description: Response of get the prepaid booking prices
+type: object
+additionalProperties: false
+properties:
+  number:
+    description: Prepaid booking number
+    type: string
+    required: true
+    example: "A1234ER1"
+  price:
+    type: prepaidBookingsPriceDetails
+    additionalProperties: false
+  excursions:
+    type: array
+    required: false
+    items:
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: Excursion code
+          required: true
+          example: "EXC123"
+        startDate:
+          type: date-only
+          description: Start date of the excursion
+          required: true
+          example: 2025-03-20
+        priceBasis:
+          type: string
+          enum: 
+            - PER_PERSON
+            - PER_CABIN
+          description: Price Basis of the excursion
+          required: true
+          example: "PER_PERSON"
+        price:
+          type: prepaidBookingsPriceDetails
+          required: true
+        passengers:
+          type: prepaidBookingsPassengerDetails
+          required: false
+        cabins:
+          type: prepaidBookingsCabinDetails
+          required: false
+
+  onboardServices:
+    type: array
+    required: false
+    items:
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: Onboard service code
+          required: true
+          example: "EXC123"
+        deliveryDate:
+          type: date-only
+          description: Delivery date of the onboard service
+          required: true
+          example: 2025-03-20
+        priceBasis:
+          type: string
+          enum: 
+            - PER_PERSON
+            - PER_CABIN
+          description: Price Basis of the onboard service
+          required: true
+          example: "PER_PERSON"
+        'type':
+          type: string
+          description: The value of the service type
+          required: true
+          example: "SVC123"
+        price:
+          type: prepaidBookingsPriceDetails
+          required: true
+        passengers:
+          type: prepaidBookingsPassengerDetails
+          required: false
+        cabins:
+          type: prepaidBookingsCabinDetails
+          required: false
+
+examples:  !include ../../../examples/bookings/prepaidBookings/response.raml

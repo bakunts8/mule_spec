@@ -1,0 +1,94 @@
+#%RAML 1.0 NamedExample
+Onboard Services Response:
+  onboardServices:
+    -
+      type:
+        code: "ALLINC"
+        description: "All Inclusive"
+        shipDepartment: "ALL-FB"
+      code: "LAUB111"
+      description: "LAUNDRY 10 PIECES"
+      longDescription:  "More information"
+      isAlcoholic: false
+      applicability:
+        isApplicableForSenior: false
+        isApplicableForAdult: false
+        isApplicableForChild: false
+        isApplicableForJunior: false
+        isApplicableForInfant: false
+      deliveryDate: 2025-01-01
+      categoryCode: "*"
+      priceMultiplier: 1
+      quantity: 2
+      prices:
+        perCabin:
+          total:
+            beforeDiscount: "20.00"
+            afterDiscount: "10.00"
+          tax: "1.00"
+        perSenior:
+          total:
+            beforeDiscount: "20.00"
+            afterDiscount: "10.00"
+          tax: "1.00"
+        perAdult:
+          total:
+            beforeDiscount: "20.00"
+            afterDiscount: "10.00"
+          tax: "1.00"
+        perChild:
+          total:
+            beforeDiscount: "20.00"
+            afterDiscount: "10.00"
+          tax: "1.00"
+        perJunior:
+          total:
+            beforeDiscount: "20.00"
+            afterDiscount: "10.00"
+          tax: "1.00"
+        perInfant:
+          total:
+            beforeDiscount: "20.00"
+            afterDiscount: "10.00"
+          tax: "1.00"
+      priceBasis: "PER_CABIN"
+      priceType: "PER_STAY"
+      promotion:
+        id: "2181"
+        mode: "MARKDOWN"
+        type: "PERCENTAGE"
+        description: "Sample promotion description"
+        webDescription: "Sample promotion web description"
+        validFrom: 2025-01-01T12:00:00Z
+        validTo: 2025-01-01T14:00:00Z
+        availability: 2
+        amount:
+          perCabin: "10.00"
+          perSenior: "10.00"
+          perAdult: "10.00"
+          perJunior: "10.00"
+          perChild: "10.00"
+          perInfant: "10.00"
+      promotionBasis: "PER_PERSON"
+      promotionType: "PER_STAY"
+      ageRequirements:
+        senior:
+          minimum: 60
+        child:
+          maximum: 10
+        junior:
+          maximum: 5
+        infant:
+          maximum: 1
+      diningRooms:
+        code: "BC"
+        description: "BUTCHER CUT"
+        'options': ["MEAT","FISH","VEG"]
+      prepaidItems:
+        image: "/content/msc-cruises/sample/about.jpg"
+        optimisedImage: "https://sampledomain.com/image/msccruisesdev/about"
+        isAllInclusive: false
+        isPerCouple: true
+        serviceCodes:
+          adults: "BAL50"
+          minors: "BAL25"

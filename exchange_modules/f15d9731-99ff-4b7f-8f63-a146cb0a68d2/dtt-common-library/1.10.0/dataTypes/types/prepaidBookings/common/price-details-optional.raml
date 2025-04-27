@@ -1,0 +1,52 @@
+#%RAML 1.0 DataType
+type: object
+description: The price details
+additionalProperties: false
+properties:
+  total:
+    description: Total price details
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      beforeDiscount: 
+        description: The value contains the total price before discount
+        type: amount
+        required: false
+        example: "100.00"
+      afterDiscount: 
+        description: The value contains the total price after discount
+        type: amount
+        required: false
+        example: "90.00"
+      beforePromotionAndDiscount: 
+        description: The value contains the total price before promotion and discounts are applied
+        type: amount
+        required: false
+        example: "110.00"
+      discountAmount: 
+        description: The value contains the discount amount
+        type: amount
+        required: false
+        example: "100.00"
+      promotionAmount: 
+        description: The value contains the promotion amount
+        type: amount
+        required: false
+        example: "100.00"
+  taxes:
+    description: Tax details
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      beforeDiscount: 
+        description: The value contains the total tax before discount
+        type: amount
+        required: false
+        example: "0.00"
+      afterDiscount: 
+        description: The value contains the total tax after discount
+        type: amount
+        required: false
+        example: "1.00"

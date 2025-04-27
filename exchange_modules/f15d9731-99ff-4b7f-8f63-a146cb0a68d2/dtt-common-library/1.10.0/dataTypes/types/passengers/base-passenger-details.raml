@@ -1,0 +1,23 @@
+#%RAML 1.0 DataType
+displayName: Passenger base details
+description: Passenger base details definition
+type: object
+additionalProperties: true
+properties:
+  dateOfBirth: 
+    description: Passenger's date of birth
+    type: date-only
+    required: false
+    example: 2000-10-01
+  firstName:
+    description: Passenger's first name
+    type: string
+    minLength: 1
+    required: false
+    example: Bruce
+  lastName:
+    description: Passenger's last name
+    type: string
+    minLength: 1
+    required: false
+    example: Wayne  

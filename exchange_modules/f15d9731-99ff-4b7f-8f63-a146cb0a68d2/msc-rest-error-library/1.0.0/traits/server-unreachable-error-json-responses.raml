@@ -1,0 +1,20 @@
+#%RAML 1.0 Trait
+responses:
+  502:
+    description: The server received an invalid response from the upstream service, while working as a gateway or proxy.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/502-response.raml
+  503:
+    description: The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/503-response.raml  
+  504:
+    description: The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/504-response.raml    

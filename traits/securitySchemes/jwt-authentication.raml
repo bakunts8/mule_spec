@@ -1,0 +1,19 @@
+#%RAML 1.0 SecurityScheme
+type: OAuth 2.0
+description: This security scheme uses JWT authentication to validate incoming requests.
+describedBy: 
+  headers:
+    Authorization:
+      description: Bearer <JWT>
+      type: string
+      pattern: '^[B,b]earer .+$'
+      required: true
+  responses:
+    400:
+      description: Token was not provided.
+    401:
+      description: Bad or expired token. To fix, you should re-authenticate the user.
+    403:
+      description: The client id validation failed.
+    503:
+      description: Error communicating with JWKS server.

@@ -1,0 +1,76 @@
+#%RAML 1.0 NamedExample
+Fetch Onboard Services By Id Response All:
+  availabilityStatus: AVAILABLE
+  deliveryDate: 2025-04-21
+  description: Onboard Service
+  code: UK900000
+  isSurprise: true
+  type: FORFAI
+  diningRooms: 
+    - code: BC
+      description: BUTCHER CUT
+      silverWhereCode: BUTC
+      mealPeriod: DINNER
+      timeSlots: 
+        - "12:00"
+        - "13:30"
+      "options": 
+        - MEAT
+        - FISH
+        - VEG
+    - code: IC
+      description: INDOCHINA
+      silverWhereCode: BUTC
+      mealPeriod: LUNCH
+      timeSlots: 
+        - "14:00"
+      "options": 
+        - MEAT
+        - FISH
+  prices: 
+    total: 
+      beforeDiscount: "100.00"
+      afterDiscount: "90.00"
+    taxes: 
+      beforeDiscount: "10.00"
+      afterDiscount: "9.00"
+    perPassenger:
+      - isApplicable: true
+        ageCategory: SENIOR
+        age: 61
+        number: 1
+        id: "1234"
+        total: 
+          beforeDiscount: "100.00"
+          afterDiscount: "90.00"
+        taxes: 
+          beforeDiscount: "10.00"
+          afterDiscount: "9.00"
+      - isApplicable: false
+        ageCategory: CHILD
+        age: 6
+        number: 2
+        id: "3425"
+
+Fetch Onboard Services By Id Response Mandatory:
+  
+  availabilityStatus: AVAILABLE
+  deliveryDate: 2025-04-21
+  description: Onboard Service
+  code: UK900000
+  isSurprise: true
+  type: FORFAI
+  prices: 
+    total: 
+      beforeDiscount: "100.00"
+      afterDiscount: "90.00"
+    taxes: 
+      beforeDiscount: "10.00"
+      afterDiscount: "9.00"
+    perPassenger:
+      - isApplicable: true
+        ageCategory: SENIOR
+        age: 61
+        number: 1
+        id: "1234"
+  

@@ -1,0 +1,16 @@
+#%RAML 1.0 DataType
+displayName: Base Image details definition
+description: Base Image details
+type: object
+additionalProperties: false
+properties:
+  image:
+    type: string
+    description: The relative path to the image in the content management system
+    required: false
+    example: "/content/dam/b2c-website-foundation/images/asset.jpg"
+  optimisedImage:
+    type: string
+    description: The relative path to the image in the delivery optimisation system
+    required: false
+    example: "/adobe/dynamicmedia/deliver/dm-p-oid--8nkGVarlOr1OgqRAHz7GAIUPgiVReqGvv4mhl53HAkoacqBZ4o9oLLB4y3s47ZF8l22phEkfD4GujkAU2vaN-A/asset.jpg?preferwebp=true"

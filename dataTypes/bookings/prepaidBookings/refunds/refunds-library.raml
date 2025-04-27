@@ -1,0 +1,34 @@
+#%RAML 1.0 Library
+
+types:
+  passengerDetails:
+    type: object
+    description: The passenger details
+    additionalProperties: false
+    properties:
+      passenger:
+        type: object
+        required: true
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: Passenger ID.
+            required: true
+            example: "150768845"
+
+  cabinDetails:
+    type: object
+    description: The Cabin details
+    additionalProperties: false
+    properties:
+      cabin:
+        type: object
+        required: true
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: Cabin ID.
+            required: true
+            example: "150768845"

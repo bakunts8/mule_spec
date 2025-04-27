@@ -1,0 +1,33 @@
+#%RAML 1.0 DataType
+displayName: Cabin slots details
+description: Cabin slots details definition
+additionalProperties: false
+properties:
+  checkIns:
+    description: List of check-in details per passenger
+    type: array
+    required: true
+    items: 
+      type: object
+      properties:
+        passenger:
+          type: object
+          required: true
+          properties: 
+            id: 
+              type: string
+              description: Passenger ID
+              example: "150768844"
+              required: true
+        isCompleted: 
+          type: boolean
+          description: Flag to indicate if the passenger completed the check-in
+          example: true
+          required: true    
+        isSecurityPictureProvided: 
+          type: boolean
+          description: Flag to indicate if the passenger uploaded a security picture
+          example: true
+          required: true           
+
+examples: !include ../../examples/bookings/get-cabin-checkin-details-response.raml

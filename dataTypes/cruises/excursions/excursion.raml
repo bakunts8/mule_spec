@@ -1,0 +1,171 @@
+#%RAML 1.0 DataType
+displayName: Excursion
+description: Excursion definition
+type: object
+additionalProperties: false
+properties:
+  code:
+    description: Excursion code
+    type: string
+    pattern: '^\w{1,15}$'
+    required: true
+    example: CIV01
+  portCode:
+    description: Excursion port code
+    type: string
+    required: false
+    example: SB1
+  price:
+    description: Excursion's price for an adult
+    type: amount
+    required: true
+    example: "70.00"
+  locationCode:
+    description: Location code of excursion
+    type: string
+    required: true
+    example: SB1
+  description:
+    description: Excursion description
+    type: string
+    required: true
+    example: PALMA DI MAIORCA, DAL CASTELLO ALLA CATTEDRALE
+  longDescription:
+    description: Long description of the excursion
+    type: string
+    required: true
+    example: "Questa escursione di quattro ore che vi svelerà Palma inizia con un tragitto di 20 minuti su strada dal porto fino al Castello di Bellver, una fortezza gotica che sovrasta la città dalla cima di una collina. Si tratta di uno dei pochi castelli di forma circolare presenti nel Mediterraneo: approfittate della sosta di 30 minuti e del panorama sulla città e sul Mar Mediterraneo per fare splendide foto ricordo all'esterno del sito. Successivamente, ripartirete verso Escollera, il molo principale di Palma. Approfittate al massimo delle due ore successive perdendovi nella città vecchia, sia in compagnia di una guida esperta che vi farà ammirare dall'esterno Palazzo dell'Almudaina, Piazza Cort con il Municipio, Plaza Mayor e Piazza Santa Eulalia, sia con tempo libero a vostra disposizione. Il tour fa tappa alla cattedrale di Palma, una costruzione imponente che sembra dominare dall'alto l'intera città e che visiterete. La cattedrale di Santa Maria, nota anche come La Seu, è stata fondata nel XIII secolo, ma la sua costruzione non è stata completata fino ai primi anni del XVII secolo. Con i 44 m di altezza delle sue volte, è una delle cattedrali più alte d'Europa. Nel museo accanto, scoprirete i dettagli del restauro della cattedrale realizzato dal famoso architetto catalano Antoni Gaudí, con del tempo libero prima del tragitto di 20 minuti per ritornare al porto.&lt;p class='ptec'&gt;Nota bene: in caso di chiusura i giorni festivi o in caso di celebrazioni religiose, la guida fornirà le informazioni all'esterno della Cattedrale. Per la visita dei luoghi di culto, è richiesto un abbigliamento adeguato. Escursione non adatta a ospiti con problemi di deambulazione. Il percorso per raggiungere la Cattedrale dal parcheggio dei pullman prevede dover salire circa 100 gradini.&lt;/p&gt;"
+  startDate:
+    description: Excursion's occurence date
+    type: date-only
+    required: true
+    example: 2024-05-24
+  endDate:
+    description:  Excursion's end date
+    type: date-only
+    required: true
+    example: 2024-05-24
+  paymentType:
+    description:  Payment type details
+    enum:
+      - PREPAID
+      - POSTPAID
+      - ALL
+    required: true
+    example: PREPAID
+  duration:
+    description: Duration of the excursion in hours
+    type: number
+    multipleOf: 0.01
+    minimum: 0
+    required: true
+    example: 1.5
+  currencyCode: 
+    description: Currency Code
+    pattern: '^[a-zA-Z]{3}$'
+    example: GBP
+    required: true
+  images:
+    type: object
+    properties: 
+      image:
+        description: Image URL
+        type: string
+        required: true
+        example: /images/msc/ACT/PMI28.jpg
+      desktop:
+        type: !include ../../common/base-image-details.raml
+      mobile:
+        type: !include ../../common/base-image-details.raml
+  video:
+    description: Video URL
+    type: string
+    required: true
+    example: http://www.mscwebtv.com/view/IT/our-excursions-in-barcelona-panoramic-tour-shopping
+  videoId:
+    description: Video ID
+    type: string
+    required: true
+    example: 57e45177-40ca-4492-b8fd-296aef955c38
+  videoDescription:
+    description: Description of the video
+    type: string
+    required: false
+    example: Description of a video
+  promotion:
+    type: !include promotion.raml
+    required: false
+  isPackage:
+    type: boolean
+    description: Whether its part of package deal
+    required: true
+    example: false
+  priceBasis:
+    description: Excursion's price basis
+    enum:
+      - PER_PERSON
+      - PER_CABIN
+    required: true
+    example: PER_PERSON
+  packageDetails:
+    type: array
+    required: true
+    minItems: 0
+    items: !include packageDetails.raml
+  prices:
+    type: object
+    properties:
+      perCabin:
+        type: !include priceDetails.raml
+      perAdult:        
+        type: !include priceDetails.raml  
+      perJunior:
+        type: !include priceDetails.raml
+      perChild:
+        type: !include priceDetails.raml
+      perInfant:
+        type: !include priceDetails.raml
+      perSenior:
+        type: !include priceDetails.raml
+  activityDetails:
+    type: !include activityDetails.raml
+    required: false
+    properties:
+      minimumPassengersRequired:
+        type: integer
+        description: Minimum number of passengers required.
+        required: false
+        example: 40
+  activityGroup:
+    type: !include activityGroup.raml
+    required: false
+  assets:
+    type: array
+    items:
+      properties:
+        excursion:
+          type: !include ../../common/base-image-details.raml
+        alternativeText:
+          type: string
+          description: #TODO: FILL IN EXAMPLE HERE
+          required: false
+          example: Alternative text here.
+  inventory:
+    type: object
+    required: false
+    properties:
+      numberAvailable:
+        type: string
+        description: Number of available excursions in the inventory
+        required: false
+        example: "30"
+      "type":
+        type: string
+        description: Inventory type
+        required: false
+        enum:
+          - BLOCK
+          - COUNT
+          - REQUEST
+        example: REQUEST
+

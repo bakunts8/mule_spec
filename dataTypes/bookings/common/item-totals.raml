@@ -1,0 +1,14 @@
+#%RAML 1.0 DataType
+displayName: Totals
+description: Item totals details
+type: object
+additionalProperties: false
+properties:
+  gross:
+    type: amount
+    description: The gross value of the booking price
+    required: false
+  net:
+    type: amount
+    description: The net amount of the total booking price
+    required: false

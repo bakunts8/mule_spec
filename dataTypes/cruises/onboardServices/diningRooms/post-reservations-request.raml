@@ -1,0 +1,38 @@
+#%RAML 1.0 DataType
+displayName: Dinning room reservations request
+description: Dinning room reservations request definition
+additionalProperties: false
+properties:
+  bookingNumber:
+    description: The booking number
+    type: bookingNumber
+    required: true
+    example: "50146350"
+  time:
+    description: The preferred reservation time
+    type: string
+    pattern: ^([01]\d|2[0-3]):[0-5]\d$
+    required: false
+    example: "18:00"
+  date:
+    description: The preferred reservation date
+    type: date-only
+    required: false
+    example: "2025-03-30"
+  passengers:
+    description: List of passenger details
+    type: array
+    required: true
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          description: The passenger identifier
+          type: string
+          required: true
+          example: "150768844"
+  
+examples: !include  ../../../../examples/cruises/onboardServices/dinningRooms/post-reservations-request.raml
+

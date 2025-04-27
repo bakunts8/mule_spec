@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+displayName: Booking details
+description: Booking details definition
+additionalProperties: false
+properties:
+  bookingNumber:
+    type: bookingNumber
+    description: The booking number
+    required: true
+    example: "123456"
+
+examples: !include ../../examples/loginTokenUpgrade/request.raml

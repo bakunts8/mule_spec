@@ -1,0 +1,9 @@
+#%RAML 1.0 SecurityScheme
+type: Basic Authentication
+description: This security scheme uses basic authentication user ID and password to validate incoming requests.
+describedBy: 
+  headers: 
+    Authorization:
+      type: string
+      description: Credentials used to authenticate the client. The username and the password are combined with a colon (username:password) and the resulting string is base64 encoded (dXNlcm5hbWU6cGFzc3dvcmQ=).
+      example: Basic <username:password>

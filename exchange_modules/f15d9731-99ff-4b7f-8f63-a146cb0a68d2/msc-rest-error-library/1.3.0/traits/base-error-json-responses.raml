@@ -1,0 +1,38 @@
+#%RAML 1.0 Trait
+responses:
+  400:
+    description: The server cannot process the request due to a client error such as malformed or invalid requests.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/400-response.raml
+  401:
+    description: The request lacks valid authentication credentials for the target resource.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/401-response.raml
+  405:
+    description: The request method is known by the server but has been disabled and cannot be used.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/405-response.raml
+  406:
+    description: The service is unable to fulfill the request based on the Accept header provided.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/406-response.raml
+  415:
+    description: An incorrect content type was provided as part of the request, or when the client sends a patch document 
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/415-response.raml
+  500:
+    description: The server has encountered a situation it doesn't know how to handle.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/500-response.raml  

@@ -1,0 +1,15 @@
+#%RAML 1.0 DataType
+
+displayName: Error Source
+description: Describes the source of the error. Used to indicate the error originated elsewhere or self-reference when error was generated internally or as a direct consequence of consuming a downstream events.
+properties:
+  name: 
+    description: The name of the source (API or end-system) where the error originated.
+    type: string
+    required: true
+    example: 'api-name'
+  layer:
+    description: 'The kind of API from where the error originated: **API** - *Generic label for API not following API led connectivity approach.* **DATA_SYNC** - *An integration application that affords a data synchronisation capability, not exposed as an API.*  **API_EXPERIENCE** - *An API operating with characteristics of an Experience API, as per the API led connectivity approach.* **API_PROCESS** - *An API operating with characteristics of a Process API, as per the API led connectivity approach.*  **API_SYSTEM** - *An API operating with characteristics of a System API, as per the API led connectivity approach.* **DATA_SOURCE** - *Describes any service, system or application capability dependency downstream/southbound of API/integration layer(s).* '
+    type: 
+      enum: [API, DATA_SYNC, API_EXPERIENCE, API_PROCESS, API_SYSTEM, DATA_SOURCE]
+    required: true

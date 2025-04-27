@@ -1,0 +1,58 @@
+#%RAML 1.0 Library
+usage: Reusable Data Types for Booking Funnel - Search Cruises operation
+
+types:
+  amounts:
+    type: object
+    description: Before and after discount total amounts
+    additionalProperties: false
+    properties:
+      beforeDiscount: 
+        type: !include ../primitives/amount.raml
+        description: Amount before discount
+        required: true
+        example: '20.00'
+      afterDiscount: 
+        type: !include ../primitives/amount.raml
+        description: Amount after discount
+        required: true
+        example: '10.00'
+
+  amountsWithDueDate:
+    type: amounts
+    description: Before and after discount total amounts
+    additionalProperties: false
+    properties:
+      dueDate:
+        type: date-only
+        description: The due date
+        required: true
+        example: 1993-04-10
+
+  basePrices:
+    type: object
+    description: Base price details
+    additionalProperties: false
+    properties:
+      deposit:
+        type: amounts
+        description: Deposit amounts before and after discount
+        required: false
+      taxes:
+        type: amounts
+        description: Taxes amounts before and after discount
+        required: true
+      total:
+        type: amounts
+        description: Total amounts before and after discount
+        required: true
+
+  fullPrices:
+    type: basePrices
+    description: Full price details
+    additionalProperties: false
+    properties:
+      surcharges:
+        type: amounts
+        description: Surcharges amounts before and after discount
+        required: true

@@ -1,0 +1,128 @@
+#%RAML 1.0 NamedExample
+Prepaid Booking Prices Response:
+  price:
+    total:
+      transactionId: "240719091144909540"
+      beforeDiscount: "100.00"
+      afterDiscount: "90.00"
+      beforePromotionAndDiscount: "110.00"
+      discountAmount: "100.00"
+      promotionAmount: "100.00"
+    taxes:
+      beforeDiscount: "0.00"
+      afterDiscount: "1.00"
+  excursions:
+    -
+      code: "EXC123"
+      startDate: 2025-03-20
+      priceBasis: "PER_PERSON"
+      price:
+        total:
+          beforeDiscount: "100.00"
+          afterDiscount: "90.00"
+          beforePromotionAndDiscount: "110.00"
+          discountAmount: "100.00"
+          promotionAmount: "100.00"
+        taxes:
+          beforeDiscount: "0.00"
+          afterDiscount: "1.00"
+      passengers:
+        -
+          id: "150768844"
+          price:
+            total:
+              beforeDiscount: "100.00"
+              afterDiscount: "90.00"
+              beforePromotionAndDiscount: "110.00"
+              discountAmount: "100.00"
+              promotionAmount: "100.00"
+            taxes:
+              beforeDiscount: "0.00"
+              afterDiscount: "1.00"
+          couponCode:
+            isApplicable: true
+            code: "RM01"
+            'type': "UNIQUE"
+            isFree: false
+            percentage: "10.0"
+          promotion:
+            id: "123456"
+      cabins:
+        -
+          id: "150774035"
+          price:
+            total:
+              beforeDiscount: "100.00"
+              afterDiscount: "90.00"
+              beforePromotionAndDiscount: "110.00"
+              discountAmount: "100.00"
+              promotionAmount: "100.00"
+            taxes:
+              beforeDiscount: "0.00"
+              afterDiscount: "1.00"
+          couponCode:
+            isApplicable: true
+            code: "RM01"
+            'type': "UNIQUE"
+            isFree: false
+            percentage: "10.0"
+          promotion:
+            id: "123456"
+  onboardServices:
+    -
+      code: "EXC123"
+      deliveryDate: 2025-03-20
+      priceBasis: "PER_PERSON"
+      'type': "SVC123"
+      price:
+        total:
+          beforeDiscount: "100.00"
+          afterDiscount: "90.00"
+          beforePromotionAndDiscount: "110.00"
+          discountAmount: "100.00"
+          promotionAmount: "100.00"
+        taxes:
+          beforeDiscount: "0.00"
+          afterDiscount: "1.00"
+      passengers:
+        -
+          id: "150768844"
+          price:
+            total:
+              beforeDiscount: "100.00"
+              afterDiscount: "90.00"
+              beforePromotionAndDiscount: "110.00"
+              discountAmount: "100.00"
+              promotionAmount: "100.00"
+            taxes:
+              beforeDiscount: "0.00"
+              afterDiscount: "1.00"
+          couponCode:
+            isApplicable: true
+            code: "RM01"
+            'type': "UNIQUE"
+            isFree: false
+            percentage: "10.0"
+          promotion:
+            id: "123456"
+      cabins:
+        -
+          id: "150774035"
+          price:
+            total:
+              beforeDiscount: "100.00"
+              afterDiscount: "90.00"
+              beforePromotionAndDiscount: "110.00"
+              discountAmount: "100.00"
+              promotionAmount: "100.00"
+            taxes:
+              beforeDiscount: "0.00"
+              afterDiscount: "1.00"
+          couponCode:
+            isApplicable: true
+            code: "RM01"
+            'type': "UNIQUE"
+            isFree: false
+            percentage: "10.0"
+          promotion:
+            id: "123456"

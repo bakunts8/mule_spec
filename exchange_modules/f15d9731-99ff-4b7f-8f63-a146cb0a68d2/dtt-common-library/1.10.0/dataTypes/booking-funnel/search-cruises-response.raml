@@ -1,0 +1,422 @@
+#%RAML 1.0 Library
+usage: Reusable Data Types for Booking Funnel - Search Cruises operation
+
+types:
+  pricesPerPassenger:
+    displayName: Prices per passenger
+    description: Prices per passenger details definition
+    type: array
+    items:
+      properties:
+        passengerId:
+          type: string
+          description: Passenger ID
+          required: true
+          example: '-9999'
+        allInclusive: 
+          type: object
+          description: All inclusive amounts
+          required: true
+          properties:
+            beforeDiscount:
+              type: !include ../primitives/amount.raml
+              description: Amount before discount
+              required: true
+              example: '100.00'
+            afterDiscount:
+              type: !include ../primitives/amount.raml
+              description: Amount after discount 
+              required: true
+              example: '100.00'  
+        charges:
+          type: array
+          items:
+            properties:
+              chargeType: 
+                type: string
+                pattern: '[\w]{3}'
+                description: TBC
+                required: true
+                example : 'SD1'
+              totalDiscountAmount:
+                type: !include ../primitives/amount.raml
+                description: TBC
+                required: true
+                example: '100.00'
+              discounts:
+                type: array
+                required: false
+                items:
+                  type: object
+                  description: Discount details
+                  properties:
+                    code:
+                      type: string
+                      description: The discount code
+                      required: false
+                      example: 'ALONEJ'
+                    amount:
+                      type: !include ../primitives/amount.raml
+                      description: The discount amount
+                      required: false
+                      example: '100.00'
+              net:
+                type: object
+                description: TBC
+                required: true
+                properties:
+                  beforeDiscount:
+                    type: !include ../primitives/amount.raml
+                    description: Net amount before discount
+                    required: true
+                    example: '100.00'
+                  afterDiscount:
+                    type: !include ../primitives/amount.raml
+                    description: Net amount after discount
+                    required: true
+                    example: '120.00'
+              gross:
+                type: object
+                description: TBC
+                required: true
+                properties:
+                  beforeDiscount:
+                    type: !include ../primitives/amount.raml
+                    description: Gross amount before discount
+                    required: true
+                    example: '100.00'
+                  afterDiscount:
+                    type: !include ../primitives/amount.raml
+                    description: Gross amount after discount
+                    required: true
+                    example: '120.00'
+              commission:
+                type: object
+                description: Commission amounts
+                properties: 
+                  beforeDiscount:
+                    type: object
+                    description: Commission before discount
+                    properties:
+                      total: 
+                        type: !include ../primitives/amount.raml
+                        description: Total commission before discount
+                        example: '40.00'
+                        required: true
+                      standard: 
+                        type: !include ../primitives/amount.raml
+                        description: Standard commission before discount
+                        example: '20.00'
+                        required: true
+                      bonus: 
+                        type: !include ../primitives/amount.raml
+                        description: Bonus commission before discount
+                        example: '20.00'
+                        required: true
+                  afterDiscount:
+                    type: object
+                    description: Commission before discount
+                    properties:
+                      total: 
+                        type: !include ../primitives/amount.raml
+                        description: Total commission after discount
+                        example: '20.00'
+                        required: true
+                      standard: 
+                        type: !include ../primitives/amount.raml
+                        description: Standard commission after discount
+                        example: '10.00'
+                        required: true
+                      bonus: 
+                        type: !include ../primitives/amount.raml
+                        description: Bonus commission after discount
+                        example: '10.00'
+                        required: true  
+  categoryItems:
+    description: Category items
+    type: object
+    properties:
+      code:
+        type: string
+        description: Category item code of the DPP
+        required: false
+        example: B2BK215
+      parentPackageCode:
+        type: string
+        description: Parent package code details of the category item
+        required: false
+        example: TBC
+      serviceType:
+        type: string
+        description: Service type details of OBS item
+        required: false
+        example: COMM
+      date:
+        type: date-only
+        description: Item date
+        required: false
+        example: 2024-01-01
+      description:
+        type: string
+        description: Description of the category item
+        required: false
+        example: 'Internet Browse - 2 devices'
+      isPerCabinPrice:
+        type: boolean
+        description: Whether the category item pricing is per cabin or per person. If the pricing is per cabin, the value is set to True. Otherwise, False.
+        required: false
+        example: false
+      endDateOffset:
+        type: date-only
+        description: End offset date of the DPP item calculated based on the values in Cruise Departure Date, End Offset From and Item End Days Offset in the Category Items setup of DPP
+        required: false
+        example: 2024-01-01
+      occurrence:
+        type: string
+        description: Occurrence details of the category item.Occurrence value "*" indicates a round trip when typeCode is AIR
+        required: false
+        example: "0"
+      defaultAirportCode:
+        type: string
+        pattern: '^[A-Z]{3}$'
+        description: The default airport code in the 3-letter IATA format.
+        required: false
+        example: "BCN"
+      originAirportCode:
+        type: string
+        pattern: '^[A-Z]{3}$'
+        description: The origin airport code in the 3-letter IATA format.
+        required: false
+        example: "JFK"
+      destinationAirportCode:
+        type: string
+        pattern: '^[A-Z]{3}$'
+        description: The destination airport code in the 3-letter IATA format.
+        required: false
+        example: "BCN"
+      isAvailable:
+        type: boolean
+        description: Availability status of the category item
+        required: false
+        example: false
+      grossPrice:
+        type: !include ../primitives/amount.raml
+        description: Gross item price of DPP item
+        required: false
+        example: '10.00'
+      isMandatory:
+        type: boolean
+        description: true if the item is mandatory. In case of AIR and TPT items, if there are multiple items, only the least priced item will be set as true, and others will be set to false.
+        required: false
+        example: true
+      maxItems:
+        type: integer
+        description: Maximum item details of the category item
+        required: false
+        example: 2
+      itemNumber:
+        type: integer
+        description: Sequence number of the category item
+        required: false
+        example: 1
+      priceBasis:
+        description: Price basis
+        enum:
+          - PER_PERSON
+          - PER_CABIN
+        required: false
+        example: PER_PERSON
+      typeCode:
+        type: string
+        description: Item type code of the category item
+        required: false
+        example: OBS
+      applicability:
+        type: string
+        description: DPP item's applicability.
+        enum:
+          - MANDATORY
+          - SUBSTITUTABLE
+          - OPTIONAL
+        required: false
+        example: MANDATORY
+      quantity:
+        type: integer
+        description: Quantity details of the corresponding DPP category item
+        required: false
+        minimum: 0
+        example: 1
+      minItems:
+        type: integer
+        description: Minimum Item details of the category item
+        required: false
+        minimum: 0
+        example: 2
+      packageCode:
+        type: string
+        description: Package id of the category item. This element will not be present for the AIR item
+        required: false
+        example: '571155514'
+      priceType:
+        type: string
+        description: Whether the category item pricing is per night or per stay. This element will not be present for the AIR item
+        required: false
+        enum:
+          - NIGHT
+          - STAY
+        example: NIGHT
+      itemPriority:
+        type: integer
+        description: Priority number of the category items
+        required: false
+        example: 1
+      costCurrency:
+        type: string
+        description: The currency in which the cost of the item is defined in the setup.
+        pattern: '([a-zA-Z]){3}'
+        example: EUR
+        required: true  
+  responseBaseObject:
+    displayName: Search Categories Response Base Object
+    description: Search Categories Response Base Object Definition 
+    type: object
+    additionalProperties: false
+    properties:
+      categoryCode:
+        type: string
+        description: Category code
+        required: true
+        example: IR2
+      macroCategory:
+        enum:
+          - BALCONY
+          - DELUXE
+          - INSIDE
+          - OUTSIDE
+          - SUITE
+          - YACHT
+        description: Cabin type.
+        required: false
+        example: BALCONY 
+      discounts:
+        type: array
+        required: false
+        items:
+          type: object
+          description: Discount details
+          additionalProperties: false
+          properties:
+            code: 
+              type: string
+              description: The discount code
+              required: false
+              example: "ALONEJ"
+            value:
+              type: string
+              description: The discount value
+              required: false
+              example: "15.00"
+            availabilityStatus: 
+              type: string
+              description: The discount availability status
+              enum:
+                - AVAILABLE
+                - DENIED
+              required: false
+              example: AVAILABLE
+            amount: 
+              type: !include ../primitives/amount.raml
+              description: The discount amount
+              required: false
+              example:  "100.00"
+            availabilityDescription: 
+              type: string
+              description: The discount availability description
+              required: false
+              example: "Sample availability description"
+            description: 
+              type: string
+              description: The discount description
+              required: false
+              example: "Sample description"
+            type: 
+              type: string
+              description: The discount type
+              enum:
+                - AMOUNT
+                - FLAT_RATE
+                - PER_DIEM
+                - PERCENTAGE
+                - USER_DEFINED
+              required: false
+              example: AMOUNT 
+      totalAllInclusiveCabinPrice:
+        type: object
+        description: All Inclusive Cabin Prices
+        required: true
+        properties:
+          beforeDiscount:
+              type: !include ../primitives/amount.raml
+              description: Total price of the cabin, including all charges like CAB,SUR,PCH etc before discount.
+              required: true
+              example: '2400.00'
+          afterDiscount: 
+            type: !include ../primitives/amount.raml
+            description: Total price of the cabin including all charges like CAB,PCH,SUR.
+            required: true
+            example: '2205.12'
+      totalCabinPrice:
+        type: object
+        description: Cabin Prices
+        required: true
+        properties:
+          beforeDiscount:
+            type: !include ../primitives/amount.raml
+            description: Total cabin price of all the passengers before discount.
+            required: true
+            example: '2000.00'
+          afterDiscount: 
+            type: !include ../primitives/amount.raml
+            description: Total price of the cabin, including all charges like CAB,SUR,PCH after discount 
+            required: true
+            example: '2205.12'        
+      portChargesAmount:
+        type: !include ../primitives/amount.raml
+        description: Port charges amount
+        required: true
+        example: '20.00'
+      maximumOccupancy:
+        type: object
+        description: Maximum occupancy details
+        required: true
+        properties:
+          real:
+            description: The maximum occupancy among the cabins available under the category.
+            type: integer
+            required: true
+            minimum: 0
+            example: 4
+          guaranteed:
+            description: The maximum occupancy of guarantee cabins available under the category.
+            type: integer
+            required: true
+            minimum: 0
+            example: 4
+      passengerType: 
+        type: !include ../primitives/passenger-type.raml
+        description: The value contains passenger type details
+        example: ALLONEJ
+      allowedOccupancies:
+        type: string
+        description: Comma separated available occupancies of cabins under the category.
+        required: true
+        example: 2,3,4            
+      pricesPerPassenger:
+        type: pricesPerPassenger
+        description: Prices per passenger
+        required: true
+      items: 
+        type: array
+        description: Category items
+        required: true
+        items: categoryItems

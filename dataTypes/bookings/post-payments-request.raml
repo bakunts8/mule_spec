@@ -1,0 +1,18 @@
+#%RAML 1.0 DataType
+displayName: Payments request
+description: Payment processing request
+additionalProperties: false
+properties:
+  transactionId:
+    type: string
+    description: The unique identifier for the payment transaction
+    required: true
+    example: "327894276382736473"
+  type:
+    type: string
+    enum: [FULL, DEPOSIT]
+    description: Type of payment being made
+    required: true
+    example: "FULL"
+
+examples: !include /examples/bookings/post-payments-request.raml

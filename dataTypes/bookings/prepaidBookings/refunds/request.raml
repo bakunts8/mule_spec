@@ -1,0 +1,36 @@
+#%RAML 1.0 DataType
+displayName: prepaid booking refund request
+description: prepaid booking refund request
+type: object
+additionalProperties: false
+properties:
+  cruise:
+    type: object
+    required: true
+    additionalProperties: false
+    properties:
+      id:
+        type: string
+        description: Unique identifier for the cruise.
+        required: true
+        example: "CR123456"
+  excursions:
+    type: array
+    description: List of excursions
+    required: false
+    items: 
+      type: !include items-request-details.raml
+  onboardServices:
+    type: array
+    description: List of onboardServices
+    required: false
+    items: 
+      type: !include items-request-details.raml
+
+examples: !include  ../../../../examples/bookings/prepaidBookings/refunds/request.raml
+
+            
+         
+
+        
+  

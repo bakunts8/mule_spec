@@ -1,0 +1,47 @@
+#%RAML 1.0 DataType
+displayName: Items
+description: Items details
+type: object
+additionalProperties: false
+properties:
+  id:
+    type: string
+    description: The ID of the item
+    required: false
+    example: "ITM123"
+  bookingDate:
+    type: date-only
+    description: The date when the item was booked
+    required: false
+    example: 2025-03-20
+  lastModifiedDate:
+    type: date-only
+    description: The last modified date
+    required: false
+    example: 2025-03-20
+  isPartOfPackage:
+    type: boolean
+    description: Flag to indicate if the item is part of a package
+    required: false
+    example: true
+  packageCode:
+    type: string
+    description: The code of the package to which the item belongs
+    required: false
+    example: "PCKG123"
+  passengers:
+    type: array
+    required: false
+    items:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: The passenger ID
+          required: false
+          example: "1234567"
+        number:
+          type: number
+          description: The booking passenger number
+          required: false
+          example: 3

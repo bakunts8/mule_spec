@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+displayName: Payment options
+description: Payment options
+additionalProperties: false
+properties:
+  returnPath:
+    type: string
+    description: The URI used to redirect the user after a successful payment
+    required: true
+    example: /bookings/return
+
+examples: !include /examples/bookings/post-payment-options-request.raml

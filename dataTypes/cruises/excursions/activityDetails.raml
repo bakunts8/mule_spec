@@ -1,0 +1,47 @@
+#%RAML 1.0 DataType
+displayName: Activity Details
+description: Activity Details definition
+type: baseActivityDetails
+additionalProperties: false
+properties:
+  isInvolvesWalking:
+    type: boolean
+    required: false
+    description: Indicates if the 'By Foot' check box is ticked. True if ticked, False if unticked.
+    example: false
+  isCulturalActivity:
+    type: boolean
+    required: false
+    description: Indicates if the 'Cultural' check box is ticked. True if ticked, False if unticked.
+    example: false
+  isFamilyFriendlyActivity:
+    type: boolean
+    required: false
+    description: Indicates if the 'For Family' check box is ticked. True if ticked, False if unticked.
+    example: false
+  isTourActivity:
+    type: boolean
+    required: false
+    description: Indicates if the 'Tour' check box is ticked. True if ticked, False if unticked.
+    example: false
+  isWalkingDifficulty:
+    type: boolean
+    required: false
+    description: Indicates if the 'Walking Difficulty' check box is ticked. True if ticked, False if unticked.
+    example: false
+  isLimitedSeats:
+    type: boolean
+    required: false
+    description: Indicates if the "Limited Seats" check box is ticked. True if ticked, False if unticked.
+    example: false
+  notes:
+    type: string
+    required: false
+    description: Noted on the activity
+    example: This is an activity note.
+  isBestRated:
+    type: boolean
+    required: false
+    description: Indicates if the activity is best rated.
+    example: true
+  

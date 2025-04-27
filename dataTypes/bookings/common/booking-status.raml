@@ -1,0 +1,14 @@
+#%RAML 1.0 DataType
+displayName: Booking status
+description: Booking status details
+type: object
+additionalProperties: false
+properties:
+  code:
+    type: !include ../../primitives/booking-status-code.raml
+    required: false
+  description:
+    type: string
+    description: The full booking status
+    required: false
+    example: "Booking status description"

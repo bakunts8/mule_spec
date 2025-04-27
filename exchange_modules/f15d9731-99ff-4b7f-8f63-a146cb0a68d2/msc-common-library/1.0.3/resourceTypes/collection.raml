@@ -1,0 +1,33 @@
+#%RAML 1.0 ResourceType
+description: Collection of <<resourcePathName>>.
+
+is: [errorLibrary.baseErrorJsonResponses, correlatable]
+
+get?:
+  is: [errorLibrary.baseErrorJsonResponses]
+  description: Retrieve list of <<resourcePathName>>.
+  responses:
+    200:
+      description: The <<resourcePathName>> have been retrieved successfully.
+      body:
+        application/json:
+          type: <<listItems>>
+          
+post?:
+  is: [errorLibrary.baseErrorJsonResponses]
+  description: Creates a <<resourcePathName|!singularize>> 
+  body:
+    application/json:
+      type: <<requestItem>>
+  responses:
+    201:
+      description: The <<resourcePathName>> have been created successfully.
+      headers:
+        Location:
+          description: Link to the newly-created resource. 
+          type: string
+          example: "https://host.com/api-name/version/resources/resourceId" 
+      body:
+        application/json:
+          type: <<responseItem>>
+          

@@ -1,0 +1,40 @@
+#%RAML 1.0 Trait
+
+description: Provides a base set of error responses that could be returned by any endpoint patch operation. 
+
+responses:
+  400:
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/400-response.raml
+  404:
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/404-response.raml
+  409:
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/409-response.raml
+  412:
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/412-response.raml
+  415:
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/415-response.raml
+  422:
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/422-response.raml
+  428: 
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/428-response.raml  

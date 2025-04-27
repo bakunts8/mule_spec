@@ -1,0 +1,39 @@
+#%RAML 1.0 DataType
+displayName: Promotion Details
+description: Promotion Details definition
+type: object
+additionalProperties: false
+properties:
+  id:
+    type: string
+    description: Promotion identifier
+    required: false
+    example: "123456"
+  type:
+    type: string
+    description: Type of promotion.
+    required: false
+    enum:
+      - MARKUP
+      - MARKDOWN
+    example: MARKUP
+  description:
+    type: string
+    description: Promotion description
+    required: false
+    example: This is a description for a promotion.
+  webDescription:
+    type: string
+    description: Promotion description
+    required: false
+    example: This is a description for a promotion.
+  validFrom:
+    type: datetime-only
+    description: Valid from date time
+    required: false
+    example: 2025-07-04T21:00:00
+  validTo:
+    type: datetime-only
+    description: Valid till date time 
+    required: false
+    example: 2025-07-20T21:00:00

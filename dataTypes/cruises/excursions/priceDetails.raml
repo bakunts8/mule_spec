@@ -1,0 +1,22 @@
+#%RAML 1.0 DataType
+displayName: Price Details
+description: Price Details definition
+type: object
+additionalProperties: false
+properties:
+  total:
+    type: object
+    required: false
+    properties:
+      beforeDiscount: 
+        type: amount
+        required: false
+      afterDiscount: 
+        type: amount
+        required: false
+  discountPercentage:
+    type: string
+    required: false
+  tax:
+    type: amount
+    required: false

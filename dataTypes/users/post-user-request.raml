@@ -1,0 +1,97 @@
+#%RAML 1.0 DataType
+displayName: User Creation Request
+description: User details to complete the web identity profile
+additionalProperties: false
+type: object
+properties:
+  name:
+    description: Customer's name
+    type: string
+    required: true
+  surname:
+    description: Customer's surname
+    type: string
+    required: true
+  email:
+    description: The Customer's email
+    type: email
+    required: true
+  dateOfBirth:
+    description: Customer's date of birth
+    type: date-only
+    required: true
+  gender:
+    description: Customer's gender
+    type: string
+    enum:
+      - MALE
+      - FEMALE
+    required: false
+  address:
+    type: object
+    description: the Customer's address details
+    required: true
+    properties:
+      countryCode:
+        description: The customer's country of residence. 
+        type: countryCode
+        required: true
+        example: IR
+  mobilePhone:
+    description: Customer's mobile phone number
+    type: telephoneNumber
+    required: false
+  booking:
+    description: Object containing booking details
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      number:
+        type: bookingNumber
+        description: Booking number
+        required: true
+        example: "1234567"
+  createNewMembership:
+    description: Indicates whether a new Voyager Loyalty Card needs to be created or not.
+    type: boolean
+    required: false
+    example: false
+  membership:
+    description: Object containing membership details
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      number:
+        description: The existing loyalty card number
+        type: string
+        required: true
+        example: "123456"
+  marketingConsents:
+    required: false
+    type: object
+    additionalProperties: false
+    properties:
+      loyaltyClubEmail:
+        description: Flag indicating whether the customer has authorized to receive marketing communication by email
+        type: boolean
+        required: false
+  termsAndConditionsConsent:
+    description: Flag indicating whether the customer has accepted the terms and conditions
+    type: boolean
+    required: false
+  thirdPartyConsent:
+    description: Indicates whether the user opted for third party use consent
+    type: boolean
+    required: false
+  profilingConsent:
+    description: Indicates whether the user has agreed for his profile details to be used.
+    type: boolean
+    required: false
+  privacyConsent:
+    description: Indicates whether the user opted for privacy consent
+    type: boolean
+    required: false
+
+examples: !include ../../examples/users/post-user-request.raml

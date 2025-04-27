@@ -1,0 +1,85 @@
+#%RAML 1.0 NamedExample
+Itinerary Response:
+  code: UTGV
+  description: United States, Jamaica, Aruba, Dominican Republic, Bahamas            
+  mapImage: /images/msc/iti/itin/UTGV.jpg
+  departureDate: 2025-03-14
+  departurePort:
+    name: Miami, United States
+  arrivalPort:
+    name: Miami, United States
+  cruiseDuration: 10
+  numberOfSailingDays: 10
+  days:
+    - date: 2025-03-14
+      dayOfWeek: FRIDAY
+      departureTime: 17:00:00
+      shipPosition:
+        code: "1"
+        description: "ALONGSIDE"
+      port:
+        isTender: false
+        code: MIA
+        name: Miami, United States
+        description: "<p>&lt;p style=\\\"margin-bottom: 0in;\\\"&gt;&lt;span style=\\\"color: black;\\\"&gt;Immerse yourself in a city known for its museums and extravagant churches when you visit Valetta, Malta. Dotted with marvelous architecture, sunny beaches, seaside locales, and appetizing restaurants, this spectacular city offers an array of attractions that provide a fascinating and memorable experience.&amp;nbsp; &lt;br /&gt;\\n&lt;br /&gt;\\n&lt;strong&gt;Destination Exclusives: &lt;br /&gt;\\n&lt;/strong&gt;&lt;br /&gt;\\n&amp;bull; Visit St. John&amp;rsquo;s Co-Cathedral, one of the best tourist attractions on the island, and witness the amazing Baroque architecture that adorns the interior&amp;nbsp; &lt;br /&gt;\\n&lt;br /&gt;\\n&amp;bull; Wander to the Grand Harbor and visit the underground passages of Auberge de Castille and the beautiful Baracca Gardens which overlook the harbor &lt;br /&gt;\\n&lt;br /&gt;\\n&amp;bull; Relax and soak up the sun&amp;rsquo;s rays when you head to Mellieha Bay, Malta&amp;rsquo;s largest beach that boasts sandy shores and sparkling blue water&amp;nbsp; &lt;/span&gt;&lt;/p&gt;\\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\"</p>"
+        images:
+          desktop:
+            image: "/content/dam/b2c-website-foundation/images/asset.jpg"
+            optimisedImage: "/adobe/dynamicmedia/deliver/dm-p-oid--8nkGVarlOr1OgqRAHz7GAIUPgiVReqGvv4mhl53HAkoacqBZ4o9oLLB4y3s47ZF8l22phEkfD4GujkAU2vaN-A/asset.jpg?preferwebp=true"
+          mobile:
+            image: "/content/dam/b2c-website-foundation/images/asset.jpg"
+            optimisedImage: "/adobe/dynamicmedia/deliver/dm-p-oid--8nkGVarlOr1OgqRAHz7GAIUPgiVReqGvv4mhl53HAkoacqBZ4o9oLLB4y3s47ZF8l22phEkfD4GujkAU2vaN-A/asset.jpg?preferwebp=true" 
+    - date: 2025-03-16
+      dayOfWeek: SUNDAY
+      arrivalTime: 09:00:00
+      departureTime: 18:00:00
+      shipPosition:
+        code: "1"
+        description: "ALONGSIDE"
+      port:
+        code: OCJ
+        name: Ocho Rios, Jamaica
+        isTender: true
+    - date: 2025-03-18
+      dayOfWeek: TUESDAY
+      arrivalTime: 08:00:00
+      departureTime: 18:00:00
+      port:
+        code: ORJ
+        name: Oranjestad, Aruba
+    - date: 2025-03-19
+      dayOfWeek: WEDNESDAY
+      arrivalTime: 08:00:00
+      departureTime: 18:00:00
+      port:
+        code: WIL
+        name: Willemstad, Curaçao
+    - date: 2025-03-21
+      dayOfWeek: FRIDAY
+      arrivalTime: 08:00:00
+      departureTime: 18:00:00
+      port:
+        code: POP
+        name: Puerto Plata, Domenican Republic
+    - date: 2025-03-23
+      dayOfWeek: SUNDAY
+      arrivalTime: 08:00:00
+      departureTime: 20:00:00
+      port:
+        code: 1SC
+        name: Ocean Cay MSC Marine Reserve,Bahamas
+    - date: 2025-03-24
+      dayOfWeek: MONDAY
+      arrivalTime: 07:00:00
+      port:
+        code: MIA
+        name: Miami, United States
+  _warnings:
+    - code: server_error
+      message: An internal or downstream error prevented the request from being processed successfully.
+      traceId: 73b309b81fd54d7fb43ead4052210959
+      errorId: 79b309b81fd54d7fb43ead4000010959
+      dateTime: 2024-04-23T10:00:00Z
+      source: 
+        name: api-name
+        layer: API_SYSTEM

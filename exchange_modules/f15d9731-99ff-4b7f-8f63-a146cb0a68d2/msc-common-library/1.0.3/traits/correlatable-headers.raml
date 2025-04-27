@@ -1,0 +1,11 @@
+#%RAML 1.0 Trait
+
+headers:
+  traceparent:
+    description: W3C Trace Parent for tracing the end-to-end flow.
+    required: false
+    example: 00-f5a3bc60abe5ce30b22ecbe6ee08d1ec-646057012368701b-01
+  MSC-Conversation-ID:
+    description: Unique identifier used to correlate a series of independent interactions with one or more Mule APIs.
+    required: false
+    example: 7700f1f0-024e-11ef-a923-88665a25b0e3

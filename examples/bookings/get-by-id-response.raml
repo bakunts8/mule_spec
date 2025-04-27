@@ -1,0 +1,489 @@
+#%RAML 1.0 NamedExample
+Retrieve Booking Details Response Example:
+  number: "12345678"
+  bookingChannel: "B2C"
+  isGroupBooking: true
+  groupId: "12345678"
+  paymentMethod: "AGENCY"
+  passengerType: "SCBDG"
+  departureDate: 2025-03-20
+  numberOfPassengers: 3
+  status:
+    code: "QUOTE"
+  type: "INDIVIDUAL"
+  createdDate: 2025-03-20
+  optionExpirationDate: 2025-03-20
+  passengers: 
+    - id: "150774035"
+      number: 1
+      ageCategory: CHILD
+      isLeadPassenger: false
+      title: Mr
+      name: GARRETZENOTEST
+      surname: DOOLEYZENOTEST
+      middleName: DOOLEYZENOTEST
+      gender: MALE
+      age: 41
+      dateOfBirth: 2000-02-18
+      email: y@g.com
+      language: "ITA"
+      nationality: "ITA"
+      placeOfBirth: "Rome"
+      countryOfBirth: "IT"
+      occupation: "Occupation"
+      isWebCheckInEnabled: true
+      hasGuardian: true
+      phonePrefix: "+44"
+      phone: "+442034263002"
+      faxPrefix: "+44"
+      fax: "+442034263002"
+      mobilePhonePrefix: "+44"
+      mobilePhone: "+442034263002"
+      emergencyContact:
+        phonePrefix: "+44"
+        phone: "+442034263002"
+        name: "DOOLEYZENOTEST"
+      couponCode:
+        isApplied: true
+        type: "TEST123"
+      identityDocument:
+        passportNumber: "1234567"
+        passportIssueDate: 2025-03-20
+        passportIssuedAt: "Rome"
+        passportExpiryDate: 2025-03-20
+        nationalIdExpiryDate: 2025-03-20
+        nationalId: "123456"
+        type: "PASSPORT"
+      insurance:
+        supplierName: "Supplier"
+        policyNumber: "INS1234"
+        supplierPhone: "+44 2034263002"
+      address:
+        addressLine1: "via Depretis, 31"
+        addressLine2: "Apt 123"
+        district: "District"
+        town: "Napoli"
+        state: "CAM"
+        postCode: "2132"
+        country: "IT"
+      checkIn:
+        - cabinId: "CI123"
+          isBiometricConsentGiven: true
+          isDITVerificationCompleted: true
+          isCreditCardTokenConsentGiven: true
+          isCheckedIn: true
+          isAvailable: true
+          storedPaymentDetails:
+            cardType: "Visa"
+            maskedCardNumber: "************1111"
+            isFinancialStatementVerified: true
+            tokenSource: "Source"
+  total:
+    gross: "100.00"
+    net: "100.00"
+    received: "100.00"
+    dueDate: 2025-03-20
+    due:
+      net: "100.00"
+      gross: "100.00"
+  totalWithoutPrepaid:
+    gross: "100.00"
+    net: "100.00"
+    received: "100.00"
+    dueDate: 2025-03-20
+    due:
+      net: "100.00"
+      gross: "100.00"
+  prepaid:
+    gross: "100.00"
+    received: "100.00"
+    bookings:
+      - number: "12345678"
+        createdAt: 2024-10-10T13:30:00.000Z
+        isConfirmed: true
+        email: abc@xyz.com
+        phone: "+442034263002"
+        cruise:
+            id: "DI20250314MIAMIA"
+        couponCode:
+            isApplied: true
+        onboardServices:
+          - code: "BCN37"
+            type: "OBS"
+            deliveryDate: 2025-03-20
+            isReviseEnabled: true
+            description: "Item description"
+            id: "PP1234"
+            priceBasis: "PER_PERSON"
+            priceId: "PRC1234"
+            preferredGuideLanguage: "ENG"
+            isPackage: true
+            passenger:
+              id: "12345678"
+            bookingStatus:
+              code: "QUOTE"
+            price:
+              total:
+                afterDiscount: "100.00"
+                beforeDiscount: "100.00"
+                gross: "100.00"
+            vehicle:
+              registrationNumber: "AB123456"
+              description: "Audi"
+            diningRooms:
+            - code: "DR1234"
+              description: "Dining item description"
+              date: 2024-10-10T13:30:00.000Z
+              slot: "11:30-12:30"
+              mealOption: "Lunch"
+        excursions:
+          - code: "BCN37"
+            description: "Item descrition"
+            id: "PP1234"
+            startDate: 2024-10-10T13:30:00.000Z
+            priceBasis: "PER_PERSON"
+            priceId: "PRC1234"
+            preferredGuideLanguage: "ENG"
+            isPackage: true
+            passenger:
+              id: "12345678"
+            bookingStatus:
+              code: "QUOTE"
+            price:
+              total:
+                afterDiscount: "100.00"
+                beforeDiscount: "100.00"
+                gross: "100.00"
+  deposit:
+    beforeDiscount: "100.00"
+    afterDiscount: "100.00"
+    dueDate: 2025-03-20
+  specialNeeds:
+    - code: "SND"
+      description: "Special need description"
+  agency:
+    id: "TESTIT01"
+    isB2CAgency: true
+    name: "Agency"
+    phone: "+44 2034263002"
+    fax: "+44 2034263002"
+    email: "abc@xyz.com"
+    sendDocumentsToPassenger: true
+    address:
+      addressLine1: "via Depretis, 31"
+      town: "Napoli"
+      state: "CAM"
+      postCode: "2132"
+      country: "IT"
+  officeDetails:
+    phone: "+44 2034263002"
+    fax: "+44 2034263002"
+    address:
+      addressLine1: "via Depretis, 31"
+      addressLine2: "Apt 123"
+      town: "Napoli"
+      state: "CAM"
+      postCode: "2132"
+      country: "IT"
+  miscellaneousItems:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      code: "MSC123"
+      description: "Misc item description"
+      locationCode: "ITA"
+      cruiseDepartureDate: 2025-03-20
+      level: "PARENT"
+      sequenceNumber: "12345"
+      applicability: "MANDATORY"
+      isParkingItem: true
+      isComplimentary: true
+      numberOfVouchersApplied: 2
+      passengers:
+        - id: "1234567"
+          number: 3
+      bookingStatus:
+        code: "QUOTE"
+        description: "BKG description"
+      relatedItem:
+        id: "12345"
+      total:
+        gross: "100.00"
+        net: "100.00"
+  hotels:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      code: "H1123"
+      name: "Hotel"
+      checkInDate: 2025-03-20
+      checkOutDate: 2025-03-20
+      passengers:
+        - id: "1234567"
+          number: 3
+      relatedItem:
+        id: "123456"
+      location:
+        code: "RM01"
+        description: "Hotel location description"
+      total:
+        gross: "100.00"
+        net: "100.00"
+  excursions:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      code: "EXC123"
+      startDate: 2025-03-20
+      applicability: "INDIVIDUAL"
+      priceBasis: "PER_PERSON"
+      description: "Excursion description"
+      passengers:
+        - id: "1234567"
+          number: 3
+      location:
+        code: "RM01"
+        description: "Excursion location description"
+      relatedItem:
+        id: "ITM0123"
+      bookingStatus:
+        code: "QUOTE"
+        description: "Booking status description"
+      total:
+        gross: "100.00"
+        net: "100.00"
+  airItems:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      passengers:
+        - id: "1234567"
+          number: 3
+      bookingStatus:
+        code: "QUOTE"
+        description: "Booking status description"
+      relatedItem:
+        id: "ITM0123"
+      segments:
+        - flightNumber: "AIR123"
+          cabinClassDescription: "Economy"
+          departureTime: "10:30:30"
+          departureDate: 2025-03-20
+          arrivalDate: 2025-03-20
+          arrivalTime: "10:30:30"
+          airline:
+            code: "BA"
+            name: "British Airways"
+          origin:
+            airportCode: "BFS"
+            airportName: "BELFAST INTERNATIONAL"
+          destination:
+            airportCode: "BFS"
+            airportName: "BELFAST INTERNATIONAL"
+  transfers:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      code: "T123"
+      description: "Transfer description"
+      type: "ONE-WAY"
+      passengers:
+        - id: "1234567"
+          number: 3
+      relatedItem:
+        id: "ITM0123"
+      total:
+        gross: "100.00"
+        net: "100.00"
+      departure:
+        location:
+          code: "L123"
+          name: "Location"
+      arrival:
+        date: 2025-03-20
+        location:
+          code: "L123"
+          name: "Location"
+  transportationItems:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      code: "TR123"
+      description: "Transportation description"
+      passengers:
+        - id: "1234567"
+          number: 3
+      relatedItem:
+        id: "ITM0123"
+      total:
+        gross: "100.00"
+        net: "100.00"
+      arrival:
+        time: "10:30:30"
+        date: 2025-03-20
+        location:
+          code: "L123"
+          name: "Location"
+      departure:
+        time: "10:30:30"
+        date: 2025-03-20
+        location:
+          code: "L123"
+          name: "Location"
+  insuranceItems:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      code: "INS123"
+      description: "Insurance description"
+      supplierCode: "SUP123"
+      passengers:
+        - id: "1234567"
+          number: 3
+      bookingStatus:
+        code: "QUOTE"
+        description: "Booking status description"
+      promotion:
+        isApplied: true
+        shouldBeDisplayed: true
+      relatedItem:
+        id: "ITM0123"
+      total:
+        gross: "100.00"
+        net: "100.00"
+  cabins:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      passengers:
+        - id: "1234567"
+          number: 3
+      categoryCode: "CAT123"
+      categoryDescription: "Category description"
+      pricedCategoryCode: "PRC123"
+      priceCode: "PRC123"
+      priceDescription: "Price description"
+      priceType: "PRC123"
+      isEligibleForETickets: true
+      number: "123"
+      checkInTime: "10:30:30"
+      hasObstructedView: true
+      isInstantConfirmation: true
+      isComplimentary: true
+      isGuaranteeClearable: true
+      isCruiseChangeAllowed: true
+      isBiometricCheckInEnabled: true
+      assemblyStation: "Station1"
+      bookingStatus:
+        code: "QUOTE"
+        description: "BKG description"
+      cruise:
+        id: "CRU123456"
+        departureDate: 2025-03-20
+        departureTime: "10:30:30"
+        arrivalDate: 2025-03-20
+        arrivalPort: "PRT"
+        numberOfSailingDays: "5"
+        demographicArea: "Area"
+        isAccessibilityFriendly: true
+        departurePort:
+          code: "PRT"
+        ship:
+          code: "SH1234"
+          name: "Ship"
+        itinerary:
+          code: "IT1234"
+          description: "Itinerary description"
+      deck:
+          code: "D123"
+          description: "Deck description"
+      discounts:
+        - code: "TEST123"
+          rules: "RL123"
+          description: "Discount description"
+          type: "AMOUNT"
+          value: "100"
+          amount: "100.00"
+      diningDetails:
+        code: "DD123"
+        seatingInformation: "12"
+        description: "Dining details"
+        notes: "Note"
+        passengers:
+          - number: 3
+            id: "12345678"
+      promotion:
+        isApplied: true
+        shouldBeDisplayed: true
+      cruiseChangeReason:
+        code: "CHG123"
+        description: "Change reason description"
+      total:
+        gross: "100.00"
+        net: "100.00"
+      relatedItem:
+        id: "ITM0123"
+  onboardServices:
+    - id: "ITM123"
+      bookingDate: 2025-03-20
+      lastModifiedDate: 2025-03-20
+      isPartOfPackage: true
+      packageCode: "PCKG123"
+      code: "SC2425ME"
+      description: "HOTEL SERVICE CHARGE"
+      supplierCode: "VE1151"
+      deliveryDate: 2025-03-20
+      specialInstructions: "Special instructions"
+      applicability: "MANDATORY"
+      isAlcoholic: true
+      priceBasis: "PER_CABIN"
+      isPrepaid: true
+      type: "SVC123"
+      isReviseEnabled: true
+      passengers:
+        - id: "1234567"
+          number: 3
+      ageRequirements:
+          infant:
+              maximum: 2
+          child:
+              maximum: 16
+          junior:
+              maximum: 25
+          senior:
+              minimum: 65
+      bookingStatus:
+          code: "QUOTE"
+          description: "Booking status description"
+      total:
+          gross: "100.0"
+          net: "100.0"
+  charges:
+    - type: "CHRG123"
+      description: "Charge description"
+      passenger:
+        number: 3
+        id: "1234567"
+      total:
+        baseCharge: "100.0"
+        discount: "100.0"
+        gross: "100.0"
+        net: "100.0"
+      relatedItem:
+        id: "ITM0123"

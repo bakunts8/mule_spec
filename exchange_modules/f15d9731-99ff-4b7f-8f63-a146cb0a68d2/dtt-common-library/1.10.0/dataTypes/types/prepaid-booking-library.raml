@@ -1,0 +1,158 @@
+#%RAML 1.0 Library
+types:
+
+  excursionRequest:
+    displayName: Excursion
+    description: Excursion definition
+    additionalProperties: false
+    type: excursionPerCabinRequest | excursionPerPersonRequest
+
+  excursionBaseRequest:
+    type: object
+    description: Excursion base object
+    additionalProperties: false
+    properties:
+      code:
+        type: string
+        description: The excursion code
+        required: true
+        example: GUA08D
+      startDate:
+        type: date-only
+        description: When the excursion starts
+        required: true
+        example: 2025-03-30
+      promotion:
+        type: !include prepaidBookings/common/promotion-id.raml
+        description: Promotion object
+        required: false
+  
+  excursionPerCabinRequest:
+    type: excursionBaseRequest
+    description: Excursion definition when price basis is per cabin
+    additionalProperties: false
+    properties:
+      priceBasis:
+        type: string
+        description: How the price is calculated. Per cabin or per passenger
+        required: true
+        enum:
+          - PER_CABIN
+      cabins:
+        type: array
+        description: List of cabins that the excursion is being purchased for.
+        required: true
+        items:
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: A cabin identifier
+              required: true
+              example: "238478072"
+  
+  excursionPerPersonRequest:
+    type: excursionBaseRequest
+    description: Excursion definition when price basis is per person
+    additionalProperties: false
+    properties:
+      priceBasis:
+        type: string
+        description: How the price is calculated. Per cabin or per passenger
+        required: true
+        enum:
+          - PER_PERSON
+      passengers:
+        type: array
+        description: List of passengers that the excursion is being purchased for.
+        required: true
+        items:
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: A passenger identifier
+              required: true
+              example: "150768844"
+
+  onboardServiceRequest:
+    displayName: Onboard Service
+    description: Onboard Service definition
+    additionalProperties: false
+    type: onboardServicePerCabinRequest | onboardServicePerPersonRequest
+
+  onboardServiceBaseRequest:
+    type: object
+    description: Onboard Service base object
+    properties:
+      'type':
+        type: string
+        description: The onboard service type
+        required: true
+        example: LAUNDRY
+      code:
+        type: string
+        description: The onboard service code
+        required: true
+        example: LAU010N
+      deliveryDate:
+        type: date-only
+        description: When the onboard service will be
+        required: true
+        example: 2023-12-15
+      promotion:
+        type: !include prepaidBookings/common/promotion-id.raml
+        description: Promotion object
+        required: false
+  
+  onboardServicePerCabinRequest:
+    type: onboardServiceBaseRequest
+    description: Onboard Service definition when price basis is per cabin
+    additionalProperties: false
+    properties:
+      priceBasis:
+        type: string
+        description: How the price is calculated. Per cabin or per passenger
+        required: true
+        enum:
+          - PER_CABIN
+      cabins:
+        type: array
+        description: List of cabins that the excursion is being purchased for.
+        required: true
+        items:
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: A cabin identifier
+              required: true
+              example: "238478072"
+  
+  onboardServicePerPersonRequest:
+    type: onboardServiceBaseRequest
+    description: Onboard Service definition when price basis is per person
+    additionalProperties: false
+    properties:
+      priceBasis:
+        type: string
+        description: How the price is calculated. Per cabin or per passenger
+        required: true
+        enum:
+          - PER_PERSON
+      passengers:
+        type: array
+        description: List of passengers that the excursion is being purchased for.
+        required: true
+        items:
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: A passenger identifier
+              required: true
+              example: "150768844"

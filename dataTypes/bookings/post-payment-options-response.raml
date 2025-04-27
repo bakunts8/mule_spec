@@ -1,0 +1,44 @@
+#%RAML 1.0 DataType
+displayName: Payment Options
+description: Defines the structure of payment options for booking details
+additionalProperties: false
+properties:
+  paymentOptions:
+    type: array
+    description: List of payment options for the booking
+    minItems: 0
+    items:
+      type: object
+      description: Details of a payment option
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          enum: 
+            - DEPOSIT
+            - FULL
+          description: Type of payment (either DEPOSIT or FULL)
+          required: true
+          example: "DEPOSIT"
+        transactionId:
+          type: string
+          description: Identifier for the transaction
+          required: true
+          example: "250319171330182675"
+        dueDate:
+          type: date-only
+          description: The due date for the payment, sourced from booking charges
+          required: true
+          example: "2025-01-10"  
+        due:
+          type: object
+          description: Payment due details
+          additionalProperties: false
+          required: true
+          properties:
+            gross:
+              type: string
+              description: The amount due for the payment, sourced from booking charges
+              required: true
+              example: "100.00"
+examples: !include ../../examples/bookings/post-payment-options-response.raml

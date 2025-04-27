@@ -1,0 +1,108 @@
+#%RAML 1.0 DataType
+displayName: Ping Response
+description: Response for the Ping Endpoint. 
+additionalProperties: false
+
+properties:
+  pong: 
+    description: The pong object containing static operational metadata information about the API.
+    type: object
+    required: true
+    properties:  
+      application:
+        description: Properties relating to the development of the application.
+        type: object
+        required: true
+        properties:
+          artifactId: 
+            description: The artifact ID of the application.
+            type: string
+            required: true
+            example: msc-s-example             
+          artifactVersion:
+            description: The artifact version of the application.
+            type: string
+            required: true
+            example: 1.0.0-SNAPSHOT  
+          muleEnvironmentProperty:
+            description: The value of the mule environment property used to reference internal property files.
+            type: string
+            required: true
+            example: dev              
+          muleVersion:
+            description: The version of the Mule Runtime.
+            type: string
+            required: true
+            example: 4.6.2  
+          startDateTime:
+            description: The time and date the API was last started on the specific node.
+            type: datetime
+            required: true
+            example: 2024-04-20T12:38:11.000Z
+          javaRuntimeVersion:
+            description: The java runtime version on which the application is deployed.
+            type: string
+            required: true
+            example: 8u402-ga-2ubuntu1~20.04
+              
+      build:
+        description: Properties encompassing the unique build instance of the running API.
+        type: object
+        required: true
+        properties:
+          revision: 
+            description: The build number of the pipeline job that generated the artifact.
+            type: string
+            required: true
+            example: b101202             
+          commitNumber: 
+            description: The hash number of the unique ID provided by the source control, that uniquely identifies the code.
+            type: string
+            required: true
+            example: e243137
+              
+      request:
+        description: Details about the incoming request to the API.
+        type: object
+        required: true
+        properties:
+          origin:
+            description: The value of the X-Forwarded-For header if it exists.
+            type: string
+            required: false
+            example: 34.0.0.77
+          protocol:
+            description: The value of the X-Forwarded-Proto header if it exists.
+            type: string
+            required: false
+            example: HTTPS             
+          host:
+            description: The value of the X-Forwarded-Host header if it exists.
+            type: string
+            required: false
+            example: id42.example-cdn.com
+          forwarded:
+            description: The value of the Forwarded header if it exists.
+            type: string
+            required: false
+            examples: 
+              protocol: for=34.0.0.77;proto=http;by=203.0.0.43
+              multipleValues: for=34.0.0.77, for=198.0.0.17
+              
+      platform:
+        description: Details about the deployment platform.
+        type: object
+        required: false
+        properties:
+          applicationName: 
+            description: The name of the application as registered on Cloudhub.
+            type: string
+            required: false
+            example:  msc-s-example-v1-dev
+          hostName: 
+            description: The host name of the application as deployed on Cloudhub.
+            type: string
+            required: false
+            example:  zgop-msc-s-example-v1-dev
+
+examples: !include ../examples/ping-response.raml

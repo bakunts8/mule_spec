@@ -1,0 +1,55 @@
+#%RAML 1.0 Library
+
+uses:
+  dtt-common-library: /exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/dtt-common-library/1.10.0/dtt-common-library.raml
+  
+types:
+  excursionRequest:
+    displayName: Excursion
+    description: Excursion definition
+    additionalProperties: false
+    type: excursionPerPersonRequest | excursionPerCabinRequest
+
+  excursionPerPersonRequest: dtt-common-library.prepaidBookingsExcursionPerPersonRequest 
+
+  excursionPerCabinRequest: dtt-common-library.prepaidBookingsExcursionPerCabinRequest
+
+  onboardServiceRequest:
+    displayName: Onboard Service
+    description: Onboard Service definition
+    additionalProperties: false
+    type: onboardServicePerCabinRequest | onboardServicePerPersonRequest
+
+
+  onboardServicePerPersonRequest: 
+    type: dtt-common-library.prepaidBookingsOnboardServiceBaseRequest
+    description: Onboard Service definition when price basis is per person
+    additionalProperties: false
+    properties:
+      priceBasis:
+        type: string
+        description: How the price is calculated. Per cabin or per passenger
+        required: true
+        enum:
+          - PER_PERSON
+      passengers:
+        type: array
+        description: List of passengers that the excursion is being purchased for.
+        required: true
+        items:
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: A passenger identifier
+              required: true
+              example: "150768844"
+            diningRooms:
+              type: array
+              description: Onboard service dining rooms
+              required: false
+              items: !include diningRooms-details.raml
+
+  onboardServicePerCabinRequest:
+    type: dtt-common-library.prepaidBookingsOnboardServicePerCabinRequest

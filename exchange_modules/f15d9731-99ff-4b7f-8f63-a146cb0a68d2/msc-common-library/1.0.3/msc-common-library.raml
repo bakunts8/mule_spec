@@ -1,0 +1,16 @@
+#%RAML 1.0 Library
+usage: The MSC Common Library contains the resources needed for an API designer to define an API according to MSC standards.
+
+uses:
+  errorLibrary: /exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/msc-rest-error-library/1.0.0/msc-rest-error-library.raml
+
+types:
+  ping: !include dataTypes/ping.raml
+
+resourceTypes:
+  collection: !include resourceTypes/collection.raml
+  collectionItem: !include resourceTypes/collection-item.raml  
+  ping: !include resourceTypes/ping-resource.raml
+
+traits:
+  correlatable: !include traits/correlatable-headers.raml

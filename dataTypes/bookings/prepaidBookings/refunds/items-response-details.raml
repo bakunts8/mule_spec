@@ -1,0 +1,31 @@
+#%RAML 1.0 DataType
+displayName: item details
+description: item details definition
+type: [ partialSuccess , passengerDetails|cabinDetails]
+additionalProperties: false
+properties:
+  id:
+    type: string
+    description: Unique identifier for the cruise.
+    required: true
+    example: "CR123456"
+  amount:
+    description: Amount refunded
+    type: amount
+    required: true
+    example: "37.00"
+  status:
+    description: Refund status
+    enum:
+      - SUCCESS 
+      - PARTIAL 
+      - FAILURE
+    required: true
+    example: "SUCCESS"
+  
+  
+            
+         
+
+        
+  

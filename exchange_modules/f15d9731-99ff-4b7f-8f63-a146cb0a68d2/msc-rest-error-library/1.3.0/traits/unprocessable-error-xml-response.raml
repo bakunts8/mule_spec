@@ -1,0 +1,8 @@
+#%RAML 1.0 Trait
+responses:
+  422:
+    description: The server is unable to process the request due to semantic errors or issues with the request content.
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/422-response.raml

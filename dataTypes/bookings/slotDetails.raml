@@ -1,0 +1,41 @@
+#%RAML 1.0 DataType
+displayName: Slots details
+description: Slots details definition
+additionalProperties: false
+properties:
+  id:
+    type: string
+    description: Slot inventory ID
+    required: true
+    example: "166837"
+  isAvailable:
+    type: boolean
+    description: Is slot available
+    required: true
+    example: true
+  startTime:
+    type: time-only
+    description: Slot start time
+    required: true
+    example: 12:00:00
+  endTime:
+    type: time-only
+    description: Slot end time
+    required: true
+    example: 13:00:00
+  isAssigned:
+    type: boolean
+    description: Is the slot assigned to this booking
+    required: true
+    example: true
+  allocationType:
+    enum:
+      - INDIVIDUAL
+      - GROUP
+      - DYNAMIC_BLOCK
+      - AGENT_BLOCK
+      - OFFICE_BLOCK 
+      - DEFAULT
+    description: The entity allowed to utilise the slot
+    required: false
+    example: GROUP

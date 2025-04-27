@@ -1,0 +1,33 @@
+#%RAML 1.0 DataType
+displayName: Address
+description: Address details
+type: object
+additionalProperties: false
+properties:
+  addressLine1:
+    type: string
+    description: Address line 1
+    required: false
+    example: "via Depretis, 31"
+  town:
+    type: string
+    description: City
+    required: false
+    example: "Napoli"
+  state:
+    type: string
+    pattern: "^[a-zA-Z]{3}$"
+    description: State
+    required: false
+    example: "CAM"
+  postCode:
+    type: string
+    description: Post code
+    required: false
+    example: "2132"
+  country:
+    type: string
+    pattern: "^[A-Z]{2}$"
+    description: Country
+    required: false
+    example: "IT"

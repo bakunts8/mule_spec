@@ -1,0 +1,23 @@
+#%RAML 1.0 Library
+usage: Membership types
+
+types:  
+  baseMembership:
+    type: object
+    additionalProperties: false
+    properties:
+      number:
+        description: membership number
+        required: true
+        type: string
+        example: "2405082"
+      status:
+        description: status
+        required: false
+        type: string
+        example: "Active"
+      cardType:
+        description: card type
+        required: false
+        type: string
+        example: "CLASSIC"

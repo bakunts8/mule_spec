@@ -1,0 +1,77 @@
+#%RAML 1.0 NamedExample
+Prepaid Booking Request:
+  couponCode: "5C298671"
+  transactionId: "240719091144909540"
+  passenger:
+    email: "johndoe@example.com"
+  cruise:
+    id: "DI20250314MIAMIA"
+  excursions:
+    - code: GUA08D
+      startDate: 2025-03-30
+      priceBasis: PER_PERSON
+      promotion:
+        id: 5C298671
+      passengers:
+        - id: "150768844"
+        - id: "150768845"
+      preferredGuideLanguage: "ENG"
+    - code: GUA11
+      startDate: 2025-01-01
+      priceBasis: PER_CABIN
+      promotion:
+        id: 5C298671
+      cabins:
+        - id: "150768801"
+        - id: "150768802"
+  onboardServices:
+    - type: LAUNDRY
+      code: LAU010N
+      deliveryDate: 2023-12-15
+      priceBasis: PER_PERSON
+      promotion:
+        id: 5C298671
+      passengers:
+        - id: "150768844"
+        - id: "150768845"
+    - type: FOOD
+      code: FOOD7625
+      deliveryDate: 2023-12-15
+      priceBasis: PER_CABIN
+      promotion:
+        id: 5C298671
+      cabins:
+        - id: "150768801"
+        - id: "150768802"
+      vehicle:
+        description: "audi"
+        registrationNumber: "AUD32WE45"
+    - type: FOOD
+      code: FOOD7626
+      deliveryDate: 2023-12-15
+      priceBasis: PER_PERSON
+      promotion:
+        id: 5C298671
+      passengers:
+        - id: "150768844"
+          diningRooms:
+            - code: "ABCD"
+              slot: "10:00"
+              date: 2025-04-20
+              reservationId: "123456"
+              mealOption: "MEAT"
+            - code: "DEFG"
+              slot: "11:00"
+              date: 2025-04-23
+              reservationId: "123489"
+              mealOption: "FISH"
+        - id: "150768845"
+          diningRooms:
+            - code: "ABCD"
+              slot: "10:00"
+              date: 2025-04-20
+              reservationId: "123456"
+              mealOption: "VEG"
+      vehicle:
+        description: "lambo"
+        registrationNumber: "A123ER34"

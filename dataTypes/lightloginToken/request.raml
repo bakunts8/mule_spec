@@ -1,0 +1,27 @@
+#%RAML 1.0 DataType
+displayName: The customer’s details with booking number
+description: The customer’s details with booking number definition
+additionalProperties: false
+properties:
+  name:
+    type: string
+    description: The customer’s name
+    required: true
+    example: "John"
+  surname:
+    type: string
+    description: The customer’s surname
+    required: true
+    example: "Wick"
+  dateOfBirth:
+    type: date-only
+    description: The customer’s date of birth
+    required: false
+    example: 1986-10-30
+  bookingNumber:
+    type: bookingNumber
+    description: The booking number
+    required: true
+    example: "123456"
+
+examples: !include ../../examples/lightloginToken/request.raml

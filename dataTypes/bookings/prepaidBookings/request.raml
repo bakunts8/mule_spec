@@ -1,0 +1,57 @@
+#%RAML 1.0 DataType
+displayName: Prepaid Bookings 
+description: Prepaid Bookings details definition
+additionalProperties: false
+properties:
+  couponCode:
+    type: string
+    description: The coupon code that should be applied to the items being purchased
+    required: false
+    example: 5C298671
+  transactionId:
+    type: datatransTransactionId
+    description: The Datatrans transaction ID
+    required: false
+    example: "240719091144909540"
+  passenger:
+    type: !include passenger-details.raml
+    required: true
+  cruise:
+    type: !include cruise-details.raml
+    required: true
+  excursions:
+    type: array
+    description: List of excursions being purchased
+    required: false
+    items: 
+      type: prepaidBookingsAddItemExcursionRequest
+      additionalProperties: false
+      properties:
+        preferredGuideLanguage:
+          description: Preferred guide language
+          required: false
+          type: string
+          pattern: '^[a-zA-Z]{3}$'
+          example: "ENG"
+  onboardServices:
+    type: array
+    description: List of onboard services being purchased
+    required: false
+    items: 
+      type: prepaidBookingsAddItemOnboardServiceRequest
+      additionalProperties: false
+      properties:
+        vehicle:
+          description: vehicle details
+          required: false
+          type: !include vehicle-details.raml
+        preferredGuideLanguage:
+          description: Preferred guide language
+          required: false
+          type: string
+          pattern: '^[a-zA-Z]{3}$'
+          example: "ENG"
+      
+
+examples: !include ../../../examples/bookings/prepaidBookings/request.raml
+

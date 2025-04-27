@@ -1,0 +1,66 @@
+#%RAML 1.0 DataType
+description: Response details of Customer
+
+type: object
+additionalProperties: false
+properties:
+  name:
+    description: Customer's name
+    type: string
+    required: true
+  surname:
+    description: Customer's surname
+    type: string
+    required: true
+  dateOfBirth:
+    description: Customer's date of birth
+    type: date-only
+    required: true
+  gender:
+    description: Customer's gender
+    type: string
+    enum:
+      - MALE
+      - FEMALE
+    required: false
+  email:
+    description: Customer's email address
+    type: email
+    required: false
+  phone:
+    description: Customer's landline number
+    type: telephoneNumber
+    required: false
+  mobilePhone:
+    description: Customer's mobile phone number
+    type: telephoneNumber
+    required: false
+  address:
+    type: fullAddressDetails
+  marketingConsents:
+    required: false
+    type: object
+    additionalProperties: false
+    properties:
+      phone:
+        description: Flag indicating whether the customer has authorized to receive marketing communication by phone
+        type: boolean
+        required: false
+      mobilePhone:
+        description: Flag indicating whether the customer is authorized to receive marketing communication by mobile
+        type: boolean
+        required: false
+      email:
+        description: Flag indicating whether the customer is authorized to receive marketing emails
+        type: boolean
+        required: false
+  thirdPartyConsent:
+    description: Flag indicating whether the customer has authorized to receive marketing communication from thirdparty
+    type: boolean
+    required: false
+  profilingConsent:
+    description: Flag indicating whether the customer has authorized to receive marketing communication by profiling
+    type: boolean
+    required: false
+
+examples: !include ../../examples/customers/get-customer-data-response.raml

@@ -1,0 +1,13 @@
+#%RAML 1.0 SecurityScheme
+description: This security scheme ensures that the client credentials sent on each request have been approved to consume the API.
+type: x-custom
+describedBy: 
+  headers:
+    x-client-id:
+      type: string
+      description: The x-client-id required for authentication.
+      example: 123e4567-e89b-12d3-a456-655616061658
+    x-client-secret:
+      type: string
+      description: The x-client-secret required for authentication.
+      example: 123e4567-e89b-12d3-a456-426655440000

@@ -1,0 +1,82 @@
+#%RAML 1.0 DataType
+displayName: Air segment
+description: Information about air segment
+type: object
+additionalProperties: false
+properties:
+  flightNumber:
+    type: string
+    description: Flight number
+    required: true
+    example: "AIR123"
+  cabinClassDescription:
+    type: string
+    description: The description of the flight cabin class
+    required: true
+    example: "Economy"
+  departureTime:
+    type: string
+    description: The flight segment departure time
+    required: true
+    example: "10:30:30"
+  departureDate:
+    type: date-only
+    description: The flight segment departure date
+    required: true
+    example: 2025-03-20
+  arrivalDate:
+    type: date-only
+    description: The flight segment arrival date
+    required: true
+    example: 2025-03-20
+  arrivalTime:
+    type: string
+    description: The flight segment arrival time
+    required: true
+    example: "10:30:30"
+  airline:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      code:
+        type: string
+        pattern: "^[a-zA-Z]{2,3}$"
+        description: Airline Code
+        required: true
+        example: "BA"
+      name:
+        type: string
+        description: The flight airline name value
+        required: true
+        example: "British Airways"
+  origin:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      airportCode:
+        type: string
+        description: The  departure airport code
+        required: true
+        example: "BFS"
+      airportName:
+        type: string
+        description: The departure airport name value
+        required: true
+        example: "BELFAST INTERNATIONAL"
+  destination:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      airportCode:
+        type: string
+        description: The  destination airport code
+        required: true
+        example: "BFS"
+      airportName:
+        type: string
+        description: The destination airport name value
+        required: true
+        example: "BELFAST INTERNATIONAL"

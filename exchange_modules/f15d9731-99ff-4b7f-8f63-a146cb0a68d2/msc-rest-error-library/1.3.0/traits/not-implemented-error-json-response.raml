@@ -1,0 +1,8 @@
+#%RAML 1.0 Trait
+responses:
+  501:
+    description: The request is targeting a non-implemented resource.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/501-response.raml

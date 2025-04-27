@@ -1,0 +1,7 @@
+#%RAML 1.0 Trait
+headers:
+  MSC-Locale: 
+    description: Locale is a combination of ISO 639-1 language code and ISO 3166-1 country code. Filters the response to only include the provided locale.
+    pattern: '^[a-z]{2}_[a-zA-Z]{2}$'
+    example: en_GB
+    required: true

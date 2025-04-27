@@ -1,0 +1,8 @@
+#%RAML 1.0 Trait
+responses:
+  409:
+    description: The request could not be completed due to a conflict with the current state of the target resource.
+    body:
+      application/xml:
+        type: error
+        examples: !include ../examples/409-response.raml

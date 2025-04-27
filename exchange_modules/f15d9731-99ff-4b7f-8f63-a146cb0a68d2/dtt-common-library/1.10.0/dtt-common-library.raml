@@ -1,0 +1,67 @@
+#%RAML 1.0 Library
+usage: The DTT Common Library contains the reusable resources for the Digital Transformation Program. 
+
+uses: 
+  searchCruisesRequest: dataTypes/booking-funnel/search-cruises-request.raml
+  searchCruisesResponse: dataTypes/booking-funnel/search-cruises-response.raml
+  pricesType: dataTypes/types/prices-type.raml
+  addressType: dataTypes/types/address-type.raml
+  membershipType: dataTypes/types/membership-type.raml
+  prepaidBooking: dataTypes/types/prepaid-booking-library.raml
+
+traits:
+  bookingHeaders : !include traits/booking-headers.raml
+  workStreamAuthHeaders: !include traits/workstream-auth-headers.raml
+
+types:
+  searchCruisesBudgetRange: searchCruisesRequest.budgetRange
+  searchCruisesDiscountCodes: searchCruisesRequest.discountCodes
+  searchCruisesAdditionalDiscounts: searchCruisesRequest.additionalDiscounts
+  searchCruisesLoyaltyCard: searchCruisesRequest.loyaltyCard
+
+  searchCruisesCategoryItems: searchCruisesResponse.categoryItems
+  searchCruisesPricesPerPassenger: searchCruisesResponse.pricesPerPassenger
+  searchCruisesPassengerDetails: searchCruisesRequest.passengerDetails
+  searchCruisesResponseBaseObject: searchCruisesResponse.responseBaseObject
+  
+  amount: !include dataTypes/primitives/amount.raml
+  negativeAmount: !include dataTypes/primitives/negative-amount.raml
+  email: !include dataTypes/primitives/email.raml
+
+  baseAmounts: pricesType.amounts
+  amountsWithDueDate: pricesType.amountsWithDueDate
+  
+  passengerDetails: !include dataTypes/types/passengers/passenger-details.raml
+  fullPassengerDetails: !include dataTypes/types/passengers/full-passenger-details.raml
+  enforcedPassengerDetails: !include dataTypes/types/passengers/passenger-details-mandatory-adults.raml
+  passengerType: !include dataTypes/primitives/passenger-type.raml
+  passengerAdultChildType: !include dataTypes/primitives/passenger-adult-child-type.raml
+  bookingNumber: !include dataTypes/primitives/booking-number.raml
+
+  baseActivityDetails: !include dataTypes/types/activities/base-activity-details.raml
+
+  basePricesDetails: pricesType.basePrices
+  fullPricesDetails: pricesType.fullPrices
+
+  baseAddressDetails: addressType.baseAddressDetails
+  fullAddressDetails: addressType.fullAddressDetails
+
+  baseMembershipDetails: membershipType.baseMembership
+
+  telephoneNumber: !include dataTypes/primitives/telephone-number.raml
+
+  goldenId: !include dataTypes/primitives/golden-id.raml
+
+  datatransTransactionId: !include dataTypes/primitives/datatrans-transaction-id.raml
+
+  prepaidBookingsExcursionRequest: prepaidBooking.excursionRequest
+  prepaidBookingsOnboardServiceRequest: prepaidBooking.onboardServiceRequest
+  prepaidBookingsPriceDetails: !include dataTypes/types/prepaidBookings/common/price-details.raml
+  prepaidBookingsPassengerDetails: !include dataTypes/types/prepaidBookings/common/passengers-details.raml
+  prepaidBookingsCabinDetails: !include dataTypes/types/prepaidBookings/common/cabins-details.raml
+  prepaidBookingsExcursionBaseRequest: prepaidBooking.excursionBaseRequest
+  prepaidBookingsExcursionPerCabinRequest: prepaidBooking.excursionPerCabinRequest
+  prepaidBookingsExcursionPerPersonRequest: prepaidBooking.excursionPerPersonRequest
+  prepaidBookingsOnboardServiceBaseRequest: prepaidBooking.onboardServiceBaseRequest
+  prepaidBookingsOnboardServicePerCabinRequest: prepaidBooking.onboardServicePerCabinRequest
+  prepaidBookingsOnboardServicePerPersonRequest: prepaidBooking.onboardServicePerPersonRequest

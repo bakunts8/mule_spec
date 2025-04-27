@@ -1,0 +1,95 @@
+#%RAML 1.0 DataType
+displayName: Pre paid service
+description: Information about prepaid services
+type: object
+additionalProperties: false
+properties:
+  code:
+    type: string
+    description: An item code describing the itinerary
+    required: true
+    example: "BCN37"
+  description:
+    type: string
+    description: The description of the item
+    required: true
+    example: "Item descrition"
+  id:
+    type: string
+    description: The unique item identifier
+    required: true
+    example: "PP1234"
+  priceBasis:
+    type: string
+    enum: 
+      - PER_PERSON
+      - PER_CABIN
+    description: Basis of the price
+    required: true
+    example: "PER_PERSON"
+  priceId:
+    type: string
+    description: The unique identifier for the pricing item
+    required: true
+    example: "PRC1234"
+  preferredGuideLanguage:
+    type: string
+    pattern: "^[a-zA-Z]{3}$"
+    description: The preferred language of the guide
+    required: false
+    example: "ENG"
+  isPackage:
+    type: boolean
+    description: Whether or not the prebooking is a package
+    required: false
+    example: true
+  passenger:
+    type: object
+    additionalProperties: false
+    required: false
+    properties:
+      id:
+        type: string
+        description: The unique passenger identifier
+        required: true
+        example: "12345678"
+  cabin:
+    type: object
+    additionalProperties: false
+    required: false
+    properties:
+      id:
+        type: string
+        description: The unique cabin identifier
+        required: true
+        example: "12345678"
+  bookingStatus:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      code:
+        type: !include ../../primitives/booking-status-code.raml
+        required: true
+  price:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      total:
+        type: object
+        additionalProperties: false
+        required: true
+        properties:
+          gross:
+            type: amount
+            description: Total gross amount for the prebooking
+            required: true
+          beforeDiscount: 
+            type: amount
+            description: Amount before discount
+            required: false
+          afterDiscount: 
+            type: amount
+            description: Amount after discount
+            required: true

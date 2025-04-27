@@ -1,0 +1,128 @@
+#%RAML 1.0 DocumentationItem
+title: CHANGELOG
+content: | 
+        All notable changes to this project will be documented in this file. <br> <br>
+        The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+        * Version 1
+          * Version 1.22.0 (17/04/2025)
+            * Added POST /users endpoint
+          * Version 1.21.3 (24/04/25)
+            * Added MSC-ECID as optional header for POST /bookings/{booking-number}/prepaid-bookings/refunds endpoint
+          * Version 1.21.2 (23/04/25)
+            * Removed duplicated fields packageDetails for GET /cruises/{cruise-id}/excursion response (INT133)
+            * Removed duration field from the activityGroup and added under packageDetails for GET /cruises/{cruise-id}/excursions response (INT133)
+          * Version 1.21.1 (22/04/25)
+            * Updated below headers for POST /bookings/{booking-number}/prepaid-bookings/refunds endpoint
+            * Changed MSC-Currency-Code header to mandatory
+            * Changed MSC-Locale header regex to ^[a-z]{2}_[A-Z]{2}$
+            * Update of portCode in GET /cruises/{cruise-id}/excursions response (INT133)
+          * Version 1.21.0 (22/04/25)
+            * Added new field in the response for GET /bookings/{bookingNumber} endpoint
+          * Version 1.20.1 (21/04/25)
+            * Update of locationCode in queryparams and location.code in response for GET /cruises/{cruise-id}/excursions/{excursion-code} (INT135.2)
+            * Update of locationCode in GET /cruises/{cruise-id}/excursions response (INT133)
+          * Version 1.20.0 (17/04/25)
+            * Added POST /bookings/{booking-number}/payments
+            * Changed MSC-Language-Code trait to mandatory
+            * Changed header from in-line to traits ecidHeader for /prepaid-bookings 
+          * Version 1.19.0 (17/04/25)
+            * Added POST /bookings/{booking-number}/prepaid-bookings/refunds endpoint
+          * Version 1.18.3 (17/04/25)
+            * Updated datatype and example for GET /customers/{golden-id} endpoint.
+          * Version 1.18.2 (15/04/25)
+            * Added two new fields in the response for POST /login/token/upgrade
+          * Version 1.18.1 (15/04/25)
+            * Removed the Agency ID header from GET /cruises/{cruise-id}/excursions/{excursion-code} endpoint.
+          * Version 1.18.0 (14/04/25)
+            * Added GET /customers/{golden-id}
+          * Version 1.17.0 (14/04/2025)
+            * Added POST /bookings/{booking-number}/prepaid-bookings endpoint
+          * Version 1.16.3 (11/04/25)
+            * Added two new fields in the response for POST /login/token/exchange endpoint
+          * Version 1.16.2 (11/04/25)
+            * Added currency header for POST /bookings/{booking-number}/payment-options endpoint
+          * * Version 1.16.1 (10/04/25)
+            * Changed transactionId field to optional for POST /bookings/{booking-number}/prepaid-bookings endpoint
+            * Added POST users/{email}/bookings endpoint
+          * Version 1.16.0 (10/04/2025)
+            * Added POST users/{email}/bookings endpoint
+          * Version 1.15.0 (08/04/2025)
+            * Added POST /bookings/{booking-number}/payment-options endpoint
+          * Version 1.14.2 (04/04/2025)
+            * Updated startTime to be optional for POST /cruises/{cruise-id}/excursions/{excursion-code}/search endpoint response
+          * Version 1.14.1 (28/03/2025)
+            * Update fields for GET /bookings/{booking-number} endpoint
+          * Version 1.14.0 (27/03/2025)
+            * Added endpoint /cruises/{cruise-id}/onboard-services/{obs-code}/dining-rooms/{dining-room-code}/reservations
+          * Version 1.13.4 (26/03/2025)
+            * Updated diningRooms to be part of per_person onbaord services request for  POST /bookings/{booking-number}/prepaid-bookings endpoint
+          * Version 1.13.4 (26/03/2025)
+            * Updated diningRooms details for  POST /bookings/{booking-number}/prepaid-bookings endpoint
+          * Version 1.13.3 (25/03/2025)
+            * Added bookingChannel field to GET /bookings/{booking-number} endpoint (INT142)
+          * Version 1.13.2 (25/03/2025)
+            * Added pattern for preferredGuideLanguage in the request for POST /bookings/{booking-number}/prepaid-bookings endpoint
+          * Version 1.13.1 (25/03/2025)
+            * Updated response excursions and obs as optional for POST /cruises/{cruiseId}/prepaid-bookings/prices
+          * Version 1.13.0 (24/03/2025)
+            * Added POST /bookings/{booking-number}/prepaid-bookings endpoint
+            * Updated POST /cruises/{cruiseId}/prepaid-bookings/prices request/response structure to refer from dtt common library
+          * Version 1.12.2 (19/03/2025)
+            * Updated  guidedLanguages to guideLanguages for GET /cruises/{cruise-id}/excursions/{excursion-code} endpoint response
+          * Version 1.12.1 (19/03/2025)
+            * Added priceBasis mandatory query parameter for GET /cruises/{cruise-id}/excursions/{excursion-code} endpoint
+          * Version 1.12.0 (18/03/2025)
+            * Added POST /cruises/{cruiseId}/prepaid-bookings/prices
+          * Version 1.11.3 (18/03/2025)
+            * Updated POST /lightlogin/token endpoint request to set dateOfBirth field to optional
+          * Version 1.11.2 (18/03/2025)
+            * Updated MSC-Conversation-ID as mandatory header for all the endpoints
+          * Version 1.11.1 (14/03/2025)
+            * Included "DEFAULT" to the allocationType Enum for endpoint GET /bookings/{booking-number}/cabins/{cabin-id}/slots response 
+          * Version 1.11.0 (13/03/2025)
+            * Changed to kebab case naming convention for GET /bookings/{booking-number}/cabins/{cabin-id}/checkIns endpoint
+          * Version 1.10.0 (12/03/2025)
+            * Added GET /bookings/{bookingNumber}/cabins/{cabinId}/checkIns endpoint
+          * Version 1.9.1 (11/03/2025)
+            * Update fields for GET /bookings/{booking-number} endpoint
+          * Version 1.9.0 (11/03/2025)
+            * Added GET /bookings/{bookingNumber}/cabins/{cabinId}/slots endpoint
+          * Version 1.8.1 (10/03/2025)
+            * Update fields for GET /bookings/{booking-number} endpoint
+              * typo onBoardServices -> onboardServices
+              * datatype change (string -> number) for passengers.number, cabins.diningDetails.passengers.number and charges.passenger.number
+          * Version 1.8.0 (06/03/2025)
+            * Added GET /bookings/{booking-number} endpoint
+          * Version 1.7.3 (06/03/2025)
+            * Added priceBasis mandatory query parameter for GET /cruises/{cruise-id}/onboard-services/{obs-code} endpoint
+          * Version 1.7.2 (05/03/2025)
+            * Updated POST /login/token/upgrade endpoint - fixed response typo
+          * Version 1.7.1 (05/03/2025)
+            * Modified the occurrence date and time fields to startDate and startTime in the response for the GET /cruises/{cruise-id}/excursions/{excursion-code} endpoint.
+          * Version 1.7.0 (03/04/2025)
+            * Added POST /lightlogin/token endpoint
+          * Version 1.6.2 (03/03/2025)
+            * Updated POST /login/token/upgrade endpoint - Added country code and language headers (INT113)
+          * Version 1.6.1 (28/02/2025)
+            * Fixed POST /login/token/upgrade endpoint path
+          * Version 1.6.0 (28/02/2025)
+            * Added POST /login/token/upgrade endpoint (INT113)
+          * Version 1.5.0 (28/02/2025)
+            * Added GET /login/token/exchange endpoint
+          * Version 1.4.0 (26/02/2025)
+            * Added GET /cruises/{cruise-id}/onboard-services endpoint
+          * Version 1.3.1 (25/02/2025)
+            *  Update of status enum value to BOOKED for GET /bookings endpoint
+          * Version 1.3.0 (21/02/2025)
+            * Added /cruises/{cruise-id}/onboard-services/{obs-code} endpoint
+            * Added /cruises/{cruise-id}/excursions/{excursion-code} endpoint
+          * Version 1.2.0 (18/02/2025)
+            * Added GET /bookings endpoint
+          * Version 1.1.1 (14/02/2025)
+            * Added mandatory header MSC-Locale for GET /cruises/{id}/excursions
+          * Version 1.1.0 (13/02/2025)
+            * Added GET /cruises/{id}/excursions
+          * Version 1.0.0 
+            * Added GET /cruises/{id}/itinerary
+            * Added GET /ping endpoint

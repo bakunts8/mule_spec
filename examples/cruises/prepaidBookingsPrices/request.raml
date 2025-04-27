@@ -1,0 +1,41 @@
+#%RAML 1.0 NamedExample
+Prepaid Booking Prices Request:
+  bookingNumber: "58672317"
+  couponCode: "5C298671"
+  returnPath: /bookings/return
+  excursions:
+    - code: GUA08D
+      startDate: 2025-03-30
+      priceBasis: PER_PERSON
+      promotion:
+        id: 5C298671
+      passengers:
+        - id: "150768844"
+        - id: "150768845"
+    - code: GUA11
+      startDate: 2025-01-01
+      priceBasis: PER_CABIN
+      promotion:
+        id: 5C298671
+      cabins:
+        - id: "150768801"
+        - id: "150768802"
+  onboardServices:
+    - type: LAUNDRY
+      code: LAU010N
+      deliveryDate: 2023-12-15
+      priceBasis: PER_PERSON
+      promotion:
+        id: 5C298671
+      passengers:
+        - id: "150768844"
+        - id: "150768845"
+    - type: FOOD
+      code: FOOD7625
+      deliveryDate: 2023-12-15
+      priceBasis: PER_CABIN
+      promotion:
+        id: 5C298671
+      cabins:
+        - id: "150768801"
+        - id: "150768802"

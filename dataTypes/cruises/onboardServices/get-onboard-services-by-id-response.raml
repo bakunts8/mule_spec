@@ -1,0 +1,193 @@
+#%RAML 1.0 DataType
+displayName: Fetch onboard services by id response
+description: Fetch onboard services by id response definition
+type: object
+additionalProperties: false
+properties:
+  availabilityStatus:
+    description: Indicates the availability of the Onboard Service
+    type: string
+    enum:
+      - AVAILABLE
+      - DENIED
+      - REQUESTED
+      - WAITING_LIST
+    required: true
+    example: AVAILABLE
+  deliveryDate:
+    description: Delivery date of the onboard service
+    type: date-only
+    required: true
+    example: 2025-04-21
+  description:
+    description: Onboard service description
+    type: string
+    required: true
+    example: Onboard Service
+  code:
+    description: Onboard service code
+    type: string
+    required: true
+    example: UK900000
+  isSurprise:
+    description: Indicates if the OBS is a surprise
+    type: boolean
+    required: true
+    example: true
+  'type':
+    description: Onboard service Type
+    type: string
+    required: true
+    example: FORFAI
+  diningRooms:
+    description: Dining room details
+    type: array
+    required: false
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        code: 
+          description: 	The value contains codes for different dining rooms available for the onboard service
+          type:  string
+          required: false
+          example: "BC"
+        description: 
+          description: The value contains the description of the dining room
+          type: string
+          required: false
+          example: "BUTCHER CUT"
+        silverWhereCode:
+          description: The value contains the SilverWhere dining room code.
+          type: string
+          required: false
+          example: "BUTC"
+        mealPeriod:
+          description: The value contains the meal period for which the dining room is available.
+          type: string
+          required: false
+          example: 
+        timeSlots:
+          description: Contains the available time slots for dining.
+          type: array
+          required: false
+          items: string
+          example: ["12:00","13:30"]
+        'options':
+          description: Contains the dining options
+          type: array
+          required: false
+          items: string
+          example: ["MEAT","FISH","VEG"]
+  prices:
+    description: Price details
+    type: object
+    required: true
+    additionalProperties: false
+    properties:
+      total:
+        description: Total price details
+        type: object
+        required: true
+        additionalProperties: false
+        properties:
+          beforeDiscount: 
+            description: The value contains the total price before discount
+            type: amount
+            required: true
+            example: "100.00"
+          afterDiscount: 
+            description: The value contains the total price of the item
+            type: amount
+            required: true
+            example: "90.00"
+      taxes:
+        description: Tax details
+        type: object
+        required: true
+        additionalProperties: false
+        properties:
+          beforeDiscount: 
+            description: The value contains the total price before discount
+            type: amount
+            required: true
+            example: "0.00"
+          afterDiscount: 
+            description: The value contains total tax amount for the item
+            type: amount
+            required: true
+            example: "1.00"
+      perPassenger:
+        description: List of all passengers.
+        type: array
+        required: true
+        items:
+          type: object
+          additionalProperties: false
+          properties:
+            isApplicable:
+              description: Indicates if the excursion is applicable to the passenger 
+              type: boolean
+              required: true
+              example: true
+            ageCategory:
+              type: string
+              description: The age category that the passenger falls into.
+              required: false
+              enum:
+                - SENIOR
+                - ADULT
+                - CHILD
+                - JUNIOR
+                - INFANT
+              example: ADULT
+            age:
+              description: Provides the age of the passenger
+              type: integer
+              required: true
+              example: 61
+            number:
+              description: The value contains the passenger number details.
+              type: integer
+              required: true
+              example: 1
+            id:
+              type: string
+              description: The passenger's identifier
+              required: false
+              example: "150774035"
+            total:
+              description: Total price details
+              type: object
+              required: false
+              additionalProperties: false
+              properties:
+                beforeDiscount: 
+                  description: The value contains per passenger total price before discount
+                  type: amount
+                  required: true
+                  example: "80.00"
+                afterDiscount: 
+                  description: 	The value contains per passenger total price
+                  type: amount
+                  required: true
+                  example: "70.00"
+            taxes:
+              description: Tax details
+              type: object
+              required: false
+              additionalProperties: false
+              properties:
+                beforeDiscount: 
+                  description: The value contains per passenger tax amount before discount
+                  type: amount
+                  required: true
+                  example: "0.00"
+                afterDiscount: 
+                  description: The value contains per passenger tax amount
+                  type: amount
+                  required: true
+                  example: "1.00"
+
+examples: !include ../../../examples/cruises/onboardServices/get-onboard-services-by-id-response.raml
+

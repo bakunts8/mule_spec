@@ -1,0 +1,7 @@
+#%RAML 1.0 Trait
+headers:
+  MSC-Currency-Code:  
+    description: Currency Code. Required for the proper retrieval of the prices.
+    pattern: '^[a-zA-Z]{3}$'
+    example: GBP
+    required: true

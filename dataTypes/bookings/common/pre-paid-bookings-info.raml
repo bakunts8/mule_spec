@@ -1,0 +1,129 @@
+#%RAML 1.0 DataType
+displayName: Pre paid service
+description: Information about prepaid services
+type: object
+additionalProperties: false
+properties:
+  number:
+    type: string
+    description: Pre-booking number
+    required: false
+    example: "12345678"
+  createdAt:
+    type: datetime
+    description: Date of the prebooking
+    required: true
+    example: 2024-10-10T13:30:00.000Z
+  isConfirmed:
+    type: boolean
+    description: Whether prebooking has been confirmed
+    required: true
+    example: true
+  email:
+    type: email
+    description: Email used in the prebooking
+    required: true
+  phone:
+    type: telephoneNumber
+    description: Phone number used in the prebooking
+    required: true
+  cruise:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      id:
+        type: string
+        description: Unique cruise ID
+        required: true
+        example: "CRU12345678"
+  couponCode:
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      isApplied:
+        type: boolean
+        description: Whether a coupon code was used in the prebooking
+        required: false
+        example: true
+  onboardServices:
+    type: array
+    required: false
+    items:
+      type: !include ./pre-paid-services-info.raml
+      additionalProperties: false
+      properties:
+        'type':
+          type: string
+          description: The type of service
+          required: true
+          example: "OBS"
+        deliveryDate:
+          type: date-only
+          description: Delivery date
+          required: true
+          example: 2025-03-20
+        isReviseEnabled:
+          type: boolean
+          description: Whether to enable thematic revise
+          required: true
+          example: true
+        vehicle:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            registrationNumber:
+              type: string
+              description: Registration number of the car
+              required: true
+              example: "AB123456"
+            description:
+              type: string
+              description: Brand name of the car
+              required: true
+              example: "Audi"
+        diningRooms:
+          type: array
+          required: false
+          items:
+            additionalProperties: false
+            properties:
+              code:
+                type: string
+                description: The dining code
+                required: false
+                example: "DR1234"
+              description:
+                type: string
+                description: A text description of dining item
+                required: false
+                example: "Dining item description"
+              date:
+                type: datetime
+                description: The date for the dining item
+                required: false
+                example: 2024-10-10T13:30:00.000Z
+              slot:
+                type: string
+                description: The slot for the dining item
+                required: false
+                example: "11:30-12:30"
+              mealOption:
+                type: string
+                description: The meal option for the dining item
+                required: false
+                example: "Lunch"
+  excursions:
+    type: array
+    required: false
+    items:
+      type: !include ./pre-paid-services-info.raml
+      additionalProperties: false
+      properties:
+        startDate:
+          type: datetime
+          description: Actual date of the item
+          required: true
+          example: 2024-10-10T13:30:00.000Z

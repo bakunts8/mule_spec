@@ -1,0 +1,56 @@
+#%RAML 1.0 DataType
+displayName: Package Details
+description: Package Details definition
+type: baseActivityDetails
+additionalProperties: false
+properties:
+  code:
+    description: Excursion code
+    type: string
+    pattern: '^\w{1,15}$'
+    required: true
+    example: BCN02
+  portCode:
+    description: Excursion port code
+    type: string      
+    required: true
+    example: SB1
+  description:
+    description: Description of the excursion 
+    type: string
+    required: false
+    example: "Visitate alcune delle attrazioni più belle della capitale catalana durante questa intensa escursione di quattro ore e mezza."
+  longDescription:
+    description: Longer description of the excursion 
+    type: string
+    required: false
+    example: "Visitate alcune delle attrazioni più belle della capitale catalana durante questa intensa escursione di quattro ore e mezza. Con un breve trasferimento di 15 minuti dal porto raggiungerete la collina del Montjuïc, dove farete una sosta per fotografare alcuni dei principali monumenti della città. Fra questi spicca la Sagrada Família, la straordinaria chiesa di Antoni Gaudí, cantiere aperto da oltre 140 anni. Dopo un percorso in autobus di 25 minuti, proseguirete a piedi per quindici minuti e raggiungere questo capolavoro architettonico. Durante una sosta all'esterno, potrete ammirare gli animali scolpiti che si mimetizzano sulla facciata, fra cui serpenti e lumache. La passeggiata di un quarto d'ora vi ricondurrà all'autobus per raggiungere in pochi minuti lo storico Barrio Gótico, sede della Cattedrale di Barcellona, costruita fra il XIII e il XV secolo. Concedetevi qualche minuto per contemplare la bellezza della facciata gotica e neogotica della cattedrale prima di dirigervi verso una delle aree dello shopping più famose della città: Plaça de Catalunya e Portal de l'Angel. Qui troverete catene di negozi spagnole e piccole botteghe storiche, alcune quasi centenarie: il luogo perfetto per fare un po' di shopping terapeutico durante i circa 90 minuti di tempo libero a vostra disposizione. Approfittatene per acquistare qualche souvenir, dalle espadrillas fatte a mano e le candele artigianali ai copricapi tradizionali, prima di far ritorno all'autobus che vi riaccompagnerà al porto in 15 minuti. In alternativa, potrete decidere di restare più a lungo nell'area per dare un'occhiata anche alle vicine Las Ramblas.&lt;p class='ptec'&gt;Nota bene: a causa delle restrizioni al traffico nell'area della Sagrada Familía, l'autobus si fermerà nelle vicinanze e gli ospiti dovranno camminare per 15 minuti a tratta. Gli ospiti che decidono di restare più a lungo in città faranno ritorno al porto da soli utilizzando il servizio navetta.&lt;/p&gt;"
+  images:
+    type: object
+    properties: 
+      image:
+        description: Image URL
+        type: string
+        required: true
+        example: /images/msc/ACT/PMI28.jpg
+      desktop:
+        type: !include ../../common/base-image-details.raml
+  activityDetails:
+    type:  !include activityDetails.raml
+    required: true
+  duration:
+    type: number
+    required: false
+    description: "the activity duration details of Excursion Package Inclusions"
+  activityGroup:
+    type: object
+    required: false
+    properties:  
+      details:
+        type: string
+        required: false
+        description: Activity group details of Excursion Package Inclusions.
+      description:
+        type: string
+        required: false
+        description: Activity group description of Excursion Package Inclusions.

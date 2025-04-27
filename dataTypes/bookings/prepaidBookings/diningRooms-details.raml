@@ -1,0 +1,30 @@
+#%RAML 1.0 DataType
+type: object
+description: The diningRooms details
+additionalProperties: false
+properties: 
+  code:
+    description: The value contains the code of the respective dining room available for the onboard service
+    type: string
+    required: false
+    example: "BC"
+  slot:
+    description: Dining slots
+    type: string
+    required: false
+    example: "10:00"
+  date:
+    description: Dining date
+    type: date-only
+    required: false
+    example: "2025-11-10"
+  reservationId:
+    description: Reservation Id
+    type: string
+    required: false
+    example: "12345"
+  mealOption:
+    description: Dining room options
+    type: string
+    required: false
+    example: "MEAT"

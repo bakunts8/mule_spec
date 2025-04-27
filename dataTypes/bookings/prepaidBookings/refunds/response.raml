@@ -1,0 +1,22 @@
+#%RAML 1.0 DataType
+displayName: prepaid booking refund response
+description: prepaid booking refund response definition
+type: object
+additionalProperties: false
+minProperties: 1
+properties:
+  excursions:
+    type: array
+    description: List of excursions
+    required: false
+    items:
+      type: !include items-response-details.raml
+  onboardServices:
+    type: array
+    description: List of onboardServices
+    required: false
+    items: 
+      type: !include items-response-details.raml
+
+examples: !include ../../../../examples/bookings/prepaidBookings/refunds/response.raml
+  

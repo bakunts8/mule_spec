@@ -1,0 +1,1211 @@
+#%RAML 1.0 DataType
+displayName: Booking details response
+description: Booking details response definition
+type: object
+additionalProperties: false
+properties:
+  number:
+    type: bookingNumber
+    description: Booking number
+    required: true
+    example: "1234567"
+  bookingChannel:
+    type: string
+    enum:
+      - "B2C"
+      - "ONL"
+      - "XML"
+      - "RES"
+      - "AM"
+      - "SB"
+    description: Booking Channel
+    required: true
+    example: "B2C"
+  isGroupBooking:
+    type: boolean
+    description: Whether booking is grouped
+    required: true
+    example: true
+  groupId:
+    type: string
+    description: ID of the group
+    required: false
+    example: "1234567"
+  paymentMethod:
+    type: string
+    enum:
+      - AGENCY
+      - DIRECT
+    description: Payment method used for the booking
+    required: true
+    example: "AGENCY"
+  passengerType:
+    type: string
+    description: Passenger type
+    required: true
+    example: "SCBDG"
+  departureDate:
+    type: date-only
+    description: Departure date of the booking
+    required: true
+    example: 2025-03-20
+  numberOfPassengers:
+    type: number
+    description: Number of passengers
+    required: true
+    example: 3
+  status:
+    type: object
+    description:
+    additionalProperties: false
+    required: true
+    properties:
+      code:
+        type: !include ../primitives/booking-status-code.raml
+        required: true
+  'type':
+    type: string
+    enum: 
+      - INDIVIDUAL
+      - GROUP
+    description: Type of the booking
+    required: true
+    example: "INDIVIDUAL"
+  createdDate:
+    type: date-only
+    description: Date when the booking was made
+    required: true
+    example: 2025-03-20
+  optionExpirationDate:
+    type: date-only
+    description: Option expiration date
+    required: true
+    example: 2025-03-20
+  passengers:
+    type: array
+    description: List of passenger details
+    required: false
+    items:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: The passenger's identifier
+          required: true
+          example: "150774035"
+        number:
+          type: number
+          description: The passenger's number
+          required: true
+          example: 1
+        ageCategory:
+          type: string
+          description: The age category that the passenger falls into.
+          required: true
+          enum:
+            - SENIOR
+            - ADULT
+            - CHILD
+            - JUNIOR
+            - INFANT
+          example: ADULT
+        isLeadPassenger:
+          type: boolean
+          description: Indicates whether the passegner is the lead passenger or not.
+          required: true
+          example: false
+        title:
+          type: string
+          description: The passenger's title
+          required: false
+          example: Mr
+        name:
+          type: string
+          description: Passenger's name
+          required: true
+          example: "GARRETZENOTEST"
+        surname:
+          type: string
+          description: Passenger's surname
+          required: true
+          example: "DOOLEYZENOTEST"
+        middleName:
+          type: string
+          description: The middle name of the participant
+          required: false
+          example: "DOOLEYZENOTEST"
+        gender:
+          type: string
+          description: Passenger's gender
+          required: true
+          enum:
+            - MALE
+            - FEMALE
+          example: MALE
+        age:
+          type: number
+          description: The passengers's age
+          minimum: 0
+          required: true
+          example: 41
+        dateOfBirth:
+          type: date-only
+          description: The passenger's date of birth
+          required: true
+          example: 2000-02-18
+        email:
+          type: email
+          description: Passenger's email
+          required: false
+        language:
+          type: string
+          pattern: "^[a-zA-Z]{3}$"
+          description: Language of the participant
+          required: false
+          example: "ENG"
+        nationality:
+          type: string
+          pattern: "^[a-zA-Z]{3}$"
+          description: The nationality code of the participant
+          required: false
+          example: "ITA"
+        placeOfBirth:
+          type: string
+          description: The place of birth of the participant
+          required: false
+          example: "Rome"
+        countryOfBirth:
+          type: string
+          pattern: "^[A-Z]{2}$"
+          description: Birth country of the participant
+          required: false
+          example: "IT"
+        occupation:
+          type: string
+          description: The occupation of the participant
+          required: false
+          example: "Occupation"
+        isWebCheckInEnabled:
+          type: boolean
+          description: Whether web check in is enabled for the participant
+          required: true
+          example: true
+        hasGuardian:
+          type: boolean
+          description: Flag to indicate if the passenger has a guardian
+          required: false
+          example: true
+        phonePrefix:
+          type: string
+          description: Phone prefix
+          required: false
+          example: "+441"
+        phone:
+          type: telephoneNumber
+          description: Phone number
+          required: false
+        faxPrefix:
+          type: string
+          description: Fax number prefix
+          required: false
+          example: "+441"
+        fax:
+          type: telephoneNumber
+          description: Fax number
+          required: false
+        mobilePhonePrefix:
+          type: string
+          description: Mobile phone prefix
+          required: false
+          example: "+441"
+        mobilePhone:
+          type: telephoneNumber
+          description: Mobile phone number
+          required: false
+        emergencyContact:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            phonePrefix:
+              type: string
+              description: Emergency phone number prefix
+              required: false
+              example: "+441"
+            phone:
+              type: telephoneNumber
+              description: Emergency phone number
+              required: false
+            name:
+              type: string
+              description: Emergency contact name of the participant
+              required: false
+              example: "GARRETZENOTEST"
+        couponCode:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            isApplied:
+              type: boolean
+              description: Whether a coupon code was redeemed for the participant
+              required: false
+              example: true
+            'type':
+              type: string
+              description: The type of coupon code redeemed
+              required: false
+              example: "TEST123"
+        identityDocument:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            passportNumber:
+              type: string
+              description: The passport number
+              required: false
+              example: "1234567"
+            passportIssueDate:
+              type: date-only
+              description: The issued date of the passport
+              required: false
+              example: 2025-03-20
+            passportIssuedAt:
+              type: string
+              description: The place where the passport was issued
+              required: false
+              example: "Rome"
+            passportExpiryDate:
+              type: date-only
+              description: The expiry date of the passport
+              required: false
+              example: 2025-03-20
+            nationalIdExpiryDate:
+              type: date-only
+              description: The expiry date of the national ID
+              required: false
+              example: 2025-03-20
+            nationalId:
+              type: string
+              description: The national ID of the passport
+              required: false
+              example: "123456"
+            'type':
+              type: !include ../primitives/identity-document-type.raml
+              required: false
+        insurance:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            supplierName:
+              type: string
+              description: The name of the insurance company
+              required: false
+              example: "Supplier"
+            policyNumber:
+              type: string
+              description: The policy number of the insurance
+              required: false
+              example: "INS1234"
+            supplierPhone:
+              type: string
+              description: The phone number of the insurance company
+              required: false
+              example: "+44 2034263002"
+        address:
+          type: !include ./common/address-info.raml
+          additionalProperties: false
+          required: false
+          properties:
+            addressLine2:
+              type: string
+              description: Address line 2 of the participant
+              required: false
+              example: "Apt 123"
+            district:
+              type: string
+              description: District code of the participant
+              required: false
+              example: "District"
+        checkIn:
+          type: array
+          required: true
+          items:
+            additionalProperties: false
+            properties:
+              cabinId:
+                type: string
+                description: The unique item identifier
+                required: true
+                example: "CI123"
+              isBiometricConsentGiven:
+                type: boolean
+                description: Whether consent was given to use biometrics
+                required: false
+                example: true
+              isDITVerificationCompleted:
+                type: boolean
+                description: Whether DIT verification is completed
+                required: false
+                example: true
+              isCreditCardTokenConsentGiven:
+                type: boolean
+                description: Whether consent was given to use the credit card token
+                required: true
+                example: true
+              isCheckedIn:
+                type: boolean
+                description: Flag to indicate if the passenger is checked in
+                required: true
+                example: true
+              isAvailable:
+                type: boolean
+                description: Flag to indicate if the cruise is ready for check in
+                required: false
+                example: true
+              storedPaymentDetails:
+                type: object
+                additionalProperties: false
+                required: true
+                properties:
+                  cardType:
+                    type: string
+                    description: Credit card type
+                    required: false
+                    example: "Visa"
+                  maskedCardNumber:
+                    type: string
+                    description: Masked card number
+                    required: false
+                    example: "************1111"
+                  isFinancialStatementVerified:
+                    type: boolean
+                    description: Flag to indicate if  financial statement checks out
+                    required: true
+                    example: true
+                  tokenSource:
+                    type: string
+                    description: Credit card token source
+                    required: false
+                    example: "Source"
+  total:
+    type: object
+    required: true
+    additionalProperties: false
+    properties:
+      gross:
+        type: amount|negativeAmount
+        description: Total gross price
+        required: true
+      net:
+        type: amount|negativeAmount
+        description: Total net price
+        required: true
+      received:
+        type: amount|negativeAmount
+        description: Total amount of payments received
+        required: true
+      dueDate:
+        type: date-only
+        description: Final date by which pament must be made
+        required: true
+        example: 2025-03-20
+      due:
+        type: object
+        additionalProperties: false
+        required: true
+        properties:
+          net:
+            type: amount|negativeAmount
+            description: Net balance due
+            required: true
+          gross:
+            type: amount|negativeAmount
+            description: Gross balance due
+            required: true
+  totalWithoutPrepaid:
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      gross:
+        type: amount
+        description: Total gross amount in case of non-prepaid booking
+        required: false
+      net:
+        type: amount
+        description: Total net amount in case of non-prepaid booking
+        required: false
+      received:
+        type: amount
+        description: Total payments in case of non-prepaid booking
+        required: false
+      dueDate:
+        type: date-only
+        description: Final date by which pament must be made
+        required: false
+        example: 2025-02-20
+      due:
+        type: object
+        additionalProperties: false
+        required: false
+        properties:
+          net:
+            type: amount
+            description: Net balance due
+            required: false
+          gross:
+            type: amount
+            description: Gross balance due
+            required: false
+  prepaid:
+    type: object
+    required: false
+    additionalProperties: false
+    properties:
+      gross:
+        type: amount
+        description: Gross amount to pay for prepaid booking
+        required: false
+      received:
+        type: amount
+        description: Received prepaid amount
+        required: false
+      bookings:
+        type: array
+        required: false
+        items:
+          type: !include ./common/pre-paid-bookings-info.raml
+  deposit:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      dueDate:
+        type: date-only
+        description: The date of the deposit
+        required: true
+        example: 2025-03-20
+      beforeDiscount: 
+        type: amount
+        description: Amount before discount
+        required: false
+      afterDiscount: 
+        type: amount
+        description: Amount after discount
+        required: true
+  specialNeeds:
+    type: array
+    required: false
+    items:
+      properties:
+        code:
+          type: string
+          pattern: "^[a-zA-Z]{3}$"
+          description: The code of the special need
+          required: false
+          example: "SND"
+        description:
+          type: string
+          description: Description of the special need
+          required: false
+          example: "Special need description"
+  agency:
+    type: object
+    description: Agency information
+    additionalProperties: false
+    required: true
+    properties:
+      id:
+        type: string
+        description: The ID of the agency
+        required: true
+        example: "TESTIT01"
+      isB2CAgency:
+        type: boolean
+        description: Whether agency is B2C or not
+        required: true
+        example: true
+      name:
+        type: string
+        description: The name of the agency
+        required: true
+        example: "Agency"
+      phone:
+        type: string
+        description: Telephone number of the agency
+        required: true
+        example: "+44 2034263002"
+      fax:
+        type: string
+        description: Fax number
+        required: false
+        example: "+44 2034263002"
+      email:
+        type: email
+        description: Email address of the agency
+        required: true
+      sendDocumentsToPassenger:
+        type: boolean
+        description: Whether or not to send documents to passenger
+        required: true
+        example: true
+      address:
+        type: !include ./common/address-info.raml
+        additionalProperties: false
+        properties:
+          addressLine1:
+            required: true
+          town:
+            required: true
+          state:
+            required: true
+          postCode:
+            required: true
+          country:
+            required: true
+  officeDetails:
+    type: object
+    additionalProperties: false
+    required: true
+    properties:
+      phone:
+        type: string
+        description: Telephone number of the office
+        required: true
+        example: "+44 2034263002"
+      fax:
+        type: string
+        description: Fax number
+        required: true
+        example: "+44 2034263002"
+      address:
+        type: !include ./common/address-info.raml
+        additionalProperties: false
+        properties:
+          addressLine1:
+            required: true
+          town:
+            required: true
+          state:
+            required: true
+          postCode:
+            required: true
+          country:
+            required: true
+          addressLine2:
+            type: string
+            description: Address line 2
+            required: true
+            example: "Apt 123"
+  miscellaneousItems:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: The code of the item
+          required: true
+          example: "MSC123"
+        description:
+          type: string
+          description: The description of the item
+          required: true
+          example: "Misc item description"
+        locationCode:
+          type: string
+          pattern: "^[a-zA-Z]{3}$"
+          description: The code of the location
+          required: false
+          example: "ITA"
+        cruiseDepartureDate:
+          type: date-only
+          description: The date of the item
+          required: true
+          example: 2025-03-20
+        level:
+          type: string
+          enum: 
+            - PARENT
+            - CHILD
+            - INDEPENDENT
+          description: The level of the item
+          required: true
+          example: "PARENT"
+        sequenceNumber:
+          type: string
+          description: The sequence number of the item
+          required: true
+          example: "12345"
+        applicability:
+          type: string
+          enum: 
+            - MANDATORY
+            - OPTIONAL
+            - SUBSTITUTABLE
+          description: The applicability of the item
+          required: false
+          example: "MANDATORY"
+        isParkingItem:
+          type: boolean
+          description: Flag to indicate if it's a parking item
+          required: true
+          example: true
+        isComplimentary:
+          type: boolean
+          description: Flag to indicate if item is complimentary
+          required: true
+          example: true
+        numberOfVouchersApplied:
+          type: number
+          description: The number of vouchers
+          required: true
+          example: 2
+        bookingStatus:
+          type: !include ./common/booking-status.raml
+          additionalProperties: false
+          required: false
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: false
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: false
+  hotels:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        id:
+          required: true
+        code:
+          type: string
+          description: the hotel code
+          required: true
+          example: "H1123"
+        name:
+          type: string
+          description: The name of the hotel
+          required: true
+          example: "Hotel"
+        checkInDate:
+          type: date-only
+          description: Check-in date
+          required: true
+          example: 2025-03-20
+        checkOutDate:
+          type: date-only
+          description: The check out date for the hotel booking
+          required: true
+          example: 2025-03-20
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: false
+        location:
+          type: object
+          additionalProperties: false
+          required: true
+          properties:
+            code:
+              type: string
+              description: The location code of the hotel
+              required: true
+              example: "RM01"
+            description:
+              type: string
+              description: The description of the hotel location
+              required: true
+              example: "Hotel location description"
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: false
+  excursions:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: Excursion code
+          required: true
+          example: "EXC123"
+        startDate:
+          type: date-only
+          description: Start date of the excursion
+          required: false
+          example: 2025-03-20
+        applicability:
+          type: string
+          enum: 
+            - INDIVIDUAL
+            - GROUP
+            - ALL
+          description: Applicability of the item
+          required: true
+          example: "INDIVIDUAL"
+        priceBasis:
+          type: string
+          enum: 
+            - PER_PERSON 
+            - PER_CABIN
+          description: Price Basis of the item
+          required: true
+          example: "PER_PERSON"
+        description:
+          type: string
+          description: The description of the activity
+          required: true
+          example: "Excursion description"
+        location:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            code:
+              type: string
+              description: Location code of the excursion
+              required: false
+              example: "RM01"
+            description:
+              type: string
+              description: Location name of the excursion
+              required: false
+              example: "Excursion location description"
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: false
+        bookingStatus:
+          type: !include ./common/booking-status.raml
+          additionalProperties: false
+          required: false
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: false
+  airItems:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        bookingStatus:
+          type: !include ./common/booking-status.raml
+          additionalProperties: false
+          required: false
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: false
+        segments:
+          type: array
+          items:
+            type: !include ./common/air-segment-info.raml
+  transfers:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: Transfer code
+          required: true
+          example: "T123"
+        description:
+          type: string
+          description: The value representing additional details of the transfer
+          required: true
+          example: "Transfer description"
+        'type':
+          type: string
+          enum:
+            - ONE-WAY
+            - RETURN
+          description: The value representing the classification of the transfer
+          required: true
+          example: "ONE-WAY"
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: false
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: false
+        departure:
+          type: object
+          additionalProperties: false
+          required: true
+          properties:
+            location:
+              type: object
+              additionalProperties: false
+              required: true
+              properties:
+                code:
+                  type: string
+                  description: Departure location code
+                  required: false
+                  example: "L123"
+                name:
+                  type: string
+                  description: Departure location name
+                  required: true
+                  example: "Location"
+        arrival:
+          type: object
+          additionalProperties: false
+          required: true
+          properties:
+            date:
+              type: date-only
+              description: The date of the transfer arrival
+              required: true
+              example: 2025-03-20
+            location:
+              type: object
+              additionalProperties: false
+              required: false
+              properties:
+                code:
+                  type: string
+                  description: Arrival location code
+                  required: false
+                  example: "L123"
+                name:
+                  type: string
+                  description: Arrival location name
+                  required: false
+                  example: "Location"
+  transportationItems:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: The transportation code
+          required: true
+          example: "TR123"
+        description:
+          type: string
+          description: The value of the  transportation description
+          required: true
+          example: "Transportation description"
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: false
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: false
+        arrival:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            time:
+              type: string
+              description: Arrival time
+              required: false
+              example: "10:30:30"
+            date:
+              type: date-only
+              description: Arrival date
+              required: false
+              example: 2025-03-20
+            location:
+              type: object
+              additionalProperties: false
+              required: false
+              properties:
+                code:
+                  type: string
+                  description: Arrival location code
+                  required: false
+                  example: "L123"
+                name:
+                  type: string
+                  description: Arrival location name
+                  required: false
+                  example: "Location"
+        departure:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            time:
+              type: string
+              description: Departure time
+              required: false
+              example: "10:30:30"
+            date:
+              type: date-only
+              description: Departure date
+              required: false
+              example: 2025-03-20
+            location:
+              type: object
+              additionalProperties: false
+              required: false
+              properties:
+                code:
+                  type: string
+                  description: Departure location code
+                  required: false
+                  example: "L123"
+                name:
+                  type: string
+                  description: Departure location name
+                  required: false
+                  example: "Location"
+  insuranceItems:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: The code corresponding to the insurance type.
+          required: true
+          example: "INS123"
+        description:
+          type: string
+          description: The description corresponding to the insurance type
+          required: true
+          example: "Insurance description"
+        supplierCode:
+          type: string
+          description: The code identifying the vendor
+          required: true
+          example: "SUP123"
+        bookingStatus:
+          type: !include ./common/booking-status.raml
+          additionalProperties: false
+          required: false
+        promotion:
+          type: object
+          additionalProperties: false
+          required: false
+          properties:
+            isApplied:
+              type: boolean
+              description: The value for the promotion existence
+              required: false
+              example: true
+            shouldBeDisplayed:
+              type: boolean
+              description: Whether to display the promotion or not
+              required: false
+              example: true
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: false
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: false
+  cabins:
+    type: array
+    required: true
+    items:
+      type: !include ./common/cabin-info.raml
+  onboardServices:
+    type: array
+    required: false
+    items:
+      type: !include ./common/items-info.raml
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: A unique identifier for the onboard service
+          required: true
+          example: "SC2425ME"
+        description:
+          type: string
+          description: A brief description of the onboard service
+          required: true
+          example: "HOTEL SERVICE CHARGE"
+        supplierCode:
+          type: string
+          description: The code identifying the vendor
+          required: true
+          example: "VE1151"
+        deliveryDate:
+          type: date-only
+          description: The date when the service is delivered
+          required: true
+          example: 2025-03-20
+        specialInstructions:
+          type: string
+          description: The value of instruction
+          required: true
+          example: "Special instructions"
+        applicability:
+          type: string
+          enum: 
+            - MANDATORY
+            - OPTIONAL
+            - SUBSTITUTABLE
+          description: The value  of the item applicability
+          required: false
+          example: "MANDATORY"
+        isAlcoholic:
+          type: boolean
+          description: The value of the alcoholic parameter
+          required: true
+          example: true
+        priceBasis:
+          type: string
+          enum: 
+            - PER_CABIN
+            - PER_PERSON
+          description: The value of the cabin parameter
+          required: true
+          example: "PER_CABIN"
+        isPrepaid:
+          type: boolean
+          description: The value of the prepaid parameter
+          required: false
+          example: true
+        'type':
+          type: string
+          description: The value of the service type
+          required: false
+          example: "SVC123"
+        isReviseEnabled:
+          type: boolean
+          description: The value of the thematic revise
+          required: false
+          example: true
+        ageRequirements:
+          type: object
+          properties:
+            infant:
+              type: object
+              additionalProperties: false
+              required: false
+              properties:
+                maximum:
+                  type: number
+                  description: Specifying the max age of the infant
+                  required: false
+                  example: 2
+            child:
+              type: object
+              additionalProperties: false
+              required: false
+              properties:
+                maximum:
+                  type: number
+                  description: Specifying the max age of the junoir child
+                  required: false
+                  example: 16
+            junior:
+              type: object
+              additionalProperties: false
+              required: false
+              properties:
+                maximum:
+                  type: number
+                  description: Specifying the max age of the child
+                  required: false
+                  example: 25
+            senior:
+              type: object
+              additionalProperties: false
+              required: false
+              properties:
+                minimum:
+                  type: number
+                  description: Specifying the min age of the seniors
+                  required: false
+                  example: 65
+        bookingStatus:
+          type: !include ./common/booking-status.raml
+          additionalProperties: false
+          required: false
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: false
+  charges:
+    type: array
+    required: true
+    items:
+      additionalProperties: false
+      properties:
+        'type':
+          type: string
+          description: The value of the charge type code
+          required: true
+          example: "CHRG123"
+        description:
+          type: string
+          description: Description of the charge
+          required: true
+          example: "Charge description"
+        passenger:
+          type: object
+          additionalProperties: false
+          required: true
+          properties:
+            number:
+              type: number
+              description: The passenger number
+              required: true
+              example: 3
+            id:
+              type: string
+              description: The passenger ID
+              required: true
+              example: "1234567"
+        total:
+          type: !include ./common/item-totals.raml
+          additionalProperties: false
+          required: true
+          properties:
+            gross:
+              required: true
+            net:
+              required: true
+            baseCharge:
+              type: amount
+              description: The value of the base charge amount
+              required: true
+            discount:
+              type: amount
+              description: The value of the discount amount
+              required: true
+        relatedItem:
+          type: !include ./common/related-item.raml
+          additionalProperties: false
+          required: true
+          properties:
+            id:
+              required: true
+
+examples: !include ../../examples/bookings/get-by-id-response.raml
