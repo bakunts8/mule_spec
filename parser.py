@@ -4,32 +4,44 @@ import os
 from pyraml import parser
 from urllib.parse import urlparse
 
+# Note: Ensure 'pyraml-parser' and 'PyYAML' are installed:
+# pip install pyraml-parser PyYAML
+
 def resolve_raml_references(data, base_path):
     """
     Recursively resolves !include tags in RAML data.
     NOTE: This is a simplified resolver. pyraml-parser handles this internally,
-          but this shows the manual concept if needed.
+          but this shows the manual concept if needed. Kept for reference.
     """
     if isinstance(data, dict):
         new_dict = {}
         for k, v in data.items():
             if k == '!include':
+                # Normalize path and join with base path
                 include_path = os.path.normpath(os.path.join(base_path, v))
                 if os.path.exists(include_path):
                     with open(include_path, 'r') as f:
                         # Decide whether to parse as YAML or return raw content
                         # based on file extension or context (simplifying here)
                         if include_path.endswith(('.yaml', '.raml')):
-                             # Important: Use safe_load
-                            included_content = yaml.safe_load(f)
-                            # Recursively resolve includes within the included file
-                            resolved_content = resolve_raml_references(included_content, os.path.dirname(include_path))
-                            # If the included file just returns a simple value (like a string)
-                            # return it directly. Otherwise, return the resolved dict/list.
-                            # This part might need adjustment based on RAML structure.
-                            return resolved_content
+                            try:
+                                # Important: Use safe_load
+                                included_content = yaml.safe_load(f)
+                                # Recursively resolve includes within the included file
+                                resolved_content = resolve_raml_references(included_content, os.path.dirname(include_path))
+                                # If the included file just returns a simple value (like a string)
+                                # return it directly. Otherwise, return the resolved dict/list.
+                                # This part might need adjustment based on RAML structure.
+                                return resolved_content
+                            except yaml.YAMLError as exc:
+                                print(f"Warning: Error parsing included YAML file: {include_path} - {exc}")
+                                return None # Or raise an error
                         else: # Handle JSON, XML, text examples etc.
-                             return f.read()
+                            try:
+                                return f.read()
+                            except Exception as e:
+                                print(f"Warning: Error reading included file: {include_path} - {e}")
+                                return None
                 else:
                     print(f"Warning: Included file not found: {include_path}")
                     return None # Or raise an error
@@ -48,16 +60,55 @@ def raml_type_to_json_schema(raml_type_def):
     """
     Converts a single RAML type definition to a JSON schema fragment.
     This is a simplified converter and needs to be extended for full RAML spec.
+    Handles basic types, object properties, array items, and common facets.
     """
     if not isinstance(raml_type_def, dict):
-        # Handle simple type names like 'string', 'integer'
-        # This might need more context depending on how types are defined/referenced
-        return {'type': raml_type_def}
+        # Handle simple type names like 'string', 'integer' passed directly
+        # e.g. properties: { name: string }
+        if isinstance(raml_type_def, str):
+             # Basic type mapping for direct references
+             type_mapping = {
+                'string': 'string',
+                'number': 'number',
+                'integer': 'integer',
+                'boolean': 'boolean',
+                'array': 'array', # Needs 'items' usually defined inline
+                'object': 'object', # Needs 'properties' usually defined inline
+                'file': 'string',
+                'datetime': 'string',
+                'date-only': 'string',
+                'time-only': 'string',
+                'nil': 'null'
+            }
+             json_type = type_mapping.get(raml_type_def, 'object') # Default to object if unknown basic type
+             schema = {'type': json_type}
+             if raml_type_def == 'datetime': schema['format'] = 'date-time'
+             if raml_type_def == 'date-only': schema['format'] = 'date'
+             if raml_type_def == 'time-only': schema['format'] = 'time'
+             return schema
+        else:
+             # If it's not a dict or string, it's unclear how to handle
+             print(f"Warning: Unexpected format for type definition: {raml_type_def}. Skipping.")
+             return {}
+
 
     json_schema = {}
-    raml_type = raml_type_def.get('type', 'object') # Default to object if not specified
 
-    # Type mapping
+    # Determine the base RAML type ('type' property)
+    raml_base_type = raml_type_def.get('type', 'object') # Default to object if 'type' is not specified
+
+    # Handle type inheritance (simplified - uses first type in list)
+    # Proper handling requires merging schemas which is complex.
+    if isinstance(raml_base_type, list):
+        if not raml_base_type:
+             print("Warning: Empty type list encountered.")
+             raml_base_type = 'object' # Fallback
+        else:
+            # TODO: Implement proper merging strategy for multiple inheritance if needed
+            print(f"Warning: Multiple inheritance detected ({raml_base_type}). Using first type '{raml_base_type[0]}' for basic conversion.")
+            raml_base_type = raml_base_type[0]
+
+    # Basic Type Mapping
     type_mapping = {
         'string': 'string',
         'number': 'number',
@@ -65,154 +116,254 @@ def raml_type_to_json_schema(raml_type_def):
         'boolean': 'boolean',
         'array': 'array',
         'object': 'object',
-        'file': 'string', # JSON Schema doesn't have a direct file type, often represented as string (e.g., base64)
-        'datetime': 'string', # Often 'string' with 'format': 'date-time'
-        'date-only': 'string', # Often 'string' with 'format': 'date'
-        'time-only': 'string', # Often 'string' with 'format': 'time'
-        # Add other RAML types as needed
+        'file': 'string', # Often represented as string (e.g., base64 or URI) in JSON Schema
+        'datetime': 'string', # Usually with format
+        'date-only': 'string', # Usually with format
+        'time-only': 'string', # Usually with format
+        'nil': 'null'       # Maps RAML nil type to JSON Schema null type
+        # Add other custom or built-in RAML types if needed
     }
 
-    # Handle inheritance (simplified)
-    if isinstance(raml_type, list):
-         # Very basic handling: use the first type for now
-         # Complex inheritance requires merging properties/schemas
-        raml_type = raml_type[0]
+    if isinstance(raml_base_type, str) and raml_base_type in type_mapping:
+       json_schema['type'] = type_mapping[raml_base_type]
+       # Add format for specific string types
+       if raml_base_type == 'datetime': json_schema['format'] = 'date-time'
+       if raml_base_type == 'date-only': json_schema['format'] = 'date'
+       if raml_base_type == 'time-only': json_schema['format'] = 'time'
+       # File type doesn't have a standard format, maybe 'binary' or 'byte' sometimes used
+       if raml_base_type == 'file': json_schema.setdefault('description', 'Represents file content, often as base64 or a URI.')
 
-    if isinstance(raml_type, str) and raml_type in type_mapping:
-       json_schema['type'] = type_mapping[raml_type]
-    elif isinstance(raml_type, str):
-       # This could be a reference to another type defined elsewhere
-       # The parser should resolve this, but you might need specific handling
-       # For simplicity, treating as object for now
-       print(f"Warning: Unrecognized or unresolved type reference '{raml_type}'. Treating as object.")
-       json_schema['type'] = 'object'
+    elif isinstance(raml_base_type, str):
+        # If the type is a string but not in our basic map,
+        # it's likely a reference to another type defined elsewhere (e.g., in 'types:' or libraries).
+        # We *assume* pyraml-parser resolves this, but the definition might be complex.
+        # For JSON schema, we often represent this as a reference within the same document.
+        # Here, we'll just mark it as potentially complex object or defer resolution.
+        # A better approach might involve passing the full 'types' map for lookup.
+        # For now, treating as 'object' as a fallback if structure isn't inline.
+        print(f"Info: Type '{raml_base_type}' is likely a reference to another defined type.")
+        # If properties are defined inline, it's likely an anonymous subtype/object
+        if 'properties' in raml_type_def:
+            json_schema['type'] = 'object'
+        else:
+             # It's likely just a reference. We can represent this in JSON Schema too.
+             # This assumes the type name corresponds to a definition in $defs
+             # json_schema['$ref'] = f'#/$defs/{raml_base_type}'
+             # However, since this function converts *one* type, maybe just 'object' is safer
+             # Or rely on the calling function to place this within $defs correctly.
+             # Let's default to object if no properties are given inline.
+             json_schema['type'] = 'object'
+             json_schema.setdefault('description', f"Reference to RAML type: {raml_base_type}")
 
 
-    # Properties mapping (for objects)
-    if json_schema.get('type') == 'object' and 'properties' in raml_type_def:
-        json_schema['properties'] = {}
-        required_props = []
-        for prop_name, prop_def in raml_type_def['properties'].items():
-            # Handle required property notation (e.g., "name:" vs "name?:")
-            clean_prop_name = prop_name.replace('?', '')
-            is_required = not prop_name.endswith('?')
+    # --- Map Common RAML Facets to JSON Schema Keywords ---
 
-            if isinstance(prop_def, str): # Simple type declaration, e.g., name: string
-                json_schema['properties'][clean_prop_name] = raml_type_to_json_schema(prop_def)
-            elif isinstance(prop_def, dict): # Inline type definition
-                json_schema['properties'][clean_prop_name] = raml_type_to_json_schema(prop_def)
-
-            if is_required:
-                required_props.append(clean_prop_name)
-
-        if required_props:
-            json_schema['required'] = required_props
-
-    # Items mapping (for arrays)
-    if json_schema.get('type') == 'array' and 'items' in raml_type_def:
-       json_schema['items'] = raml_type_to_json_schema(raml_type_def['items'])
-
-    # Other common constraints
     if 'description' in raml_type_def:
         json_schema['description'] = raml_type_def['description']
     if 'default' in raml_type_def:
         json_schema['default'] = raml_type_def['default']
     if 'enum' in raml_type_def:
         json_schema['enum'] = raml_type_def['enum']
+
+    # String Facets
     if 'pattern' in raml_type_def:
         json_schema['pattern'] = raml_type_def['pattern']
     if 'minLength' in raml_type_def:
         json_schema['minLength'] = raml_type_def['minLength']
     if 'maxLength' in raml_type_def:
         json_schema['maxLength'] = raml_type_def['maxLength']
-    # Add mappings for minimum, maximum, format, etc.
+
+    # Number Facets
+    # RAML 'minimum'/'maximum' map directly
+    if 'minimum' in raml_type_def:
+        json_schema['minimum'] = raml_type_def['minimum']
+    if 'maximum' in raml_type_def:
+        json_schema['maximum'] = raml_type_def['maximum']
+    # RAML 'format' for numbers (int, int8, int16, int32, int64, float, double)
+    # JSON Schema doesn't have direct numeric formats, but 'type' (integer/number) covers it.
+    # Could add validation pattern or comments if needed.
+    if 'format' in raml_type_def and json_schema.get('type') in ['number', 'integer']:
+         json_schema.setdefault('description', json_schema.get('description',''))
+         json_schema['description'] += f" (RAML format: {raml_type_def['format']})"
+
+
+    # --- Object Specific ---
+    if json_schema.get('type') == 'object':
+        required_props = []
+        if 'properties' in raml_type_def and isinstance(raml_type_def['properties'], dict):
+            json_schema['properties'] = {}
+            for prop_name, prop_def in raml_type_def['properties'].items():
+                # Handle required property notation (e.g., "name:" vs "name?:")
+                clean_prop_name = prop_name.rstrip('?')
+                # RAML 'required' facet overrides '?' marker if both present
+                is_required = prop_def.get('required', True) if isinstance(prop_def, dict) else True # Default required=true
+                if prop_name.endswith('?'): # Optional marker '?' sets required=false unless overridden
+                    is_required = prop_def.get('required', False) if isinstance(prop_def, dict) else False
+
+
+                # Recursively convert the property's type definition
+                json_schema['properties'][clean_prop_name] = raml_type_to_json_schema(prop_def)
+
+                if is_required:
+                    required_props.append(clean_prop_name)
+
+        # Add 'required' array if any properties are required
+        if required_props:
+            json_schema['required'] = sorted(list(set(required_props))) # Ensure uniqueness and sort
+
+        # RAML allows additionalProperties directly; map it
+        if 'additionalProperties' in raml_type_def:
+            # JSON schema expects boolean or a schema for additionalProperties
+            if isinstance(raml_type_def['additionalProperties'], bool):
+                 json_schema['additionalProperties'] = raml_type_def['additionalProperties']
+            elif isinstance(raml_type_def['additionalProperties'], (dict, str)): # Could be inline type or ref
+                 # Simple case: assume 'true' if complex type provided, as standard schema allows any valid value.
+                 # For stricter validation, convert the type schema:
+                 # json_schema['additionalProperties'] = raml_type_to_json_schema(raml_type_def['additionalProperties'])
+                 # For simplicity now, just allowing any additional properties if specified non-boolean:
+                 if str(raml_type_def['additionalProperties']).lower() == 'false':
+                     json_schema['additionalProperties'] = False
+                 else:
+                     json_schema['additionalProperties'] = True # Or convert the schema if needed
+                     print(f"Info: Handling complex 'additionalProperties' for type '{raml_base_type}' as 'true'. For specific schema, enhance conversion.")
+
+            # Could also check minProperties, maxProperties if needed
+
+
+    # --- Array Specific ---
+    if json_schema.get('type') == 'array':
+        # RAML 'items' defines the type of array elements
+        if 'items' in raml_type_def:
+           json_schema['items'] = raml_type_to_json_schema(raml_type_def['items'])
+        else:
+            # If 'items' is missing, JSON schema typically assumes items can be of any type.
+            # Add empty schema object {} for items to indicate any type is allowed.
+             json_schema['items'] = {}
+             print(f"Warning: Array type definition found without 'items'. Assuming items can be of any type.")
+
+
+        # RAML array constraints
+        if 'minItems' in raml_type_def:
+            json_schema['minItems'] = raml_type_def['minItems']
+        if 'maxItems' in raml_type_def:
+            json_schema['maxItems'] = raml_type_def['maxItems']
+        if 'uniqueItems' in raml_type_def:
+            json_schema['uniqueItems'] = raml_type_def['uniqueItems']
+
+
+    # Clean up empty descriptions that might have been added
+    if 'description' in json_schema and not json_schema['description'].strip():
+         del json_schema['description']
 
     return json_schema
 
 
 def generate_json_schema_from_raml_file(raml_file_path):
     """
-    Loads a RAML file, resolves references, extracts type definitions,
-    and converts them into a JSON schema.
+    Loads a root RAML file, resolves references using pyraml-parser,
+    extracts type definitions from the 'types' section, and converts
+    them into a JSON schema document with definitions under '$defs'.
 
     Args:
         raml_file_path (str): The path to the root RAML file.
 
     Returns:
         dict: A dictionary representing the JSON schema for the types,
-              or None if an error occurs.
-              The schema structure might contain definitions under a 'definitions'
-              or '$defs' key, mapping RAML type names to their JSON schema.
+              structured with a '$defs' section, or None if an error occurs.
     """
     try:
+        print(f"Parsing RAML file: {raml_file_path}")
         # pyraml-parser automatically handles !include and 'uses' resolution
         # when loading the root file.
         parsed_raml = parser.load(raml_file_path)
+        print("RAML parsing successful.")
 
-        # --- Manual Include Resolution (Alternative/Fallback if parser doesn't handle everything) ---
-        # base_path = os.path.dirname(raml_file_path)
-        # with open(raml_file_path, 'r') as f:
-        #     raw_raml_data = yaml.safe_load(f) # Use safe_load!
-        # resolved_raml_data = resolve_raml_references(raw_raml_data, base_path)
-        # parsed_raml = resolved_raml_data # Use this if pyraml-parser is not used/available
-        # --- End Manual Resolution ---
-
-
+        # Prepare the base JSON schema structure
         json_schema_output = {
-            "$schema": "http://json-schema.org/draft-07/schema#", # Or another version
-            "title": parsed_raml.title,
-            "$defs": {} # Using $defs for reusable definitions (common practice)
-                         # 'definitions' is also used in older drafts
+            # Using Draft 7, but could be changed
+            "$schema": "http://json-schema.org/draft-07/schema#",
+             # Use RAML title if available, otherwise provide a default
+            "title": getattr(parsed_raml, 'title', 'API Types Schema'),
+             # Use $defs for reusable definitions (Draft 7+ standard)
+            "$defs": {}
         }
+         # Add top-level description if present in RAML
+        if hasattr(parsed_raml, 'description') and parsed_raml.description:
+             json_schema_output['description'] = str(parsed_raml.description) # Ensure it's a string
 
+        # Check if the 'types' attribute exists and is not empty
         if not hasattr(parsed_raml, 'types') or not parsed_raml.types:
-             print("Warning: No 'types' section found in the RAML.")
-             # Attempt to generate schema from resource bodies if types are missing
-             # This requires iterating through parsed_raml.resources and their methods/bodies
-             # For now, returning an empty schema for types.
-             return json_schema_output # Return basic schema structure
+             print("Warning: No 'types' section found or it is empty in the parsed RAML.")
+             # Consider checking resources for inline type definitions if needed
+             # For now, returning the basic schema structure without type definitions.
+             return json_schema_output
 
-        # Convert each defined RAML type
+        print(f"Found {len(parsed_raml.types)} types in the RAML definition. Converting to JSON Schema...")
+
+        # Convert each defined RAML type found in the 'types' section
+        type_count = 0
         for type_name, type_definition in parsed_raml.types.items():
-            # The parser gives you objects; access raw data if needed via .raw
-            raml_type_def = type_definition.raw
-            json_schema_output["$defs"][type_name] = raml_type_to_json_schema(raml_type_def)
+            # The parser provides objects; access raw RAML data via .raw
+            # The .raw attribute holds the original dictionary structure for the type
+            if hasattr(type_definition, 'raw') and isinstance(type_definition.raw, dict):
+                raml_type_def_dict = type_definition.raw
+                print(f"  Converting type: '{type_name}'...")
+                converted_schema = raml_type_to_json_schema(raml_type_def_dict)
+                # Add the converted schema to the $defs section
+                json_schema_output["$defs"][type_name] = converted_schema
+                type_count += 1
+            else:
+                print(f"Warning: Could not get raw dictionary definition for type '{type_name}'. Skipping.")
 
-        # Optionally: If you want a schema specifically for a request/response body
-        # of a particular resource/method, you'd navigate parsed_raml.resources
-        # find the specific body (e.g., application/json) and convert its 'type' reference.
-        # Example: Find first POST request body for /users
-        # user_post_body_type = parsed_raml.resources['/users'].methods['post'].body['application/json'].type
-        # if user_post_body_type in json_schema_output["$defs"]:
-        #    specific_schema = json_schema_output["$defs"][user_post_body_type]
-        # else: # Handle inline type definitions if not referencing a global type
-        #    specific_schema = raml_type_to_json_schema(parsed_raml.resources['/users'].methods['post'].body['application/json'].raw)
-
-
+        print(f"Successfully converted {type_count} types.")
         return json_schema_output
 
     except FileNotFoundError:
         print(f"Error: RAML file not found at {raml_file_path}")
         return None
+    except ImportError:
+        print("Error: Required libraries ('pyraml-parser', 'PyYAML') not found.")
+        print("Please install them using: pip install pyraml-parser PyYAML")
+        return None
     except Exception as e:
+        # Catching generic Exception to provide feedback on any parsing/conversion error
         print(f"An error occurred during RAML parsing or schema generation: {e}")
-        # Consider more specific error handling based on pyraml-parser exceptions
+        import traceback
+        traceback.print_exc() # Print stack trace for debugging
+        # Consider more specific error handling based on pyraml-parser exceptions if possible
         return None
 
 # --- Example Usage ---
-# Make sure you have a RAML file (e.g., 'api.raml') in the same directory
-# or provide the full path.
-raml_path = 'path/to/your/api.raml' # <--- CHANGE THIS TO YOUR RAML FILE PATH
+if __name__ == "__main__": # Ensures this block runs only when script is executed directly
+    # Set the path to the main RAML specification file.
+    # Assumes 'spec.raml' is in the same directory as 'parser.py' or provide a full path.
+    raml_path = 'spec.raml' # <--- MODIFIED TO POINT TO spec.raml
 
-final_schema = generate_json_schema_from_raml_file(raml_path)
+    print("-" * 30)
+    print("Starting RAML to JSON Schema Generation")
+    print(f"Input RAML file: {os.path.abspath(raml_path)}") # Show absolute path
+    print("-" * 30)
 
-if final_schema:
-    print("\nGenerated JSON Schema:")
-    # Use json.dumps for pretty printing
-    print(json.dumps(final_schema, indent=2))
 
-    # Example: Save to a file
-    # output_filename = 'generated_schema.json'
-    # with open(output_filename, 'w') as f:
-    #     json.dump(final_schema, f, indent=2)
-    # print(f"\nSchema saved to {output_filename}")
+    final_schema = generate_json_schema_from_raml_file(raml_path)
+
+    print("-" * 30)
+    if final_schema:
+        print("Generated JSON Schema Document:")
+        # Use json.dumps for pretty printing with indentation
+        print(json.dumps(final_schema, indent=2))
+
+        # --- Optional: Save to a file ---
+        output_filename = 'generated_schema.json'
+        try:
+            with open(output_filename, 'w') as f:
+                json.dump(final_schema, f, indent=2)
+            print("-" * 30)
+            print(f"Schema successfully saved to: {output_filename}")
+        except IOError as e:
+            print(f"Error saving schema to file '{output_filename}': {e}")
+        # --- End Optional Save ---
+
+    else:
+        print("JSON Schema generation failed.")
+    print("-" * 30)
