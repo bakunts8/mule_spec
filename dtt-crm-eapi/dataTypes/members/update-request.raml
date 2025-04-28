@@ -1,0 +1,14 @@
+#%RAML 1.0 DataType
+description: update member details
+displayName: update member
+
+type: object
+additionalProperties: false
+properties:
+  isStatusMatchApproved:
+    description: Boolean flag to indicate if the membership is approved or rejected.
+    type: boolean
+    required: true
+    example: true
+
+examples: !include ../../examples/members/update-request.raml

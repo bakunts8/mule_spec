@@ -1,0 +1,8 @@
+#%RAML 1.0 Trait
+responses:
+  404:
+    description: The request is targeting a non-existing resource.
+    body:
+      application/json:
+        type: error
+        examples: !include ../examples/404-response.raml

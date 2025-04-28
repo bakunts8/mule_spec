@@ -1,0 +1,8 @@
+#%RAML 1.0 DataType
+properties:
+  "_warnings":
+    type: array
+    items: !include error.raml
+    required: false
+  
+examples: !include ../examples/partial-success-response.raml

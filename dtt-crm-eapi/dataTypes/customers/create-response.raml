@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+displayName: Customer create response
+description: Customer create response object
+type: partialSuccess
+additionalProperties: false
+properties:
+  goldenId:
+    type: goldenId
+    description: The customer's golden ID
+    required: true
+    example: "1000518"
+examples: !include ../../examples/customers/create-response.raml

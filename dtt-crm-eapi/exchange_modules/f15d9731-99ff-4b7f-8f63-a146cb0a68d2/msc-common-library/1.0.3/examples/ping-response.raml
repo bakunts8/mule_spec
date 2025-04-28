@@ -1,0 +1,21 @@
+#%RAML 1.0 NamedExample
+Ping Response:
+    pong:
+      application: 
+          artifactId: msc-mule-application-template
+          artifactVersion: 1.1.1
+          muleEnvironmentProperty: dev
+          muleVersion: 4.6.2
+          startDateTime: 2024-04-20T12:38:11.000Z
+          javaRuntimeVersion: 8u402-ga-2ubuntu1~20.04   
+      build: 
+          revision: '283170'
+          commitNumber: 341f0f5
+      request: 
+        origin: 34.0.0.77
+        protocol: HTTPS
+        host: id42.example-cdn.com
+        forwarded: for=34.0.0.77, for=198.0.0.17
+      platform: 
+          applicationName: msc-mule-application-template-v1-dev
+          hostName: msc-mule-application-template-v1-dev-77956c995b-abcdr

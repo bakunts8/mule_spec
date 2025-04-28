@@ -1,0 +1,48 @@
+#%RAML 1.0 DataType
+displayName: Passenger details
+description: Passenger details definition
+type: object
+additionalProperties: false
+properties:
+  passengerType:
+    description: Passenger Type
+    type: !include ../../primitives/passenger-type.raml
+    required: false
+  adults:
+    description: Adult passengers information
+    type: object
+    required: true
+    properties: 
+      total: 
+        type: integer
+        description: Total amount of passengers in this category
+        required: true
+      details:
+        type: array
+        description: Passenger information
+        required: true
+        minItems: 1 
+        items:
+          properties:
+            age: 
+              type: integer
+              minimum: 18  
+  children:
+    description: Children's passenger information
+    type: object
+    required: false
+    properties: 
+      total: 
+        type: integer
+        description: Total amount of passengers in this category
+        required: true
+      details:
+        type: array
+        description: Passenger information
+        required: false
+        items:
+          properties:
+            age: 
+              type: integer
+              maximum: 17
+              minimum: 0              

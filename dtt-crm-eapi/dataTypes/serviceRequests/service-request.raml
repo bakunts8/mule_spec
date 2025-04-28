@@ -1,0 +1,202 @@
+#%RAML 1.0 DataType
+description: Service Request Data type
+type: object
+additionalProperties: false
+properties:
+  number:
+    type: string
+    description: The service request number
+    required: false
+    example: 1-73366738
+  id:
+    type: string
+    description: The service request identifier
+    required: false
+    example: 1-17OI4Y
+  customer:
+    type: object
+    description: Object related to customer details
+    additionalProperties: false
+    required: true
+    properties:
+      goldenId:
+        type: goldenId
+        required: true 
+      name:
+        type: string
+        description: First name of customer
+        required: false
+        example: John
+      surname:
+        type: string
+        description: Surname of customer
+        required: false
+        example: Wick
+  travelAgency:
+    type: string
+    description: The travel agency details
+    required: false
+    example: "*ND"
+  marketCode:
+    type: string
+    description: The market code
+    required: false
+    example: 1-2Q0N
+  createdDateTime:
+    type: datetime
+    description: The date time of when the service request was created
+    required: false
+    example:  2022-01-10T11:40:55Z
+  createdBy:
+    type: string
+    description: Who created the service request
+    required: false
+    example: CRMASIS
+  chargeDate:
+    type: date-only
+    description: Charge date
+    required: false
+    example: 2022-01-12
+  closureDateTime:
+    type: datetime
+    description: The date time of when the service request was closed
+    required: false
+    example: 2022-07-04T12:45:44Z
+  employeeOwner:
+    type: string
+    description: The employee owner
+    required: false
+    example: CRMASIS
+  acquisitionChannel:
+    type: string
+    description: The acquisition channel
+    required: false
+    example: 
+  status:
+    type: string
+    description: The service request status
+    required: false
+    example: 0-3248
+  outcome:
+    type: string
+    description: Outcome of service request
+    required: false
+    example: "*ND"
+  booking:
+    type: object
+    description: Object containing booking related details
+    required: false
+    additionalProperties: false
+    properties:
+      number:
+        type: string
+        description: The Booking number
+        required: false
+        example: "000"
+  sellCruise:
+    type: string
+    description: Sell cruise details
+    required: false
+    example: 
+  numberOfPassengers:
+    type: number
+    description: The number of passengers
+    required: false
+    minimum: 0
+    example: 3
+  contactReason:
+    type: string
+    description: The contact reason
+    required: false
+    example: "*ND"
+  periodOfInterest:
+    type: string
+    description: The Period of interest details
+    required: false
+    example: 
+  travelCondition:
+    type: string
+    description: Travelling conditions
+    required: false
+    example: 
+  destination:
+    type: string
+    description: The destination
+    required: false
+    example: 
+  campaignName:
+    type: string
+    description: The campaign name
+    required: false
+    example: 
+  inboundCampaignCode:
+    type: string
+    description: The inbound campaign code
+    required: false
+    example:
+  outboundCampaignCode:
+    type: string
+    description: The outbound campaign code
+    required: false
+    example: 
+  category:
+    type: string
+    description: The service request category
+    required: false
+    example: Info
+  subCategory:
+    type: string
+    description: The service request sub category
+    required: false
+    example: General - Commercial
+  type:
+    type: string
+    description: The service request type
+    required: false
+    example: Info On Website
+  workgroup:
+    type: string
+    description: The workgroup
+    required: false
+    example: "*NON DEFINITO"
+  priority:
+    type: string
+    description: The priority for service request
+    required: false
+    example: 0-3236
+  amountClaimed:
+    type: amount
+    description: The amount claimed
+    required: false
+    example: "300.00"
+  amountOffered:
+    type: amount
+    description: The amount offered
+    required: false
+    example: "200.00"
+  currencyCode:
+    type: string
+    pattern: '[a-zA-Z]{3}'
+    description: Currency code
+    required: false
+    example: EUR 
+  mode:
+    type: string
+    description: The mode
+    required: false
+    example: "*Non Definito"
+  touchPoint:
+    type: string
+    description: Touch Point
+    required: false
+    example: assistenzaclienti
+  relatedServiceRequest:
+    type: string
+    description: The parent service request
+    required: false
+    example: 2-15104374254
+  refusalReason:
+    type: string
+    description: The refusal reason
+    required: false
+    example: excommunicado

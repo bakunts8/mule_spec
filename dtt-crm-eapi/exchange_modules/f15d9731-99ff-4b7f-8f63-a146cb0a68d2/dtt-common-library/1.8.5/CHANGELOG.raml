@@ -1,0 +1,63 @@
+#%RAML 1.0 DocumentationItem
+title: CHANGELOG
+content: | 
+        All notable changes to this project will be documented in this file. <br> <br>
+        The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+        * Versions
+          * Version 1.8.5 (06/11/2024)
+            * Updated email regex to allow more emails
+          * Version 1.8.4 (01/11/2024)
+            * Updated searchCruisesResponseBaseObject - discounts as array
+          * Version 1.8.3 (22/10/2024)
+            * Updated baseActivityDetails - removed note, videoId, maxWaitlistCapacity, duration, isPackage, minimumPassengers, category fields to keep the common activity details fields for excursions and labels
+          * Version 1.8.2 (16/10/2024)
+            * Updated email regex to allow for an email with one character in the beginning
+          * Version 1.8.1 (15/10/2024)
+            * Updated response search cruise charges - added discount to search cruises base response (DTTP-15809)
+          * Version 1.8.0 (14/10/2024)
+            * Updated response search cruise charges - added discount to search cruises base charges response (DTTP-15809)
+          * Version 1.7.2 (23/08/2024)
+            * Update searchCruisesResponse.categoryItems - updated occurrence to string. Added defaultAirportCode, originAirportCode and destinationAirportCode
+          * Version 1.7.1 (23/08/2024)
+            * Update datatype datatransTransactionId to have minLength 18
+          * Version 1.7.0 (23/08/2024)
+            * Added datatype datatransTransactionId
+          * Version 1.6.2 (22/08/2024)
+            * Added passenger number in full passenger details
+          * Version 1.6.1 (22/08/2024)
+            * updated dataType baseActivityDetails's field name
+          * Version 1.6.0 (22/08/2024)
+            * added datatype bookingNumber
+          * Version 1.5.2 (21/08/2024)
+            * fixed datatype issue for baseActivityDetails
+          * Version 1.5.1 (20/08/2024)
+            * updated datatype baseActivityDetails
+              * changed dataType for limitedSeats to integer from boolean
+          * Version 1.5.0 (16/08/2024)
+            * added datatype baseActivityDetails 
+          * Version 1.4.2 (14/08/2024)
+            * added pattern for Telephone
+          * Version 1.4.1 (01/08/2024)
+            * Updated Telephone primitive to accept characters and numbers
+          * Version 1.4.0 (23/07/2024)
+            * Added primitive type golden id
+          * Version 1.3.0 (23/07/2024)
+            * Added primitive type mobile and phone
+          * Version 1.2.2 (23/07/2024)
+          * Version 1.2.2 (23/07/2024)
+            * Updated reference to passenger type in passengers data types. 
+          * Version 1.2.1 (22/07/2024)
+            * Updated deposit in Prices definition to required false. 
+          * Version 1.2.0 (19/07/2024)
+            * Added Full Passenger details with minor refactoring to location of files.
+          * Version 1.1.0 (17/07/2024)
+            * Added base membership and full address details to increase reusability
+          * Version 1.0.15
+            * Added email and address types to increase reusability
+          * Version 1.0.14
+            * Added Prices Type definitions to increase reusability
+          * Version 1.0.11
+            *  Restructured passengerDetails type and exposed different sub-types to increase reusability.
+          * Version 1.0.10
+            * Exposed a base version of passengerDetails which does not include adults and isPhysicallyChallenged.

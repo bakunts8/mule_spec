@@ -1,0 +1,95 @@
+#%RAML 1.0 Library
+usage: Use to send an email
+
+uses:
+  dtt-common-library: exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/dtt-common-library/1.8.5/dtt-common-library.raml
+
+types:
+  email-request:
+    description: Request to send an email
+    additionalProperties: false
+    type: unreachable-email-request | unsubscribe-email-request | wrong-number-email-request
+
+  wrong-number-email-request:
+    description: Request to send an email when the customer's phone number is wrong
+    type: [base-email-request, basic-recipient]
+    additionalProperties: false
+    properties:
+      'type':
+        description: The type of email to be sent
+        type: string
+        enum: ["WRONG_NUMBER"]
+    examples: !include ../../examples/emails/wrong-number-email-request.raml
+
+  unreachable-email-request:
+    description: Request to send an email when the customer was not reachable. 
+    type: [base-email-request, basic-recipient]
+    additionalProperties: false
+    properties:
+      'type':
+        description: The type of email to be sent
+        type: string
+        enum: ["UNREACHABLE"]
+    examples: !include ../../examples/emails/unreachable-email-request.raml
+
+  unsubscribe-email-request:
+    description: Request to send an email when the customer unsubscribes.
+    type: [base-email-request, detailed-recipient]
+    additionalProperties: false
+    properties:
+      type:
+        description: The type of email to be sent
+        type: string
+        enum: ["UNSUBSCRIBE"]     
+    examples: !include ../../examples/emails/unsubscribe-email-request.raml
+
+  base-email-request:
+    description: Common fields needed for wrong number and unreachable
+    type: object
+    additionalProperties: false
+    properties:
+      campaignId:
+          type: string
+          description: Technical campaign id in AJO for the email campaign
+          required: true
+          example: "f7a0dad2-4ca2-48d0-96c5-e4278428435g"
+      goldenId:
+        type: dtt-common-library.goldenId
+        description: Recipient's golden id
+        required: true
+        example: "12345"
+
+  basic-recipient:
+    description: Recipient's details
+    type: object
+    additionalProperties: false
+    properties:
+      recipient: 
+        type: object
+        additionalProperties: false
+        properties:
+          email:
+            type: dtt-common-library.email
+            description: Recipient's email address
+            required: true
+            example: "abc.def@test.com"
+
+  detailed-recipient:
+    description: Recipient's details
+    type: object
+    additionalProperties: false
+    properties:
+      recipient: 
+        type: object
+        additionalProperties: false
+        properties:
+          email:
+            type: dtt-common-library.email
+            description: Recipient's email address
+            required: true
+            example: "abc.def@test.com"
+          name:
+            type: string
+            description: The name of the recipient
+            required: false
+            example: John                            

@@ -1,0 +1,113 @@
+#%RAML 1.0 DataType
+type: object
+description: Customer details
+additionalProperties: false
+properties:
+  dateOfBirth:
+    description: Customer's date of birth
+    type: date-only
+    required: false
+    example: "2001-08-05"
+  customerId:
+    description: unique key in the source system
+    type: string
+    required: true
+    example: "DERF12h444"
+  gender:
+    description: customer's gender
+    type: string
+    required: false
+    enum:
+      - MALE
+      - FEMALE
+      - NOT_SPECIFIED
+  language:
+    description: language details
+    type: string
+    pattern: '[a-zA-Z]{3}'
+    example: ITR
+    required: false
+  nationality:
+    description: customer's nationality
+    type: string
+    example: ITR
+    required: false
+  marketCode:
+    description: Market Code
+    type: string
+    example: GBR
+    required: false
+  officeCode: 
+    description: Office Code
+    type: string
+    example: GBR
+    required: true 
+  email:
+    description: Customer's email address
+    type: !include base-email.raml
+    required: false
+  loyaltyClubEmail: 
+    description: email associated with loyalty club membership
+    type: !include base-email.raml
+    required: false
+  phone:
+    description: Customer's landline number
+    type: object
+    additionalProperties: false
+    properties:
+      number: 
+        description: Phone number
+        type: telephoneNumber
+        required: false
+        example: "+391845208"
+    required: false
+  mobilePhone:
+    description: Customer's Mobile  number
+    type: object
+    additionalProperties: false
+    properties:
+      number: 
+        type: telephoneNumber
+        required: false
+        example: "+391845208"
+    required: false
+  address:
+    required: false
+    type: fullAddressDetails
+    additionalProperties: false
+    properties:
+      acquisitionChannel:
+        description: address acquisition channel
+        type: string
+        required: false
+        example:  "WEB CHECK-IN"
+  marketingConsents:
+    required: false
+    type: object
+    additionalProperties: false
+    properties:
+      email:
+        description: Flag indicating whether the customer is authorized to receive marketing emails
+        type: boolean
+        required: false
+        example: true
+      loyaltyClubEmail:
+        description: Flag indicating whether the loyalty club email can be used to receive marketing emails
+        type: boolean
+        required: false
+        example: true
+      mobilePhone:
+        description: Flag indicating whether the customer is authorized to receive marketing communication by mobile
+        type: boolean
+        required: false
+        example: true
+      phone:
+        description: Flag indicating whether the customer has authorized to receive marketing communication by phone
+        type: boolean
+        required: false
+        example: true
+      post:
+        description: Flag indicating whether the customer is authorized to receive marketing by post
+        type: boolean
+        required: false
+        example: true

@@ -1,0 +1,15 @@
+#%RAML 1.0 DataType
+description: Customer email related information
+type: object
+additionalProperties: false
+properties:
+  address:
+    description: email address
+    type: email
+    required: false
+    example: "surname.name@gmail.com"
+  isBlackListed:
+    description: Flag to indicate if the email blacklisted
+    type: boolean
+    required: false
+    example: false

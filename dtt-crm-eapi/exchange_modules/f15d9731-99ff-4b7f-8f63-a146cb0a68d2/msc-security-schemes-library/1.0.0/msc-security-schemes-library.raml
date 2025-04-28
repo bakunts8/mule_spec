@@ -1,0 +1,7 @@
+#%RAML 1.0 Library
+usage: Library defining all security schemes used in MSC.
+
+securitySchemes:
+  basicAuthentication: !include securitySchemes/basic-authentication.raml
+  clientIdAuthentication: !include securitySchemes/client-id-authentication.raml
+  oauth2Authenticaton: !include securitySchemes/oauth2-authentication.raml

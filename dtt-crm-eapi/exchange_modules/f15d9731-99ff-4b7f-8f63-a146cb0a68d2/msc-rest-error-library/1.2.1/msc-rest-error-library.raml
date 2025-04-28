@@ -1,0 +1,21 @@
+#%RAML 1.0 Library
+usage: Library that neatly encapsulates the Error type definition as per the MSC REST API Design guidelines.
+
+types:
+  error: !include dataTypes/error.raml
+  partialSuccess: !include dataTypes/partial-success.raml
+
+traits:
+  baseErrorJsonResponses: !include traits/base-error-json-responses.raml
+  baseErrorXmlResponses: !include traits/base-error-xml-responses.raml
+  notFoundErrorJsonResponse: !include traits/not-found-error-json-response.raml
+  notFoundErrorXmlResponse: !include traits/not-found-error-xml-response.raml
+  conditionalErrorJsonResponses: !include traits/conditional-error-json-responses.raml
+  conditionalErrorXmlResponses: !include traits/conditional-error-xml-responses.raml
+  serverUnreachableErrorJsonResponses: !include traits/server-unreachable-error-json-responses.raml
+  serverUnreachableErrorXmlResponses: !include traits/server-unreachable-error-xml-responses.raml
+  conflictErrorJsonResponse: !include traits/conflict-error-json-response.raml
+  conflictErrorXmlResponse: !include traits/conflict-error-xml-response.raml
+  unprocessableErrorJsonResponse: !include traits/unprocessable-error-json-response.raml
+  unprocessableErrorXmlResponse: !include traits/unprocessable-error-xml-response.raml
+  

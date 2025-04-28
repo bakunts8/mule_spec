@@ -1,0 +1,13 @@
+#%RAML 1.0 NamedExample
+400 Bad Request:
+  code: data_validation
+  message: Invalid request. One or more fields do not match the specifications.
+  traceId: 73b309b81fd54d7fb43ead4052210959
+  errorId: 79b309b81fd54d7fb43ead4000010959
+  datetime: 2024-04-23T10:00:00Z
+  source: 
+    name: api-name
+    layer: DATA_SOURCE
+  causes: 
+    - message: Field name exceeds the 256 characters limit.
+    - message: Field name cannot be null

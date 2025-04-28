@@ -1,0 +1,48 @@
+#%RAML 1.0 Trait
+
+uses: 
+  dttCommonLibrary: exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/dtt-common-library/1.8.5/dtt-common-library.raml
+
+queryParameters:
+  name:
+    description: Customer's name
+    type: string
+    required: false
+    example: "GARRETZENOTEST"
+  surname:
+    description: Customer's surname
+    type: string
+    required: false
+    example: "DOOLEYZENOTEST"
+  dateOfBirth:
+    description: Customer's date of birth
+    type: date-only
+    required: false
+    example: "2001-08-05"
+  phone:
+    description: Customer's landline number
+    type: dttCommonLibrary.telephoneNumber
+    required: false
+    example: "+341234567890"
+  mobilePhone:
+    description: Customer's mobile phone number
+    type: dttCommonLibrary.telephoneNumber
+    required: false
+    example: "+3412345677"
+  email:
+    description: Customer's email address
+    type: dttCommonLibrary.email
+    required: false
+    example: "dweplshmqe@mailkept.com"
+  page:
+    description: The page iteration
+    type: number
+    required: false
+    default: 1
+    example: 2
+  pageSize:
+    description: The maximum number of records to return in the response.
+    type: number
+    required: false
+    default: 100
+    example: 20

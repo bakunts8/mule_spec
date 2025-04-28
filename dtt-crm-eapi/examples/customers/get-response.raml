@@ -1,0 +1,58 @@
+#%RAML 1.0 NamedExample
+
+Search Customers Results:
+  customers:
+    - goldenId: "1000518"
+      name: GARRETZENOTEST
+      surname: DOOLEYZENOTEST
+      dateOfBirth: 2001-08-05
+      address:
+        addressLine1: TEST ADDRESS
+        state: GBR
+        districtName: VIERA
+        postCode: "28001"
+        region: CAMPANIA
+        country: ITALY
+        province: RM
+        town: DARLINGTON
+        additionalInformation: Additional information here
+      phone: "+341234567890"
+      mobilePhone: "+3412345677"
+      email: abcd@gmail.com.au
+      lastPhone: "+341234567890"
+      lastMobilePhone: "+3412345677"
+      lastEmail: abcd@gmail.com.au
+      membership:
+        number: "2405082"
+        status: Active
+        cardType: CLASSIC
+      marketCode: GBR
+      officeCode: GBR
+    - goldenId: "1000519"
+      name: GARRETZ
+      surname: ZENOTEST
+      dateOfBirth: 2001-08-05
+      address:
+        addressLine1: TEST ADDRESS 2
+        state: GBR
+        districtName: VIERA
+        postCode: "28001"
+        region: CAMPANIA
+        country: ITALY
+        province: RM
+        town: DARLINGTON
+        additionalInformation: Additional information here
+      phone: "+341234512321"
+      mobilePhone: "+3412343454"
+      email: abcd123@gmail.com.au
+      membership:
+        number: "2412345"
+        status: Active
+        cardType: CLASSIC
+      marketCode: IRE
+      officeCode: IRE
+  _pagination:
+    currentPage: 1
+    pageSize: 10
+    totalPages: 1
+    totalItems: 2

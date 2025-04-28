@@ -1,0 +1,114 @@
+#%RAML 1.0 Library
+
+uses: 
+  dttCommonLibrary: exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/dtt-common-library/1.8.5/dtt-common-library.raml
+
+types:
+  customers:
+    type: object
+    properties:
+      customers:
+        description: List of Customer records
+        type: array
+        items: 
+          type: customer
+        required: true
+      _pagination:
+        description: Pagination details
+        type: pagination
+        required: true
+    examples: !include ../../examples/customers/get-response.raml
+
+  customer:
+    type: object
+    description: Customer details
+    properties:
+      goldenId:
+        type: dttCommonLibrary.goldenId
+        description: The golder identifier for a customer
+        required: true
+        example: "1000518"
+      name:
+        description: Customer's name
+        type: string
+        required: false
+        example: "GARRETZENOTEST"
+      surname:
+        description: Customer's surname
+        type: string
+        required: false
+        example: "DOOLEYZENOTEST"
+      dateOfBirth:
+        description: Customer's date of birth
+        type: date-only
+        required: false
+        example: "2001-08-05"
+      address:
+        type: dttCommonLibrary.fullAddressDetails
+      phone:
+        description: Customer's landline number
+        type: dttCommonLibrary.telephoneNumber
+        required: false
+        example: "+341234567890"
+      mobilePhone:
+        description: Customer's mobile phone number
+        type: dttCommonLibrary.telephoneNumber
+        required: false
+        example: "+3412345677"
+      email:
+        description: Customer's email address
+        type: dttCommonLibrary.email
+        required: false
+        example: "dweplshmqe@mailkept.com"
+      lastPhone:
+        description: Customer's last landline number
+        type: dttCommonLibrary.telephoneNumber
+        required: false
+        example: "+341234567890"
+      lastMobilePhone:
+        description: Customer's last mobile phone number
+        type: dttCommonLibrary.telephoneNumber
+        required: false
+        example: "+3412345677"
+      lastEmail: 
+        description: Customer's last email address
+        type: dttCommonLibrary.email
+        required: false
+        example: "dweplshmqe@mailkept.com"
+      membership:
+        type: dttCommonLibrary.baseMembershipDetails
+      marketCode:
+        description: Market Code
+        pattern: '[a-zA-Z]{3}'
+        example: GBR
+        required: false
+      officeCode: 
+        description: Office Code
+        pattern: '[a-zA-Z]{3}'
+        example: GBR
+        required: false
+
+  pagination:
+    type: object
+    description: 
+    properties:
+      currentPage:
+        description: The current page index
+        type: number
+        required: true
+        example: 2
+      pageSize:
+        description: The number of records returned
+        type: number
+        required: true
+        example: 10
+      totalPages:
+        description: The number of pages based on the pageSize requested
+        type: number
+        required: true
+        example: 30
+      totalItems:
+        description: Total number of records available
+        type: number
+        required: true
+        example: 300

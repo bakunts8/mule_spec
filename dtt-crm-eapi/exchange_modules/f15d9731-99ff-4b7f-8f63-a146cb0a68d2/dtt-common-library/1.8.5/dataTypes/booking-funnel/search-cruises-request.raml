@@ -1,0 +1,76 @@
+#%RAML 1.0 Library
+usage: Reusable Data Types for Booking Funnel - Search Cruises operation
+
+types:
+  budgetRange:
+    description: Budget Range
+    type: object
+    additionalProperties: false
+    properties:
+      minimum:
+        type: string
+        description: Minimum value for the budget range
+        pattern: '\d+'
+        required: true
+        example: '0'
+      maximum:
+        type: string
+        description: Maximum value for the budget range
+        pattern: '\d+'
+        required: true
+        example: '5000000'
+        
+  discountCodes:
+    description: Discount Codes
+    type: array
+    items:
+      properties:
+        code: 
+          description: Discount Code details
+          type: string
+          required: true
+          example: YOUNG17
+
+  additionalDiscounts:
+    type: array
+    description: Additional Discounts
+    items:
+      properties:
+        passengerType:
+          description: Passenger Type Details
+          type: !include ../primitives/passenger-type.raml
+          required: false
+        discountCode:
+          description: Discount Code
+          type: string
+          required: false
+          example: YOUNG17
+
+  loyaltyCard:
+    description: Loyalty card details
+    type: object
+    additionalProperties: false
+    properties:  
+      number: 
+        description: Loyalty card number
+        type: string
+        required: true
+        example: MSC123
+      dateOfBirth:
+        description: DoB of the card holder
+        type: date-only
+        required: true
+        example: 2024-05-10
+
+  passengerDetails: 
+    displayName: Passenger details
+    description: Passenger details definition
+    type: !include ../types/passengers/passenger-details.raml
+    additionalProperties: false
+    properties:
+      isPhysicallyChallenged:
+        type: boolean
+        description: Indicates if one of the passengers is physically challenged. Defaults to false. 
+        default: false
+        required: false
+        example: false

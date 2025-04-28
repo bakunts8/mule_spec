@@ -1,0 +1,23 @@
+#%RAML 1.0 DataType
+displayName: Error Cause
+description: Container entity to provide additional information regarding the cause of the error.
+properties:
+  code:
+    description: Pattern based string that identifies a more fine grained error condition which contributed to the general/parent error code.
+    type: string
+    required: false
+    example: invalid_value
+  message: 
+    description: More specific information on the failure cause.
+    type: string
+    required: true
+    example: <Field name> does not match regex pattern:'^(e|p|s)\-(s2p)-(\S)*$'
+  field: 
+    description: A JSON Pointer (RFC6901) that identifies the entity or entity attribute responsible for the more specific error code and message.
+    type: string
+    required: false
+    example: fieldParent.fieldName
+  source:
+    description: Used to indicate the error originated elsewhere or self-reference when error was generated internally or as a direct consequence of consuming a downstream events.
+    type: !include error-source.raml
+    required: false

@@ -1,0 +1,372 @@
+#%RAML 1.0 Library
+
+uses: 
+  dttCommonLibrary: exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/dtt-common-library/1.8.5/dtt-common-library.raml
+
+types:
+  get-response:
+    description: Response for get communication
+    type: object
+    additionalProperties: false
+    properties:
+      communications:
+        type: array
+        minItems: 0
+        items:
+          additionalProperties: false
+          type: marketoResponse | ajoResponse
+    
+    examples: !include  ../../examples/communications/get-response.raml
+
+  marketoResponse:
+    description: Data Type for Marketo communications responses
+    type: base-response
+    additionalProperties: false
+    properties:
+      campaign:
+        description: Campaign details
+        type: !include campaign.raml
+        required: false
+        additionalProperties: false
+        properties:
+          description:
+            description: Description of Campaign
+            type: string
+            required: false
+            example: "COM_20062024_20062024"
+      
+      activity:
+        type: !include activity.raml
+        required: false
+        additionalProperties: false
+        properties:
+          id:
+            description: Activity id
+            type: string
+            required: false
+            example: "11066370245"
+          attributeDescription:
+            description: Description of Activity Attribute
+            type: string
+            required: false
+            example: "{\"Campaign Run ID\":108610,\"Step ID\":80171,\"Choice Number\":525556}"
+          filterDescription:
+            description: Description of Activity Filter
+            type: string
+            required: false
+            example: "*ND"
+          excludeDescription:
+            description: Description of Exclude Activity
+            type: string
+            required: false
+            example: "*ND"
+          type:
+            type: activityType
+            required: false
+            additionalProperties: false
+            properties:
+              id:
+                description: Activity type id
+                type: string
+                required: false
+                example: "7"
+
+      leadId:
+        description: Lead id
+        type: string
+        required: false
+        example: "139148039"
+      
+      program:
+        type: !include program.raml
+        required: false
+        additionalProperties: false
+        properties:
+          id:
+            description: Program Id
+            type: string
+            required: false
+            example: "20480"
+      creativity:
+        description:
+        type: object
+        required: false
+        additionalProperties: false
+        properties:
+          code:
+            description: Creativity code
+            type: string
+            required: false
+            example: "102319"
+          description: 
+            description: Creativity description
+            type: string
+            required: false
+            example: "20240620_USA_OS_WEEKLY_25D_JUNE_062024_REDEMPTION_7.20240620_USA_OS_WEEKLY_25D_JUNE_062024_REDEMPTION_7"
+
+      newsletterAdditionalQuestion:
+        description: Additional question newsletter
+        type: string
+        required: false
+        example: "*ND"
+  
+  ajoResponse:
+    description: Data Type for AJO communications responses
+    type: base-response
+    additionalProperties: false
+    properties:
+      mergerId:
+        description: Merger Id
+        type: string
+        required: false
+        example: ""
+      producedBy:
+        description: Event produced by
+        type: string
+        enum:
+          - SELF
+          - SYSTEM
+          - SALES_REPRESENTATIVE
+          - CUSTOMER_REPRESENTATIVE
+        required: false
+        example: "SELF"
+      event:
+        description: Event details
+        type: object
+        required: false
+        additionalProperties: false
+        properties:
+          "type":
+            description: Event type
+            type: string
+            required: false
+            example: ""
+          date:
+            description: Event date
+            type: datetime-only
+            required: false
+            example: "2024-06-20T13:43:46"
+      email:
+        description: Email details
+        type: object
+        required: false
+        additionalProperties: false
+        properties:
+          domain:
+            description: Email domain
+            type: string
+            required: false
+            example: ""
+          subject:
+            description: Email subject
+            type: string
+            required: false
+            example: ""
+      url:
+        description: URL details
+        type: object
+        required: false
+        additionalProperties: false
+        properties:
+          id:
+            description: URL id
+            type: string
+            required: false
+            example: ""
+          trackingType:
+            description: The tracking type of the URL
+            type: string
+            required: false
+            example: ""
+      linkTags:
+        description: The tags present in the link
+        type: string
+        required: false
+        example: ""
+      trackerUrlLabel:
+        description: Human-Friendly label.
+        type: string
+        required: false
+        example: ""
+      interactionType:
+        description: Specify action made by user on a message.
+        type: string
+        required: false
+        example: ""
+      entityType:
+        description: The tags present in the link
+        type: string
+        required: false
+        example: ""
+      message:
+        description: URL details
+        type: object
+        required: false
+        additionalProperties: false
+        properties:
+          id:
+            description: Unique ID representing a non-personalized message sent to the end user.
+            type: string
+            required: false
+            example: "" 
+          profileId:
+            description: A unique id refers to every single message sent as part of a MessageExecution activity.
+            type: string
+            required: false
+            example: ""
+          executionId:
+            description: Message execution id
+            type: string
+            required: false
+            example: ""
+      journey:
+        description: Journey details
+        type: object
+        required: false
+        additionalProperties: false
+        properties:
+          "name":
+            description: Journey name
+            type: string
+            required: false
+            example: ""
+          actionId:
+            description: Journey action id
+            type: string
+            required: false
+            example: ""
+          actionName:
+            description: Journey action name
+            type: string
+            required: false
+            example: ""
+          version:
+            description: Journey version details
+            type: object
+            required: false
+            additionalProperties: false
+            properties:
+              id:
+                description: Journey version id
+                type: string
+                required: false
+                example: ""
+              instanceId:
+                description: Journey version instance id
+                type: string
+                required: false
+                example: ""
+              nodeId:
+                description: Journey version node id
+                type: string
+                required: false
+                example: ""
+      campaign:
+        description: Campaign details
+        type: !include campaign.raml
+        required: false
+        additionalProperties: false
+        properties:
+          actionId:
+            description: Campaign action id
+            type: string
+            required: false
+            example: ""
+          versionId:
+            description: Campaign version id
+            type: string
+            required: false
+            example: ""
+      batchInstanceId:
+        description: Batch instance id
+        type: string
+        required: false
+        example: ""
+      sms:
+        description: Campaign details
+        type: object
+        required: false
+        additionalProperties: false
+        properties:
+          provider:
+            description: SMS provider
+            type: string
+            enum:
+              - SINCH 
+              - TWILLIO
+            required: false
+            example: "SINCH"
+          messageType:
+            description: Message Type
+            type: string
+            required: false
+            example: ""
+          inboundMessage:
+            description: Inbound message
+            type: string
+            required: false
+            example: ""
+      tags:
+        description: tags
+        type: string
+        required: false
+        example: ""
+      activity:
+        type: !include activity.raml
+        required: false
+        additionalProperties: false
+        properties:
+          type:
+              type: activityType
+              required: false
+              additionalProperties: false
+  base-response:
+    description: Base communication response data type
+    type: object
+    additionalProperties: false
+    properties:
+      id:
+        description: Unique id
+        type: string
+        required: true
+        example: "487679"
+      sourceSystem:
+        description: System from which the data is fetched
+        type: string
+        enum:
+          - MARKETO
+          - AJO
+        required: true
+        example: MARKETO
+      customer:
+        description: Customer details
+        type: object
+        additionalProperties: false
+        required: true
+        properties:
+          goldenId:
+            description: golden ID
+            type: dttCommonLibrary.goldenId
+            required: true
+            example: "132597427"
+      channel:
+        description: Marketing channel
+        type: string
+        required: false
+        example: "MARKETING SYSTEM"
+      marketAssetDescrption:
+        description: Description of market asset
+        type: string
+        required: false
+        example: "USA"
+  
+  activityType:
+    description: Activity Type details
+    type: object
+    additionalProperties: false
+    properties:
+      description: 
+        description: Activity type description
+        type: string
+        required: false
+        example: "Send Email"

@@ -1,0 +1,39 @@
+{
+  "dependencies": [
+    {
+      "version": "1.0.3",
+      "assetId": "msc-common-library",
+      "groupId": "f15d9731-99ff-4b7f-8f63-a146cb0a68d2",
+      "provided": false
+    },
+    {
+      "version": "1.0.0",
+      "assetId": "msc-security-schemes-library",
+      "groupId": "f15d9731-99ff-4b7f-8f63-a146cb0a68d2",
+      "provided": false
+    },
+    {
+      "version": "1.2.1",
+      "assetId": "msc-rest-error-library",
+      "groupId": "f15d9731-99ff-4b7f-8f63-a146cb0a68d2",
+      "provided": false
+    },
+    {
+      "version": "1.8.5",
+      "assetId": "dtt-common-library",
+      "groupId": "f15d9731-99ff-4b7f-8f63-a146cb0a68d2",
+      "provided": false
+    }
+  ],
+  "version": "1.8.4",
+  "originalFormatVersion": "1.0",
+  "apiVersion": "v1",
+  "descriptorVersion": "1.0.0",
+  "classifier": "raml",
+  "main": "api.raml",
+  "assetId": "dtt-crm-eapi",
+  "groupId": "f15d9731-99ff-4b7f-8f63-a146cb0a68d2",
+  "organizationId": "f15d9731-99ff-4b7f-8f63-a146cb0a68d2",
+  "name": "DTT CRM EAPI",
+  "tags": []
+}

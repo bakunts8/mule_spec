@@ -1,0 +1,39 @@
+#%RAML 1.0 DataType
+description: Get Service Requests Response Data type
+type: object
+additionalProperties: false
+properties:
+  serviceRequests:
+    type: array
+    items:
+      type: !include service-request.raml
+    description: List of service requests
+    required: true
+  _pagination:
+    type: object
+    description: 
+    additionalProperties: false
+    properties:
+      currentPage:
+        description: The current page index
+        type: number
+        required: true
+        example: 2
+      pageSize:
+        description: The number of records returned
+        type: number
+        required: true
+        example: 10
+      totalPages:
+        description: The number of pages based on the pageSize requested
+        type: number
+        required: true
+        example: 30
+      totalItems:
+        description: Total number of records available
+        type: number
+        required: true
+        example: 300
+
+examples: !include  ../../examples/serviceRequests/get-response.raml
+  

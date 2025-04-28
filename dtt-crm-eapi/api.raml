@@ -1,0 +1,207 @@
+#%RAML 1.0
+title: dtt-crm-eapi
+version: v1
+baseUri: https://{env}{host}/dtt-crm-eapi/{version}
+description: CRM EAPI 
+
+baseUriParameters:
+  env:
+    enum: [dev.,test.]
+    description: The target environment where the application is going to be deployed. PROD is not provided as an option since the APIs in production require no qualifier.
+    required: false
+
+documentation: 
+  - !include CHANGELOG.raml
+  
+protocols: [HTTPS]
+securedBy: [securitySchemesLibrary.basicAuthentication]
+
+uses:
+  errorLibrary: /exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/msc-rest-error-library/1.2.1/msc-rest-error-library.raml
+  securitySchemesLibrary: /exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/msc-security-schemes-library/1.0.0/msc-security-schemes-library.raml
+  commonLibrary: /exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/msc-common-library/1.0.3/msc-common-library.raml
+  dttCommonLibrary: exchange_modules/f15d9731-99ff-4b7f-8f63-a146cb0a68d2/dtt-common-library/1.8.5/dtt-common-library.raml
+  retrieveCustomersResponse: dataTypes/customers/get-response.raml
+  emails-library: /dataTypes/emails/email-request.raml
+  communicationsLibrary: dataTypes/communications/communications-library.raml
+
+types:
+  fullAddressDetails: dttCommonLibrary.fullAddressDetails  
+  telephoneNumber: dttCommonLibrary.telephoneNumber
+  email: dttCommonLibrary.email
+  goldenId: dttCommonLibrary.goldenId
+  amount: dttCommonLibrary.amount
+
+  error: errorLibrary.error
+  ping: commonLibrary.ping
+  partialSuccess: errorLibrary.partialSuccess
+  
+traits:
+  customerQueryParams: !include traits/customers-query-params.raml
+
+/customers:
+  is: [errorLibrary.baseErrorJsonResponses, commonLibrary.correlatable]
+  get:
+    is: [customerQueryParams]
+    description: Retrieves customer information.
+    responses:
+      200:
+        body:
+          application/json:
+            type: retrieveCustomersResponse.customers
+  post:
+    description: Creates customer
+    body:
+      application/json:
+        type: !include dataTypes/customers/create-request.raml
+    responses:
+        201:
+          body:
+            application/json:
+              type:  !include dataTypes/customers/create-response.raml
+  /{golden-id}:
+    uriParameters:
+      golden-id:
+        description: Golden id related to customer
+        type: goldenId
+        required: true
+        example: "132597427"
+    is: [errorLibrary.baseErrorJsonResponses, errorLibrary.notFoundErrorJsonResponse, commonLibrary.correlatable]
+    put:
+      description: Update customer by golden id
+      body:
+        application/json:
+          type: !include dataTypes/customers/update-request.raml
+      responses:
+        200:
+          body:
+            application/json:
+              type: !include dataTypes/customers/update-response.raml
+
+/loyalty-members/{card-number}:
+  uriParameters:
+    card-number:
+      description: Membership card number
+      type: string
+      required: true
+      example: "2458939"
+  is: [errorLibrary.baseErrorJsonResponses, errorLibrary.notFoundErrorJsonResponse, commonLibrary.correlatable]
+  patch:
+    description: Activate or deactivate a member card using the card number
+    body:
+      application/json:
+        type: !include dataTypes/members/update-request.raml
+    responses:
+      204:
+
+/emails:
+  post:    
+    is: [errorLibrary.baseErrorJsonResponses, commonLibrary.correlatable]
+    description: Sends a transactional email
+    body:
+      application/json:
+        type: emails-library.email-request
+    responses:
+      204:
+
+/service-requests:
+  is: [errorLibrary.baseErrorJsonResponses, commonLibrary.correlatable]
+  get:
+    description: Get service requests based on search query parameters
+    queryParameters:
+      goldenId:
+        type: goldenId
+        required: true
+      sinceCreatedDate:
+        type: datetime
+        description: Used to search for service requests starting from the provided date time
+        required: false
+      page:
+        description: The page iteration
+        type: number
+        required: false
+        minimum: 1
+        default: 1
+        example: 2
+      pageSize:
+        description: The maximum number of records to return in the response
+        type: number
+        required: false
+        minimum: 10
+        maximum: 100
+        default: 100
+        example: 100
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include dataTypes/serviceRequests/get-response.raml
+
+  /{sr-number}/emails:
+    uriParameters:
+      sr-number:
+        description: The service request number
+        type: string
+        required: true
+        example: 1-17OI4Y
+    is: [errorLibrary.baseErrorJsonResponses, commonLibrary.correlatable]
+    get:
+      description: Get service requests emails list related to a single SR
+      queryParameters:
+        page:
+          description: The page iteration
+          type: number
+          required: false
+          minimum: 1
+          default: 1
+          example: 2
+        pageSize:
+          description: The maximum number of records to return in the response
+          type: number
+          required: false
+          minimum: 10
+          maximum: 100
+          default: 100
+          example: 100
+      responses:
+        200:
+          body:
+            application/json:
+              type: !include dataTypes/serviceRequests/get-service-request-emails-response.raml
+    /{email-id}/attachments:
+      uriParameters:
+        email-id:
+          description: The email Id
+          type: string
+          required: true
+          example: 2-A77HOQG
+      is: [errorLibrary.baseErrorJsonResponses, commonLibrary.correlatable]
+      get:
+        description: Retrieve email attachments related to a specific service request (SR).
+        responses:
+          200:
+            body:
+              application/json:
+                type: !include dataTypes/serviceRequests/get-service-request-emails-attachments-response.raml     
+
+/communications:
+  is: [errorLibrary.baseErrorJsonResponses, commonLibrary.correlatable]
+  get:
+    description: Get communications history from marketing
+    queryParameters:
+      goldenId:
+        type: goldenId
+        required: true
+      sinceActivityDate:
+        type: date-only
+        description: Used  to search for the history of marketing communications from the specified date.
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: communicationsLibrary.get-response
+
+/ping:
+  type:
+    commonLibrary.ping

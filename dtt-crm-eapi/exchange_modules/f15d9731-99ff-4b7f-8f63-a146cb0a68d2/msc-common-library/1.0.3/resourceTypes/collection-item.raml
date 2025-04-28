@@ -1,0 +1,53 @@
+#%RAML 1.0 ResourceType
+description: A specific <<resourcePathName|!singularize>>.
+
+is: [correlatable]
+
+get?:
+  is: [errorLibrary.baseErrorJsonResponses,errorLibrary.notFoundErrorJsonResponse]
+  description: Retrieve <<resourcePathName|!singularize>>.
+  responses: 
+    200:
+      description: The <<resourcePathName|!singularize>> has been retrieved successfully.
+      headers:
+        ETag:
+          description: Identifier for the version of resource returned in the response.
+          type: string
+          example: "v1"
+      body: 
+        application/json:
+          type: <<item>>
+put?:
+  is: [errorLibrary.baseErrorJsonResponses,errorLibrary.notFoundErrorJsonResponse]
+  description: Replaces <<resourcePathName|!singularize>>.
+  body: 
+    application/json:
+      type: <<item>>
+  responses: 
+    204:
+      description: The <<resourcePathName|!singularize>> has been replaced successfully.
+patch?:
+  is: [errorLibrary.baseErrorJsonResponses,errorLibrary.notFoundErrorJsonResponse, errorLibrary.conditionalErrorJsonResponses]
+  description: Updates <<resourcePathName|!singularize>>.
+  headers:
+    If-Match:  
+      description: Conditional request. The server will return the requested resource only if it matches the provided etag value.
+      type: string
+      example: "v1"
+  body:
+    application/json-patch+json:
+  responses:
+    204:
+      description: The <<resourcePathName|!singularize>> has been updated successfully.
+
+delete?:
+  is: [errorLibrary.baseErrorJsonResponses,errorLibrary.notFoundErrorJsonResponse, errorLibrary.conditionalErrorJsonResponses]
+  description: Deletes <<resourcePathName|!singularize>>.
+  headers:
+    If-Match:
+      description: Conditional request. The server will return the requested resource only if it matches the provided etag value.
+      type: string
+      example: "v1"
+  responses:
+    204:
+      description: The <<resourcePathName|!singularize>> has been deleted successfully.

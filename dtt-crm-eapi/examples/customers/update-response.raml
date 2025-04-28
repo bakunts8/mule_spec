@@ -1,0 +1,16 @@
+#%RAML 1.0 NamedExample
+
+update customer results:
+  goldenId: "1000518"
+    
+update customer partial success results:
+  goldenId: "1000518"
+  _warnings:
+    - code: legacy_crm_not_updated
+      message: Failed to create customer in CRM AS IS
+      traceId: 73b309b81fd54d7fb43ead4052210959
+      errorId: 79b309b81fd54d7fb43ead4000010959
+      dateTime: 2024-04-23T10:00:00Z
+      source: 
+        name: dtt-crm-legacy-sapi
+        layer: API_SYSTEM

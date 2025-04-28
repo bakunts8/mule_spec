@@ -1,0 +1,22 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  attachments:
+    type: array
+    required: false
+    minItems: 0
+    items:
+      type: object
+      properties:
+            fileName:
+              type: string
+              description: The name of the file.
+              pattern: "^.+\\.[a-zA-Z0-9]+$"
+              required: true
+              example: "example_file.anyextension"
+            signedUrl:
+              type: string
+              description: The signed URL for accessing the file in Azure Blob storage.
+              pattern: "^https://.+$"
+              required: true
+examples: !include ../../examples/serviceRequests/get-service-request-emails-attachments-response.raml

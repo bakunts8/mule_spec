@@ -1,0 +1,235 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  emails:
+    type: array
+    required: false
+    minItems: 0
+    items:
+      type: object
+      properties:
+        serviceRequest:
+          type: object
+          required: true
+          properties:
+            
+            number:
+              type: string
+              required: true
+              minLength: 1
+              description: Service Request Number
+              example: "2-22203669119"
+
+            id:
+              type: string
+              description: Service Request Id
+              required: true
+              minLength: 1
+              example: "2-A77HOQN"
+
+            createdDate:
+              type: datetime
+              description: Date and time when the Service Request was created
+              example: "2024-07-08T11:21:30Z"
+              required: true
+
+            createdBy:
+              type: string
+              description: ID of the user who created the Service Request
+              example: "0-1"
+              required: true
+              minLength: 1
+
+            lastUpdateDate:
+              type: datetime
+              description: Date and time when the Service Request was last updated
+              example: "2024-07-08T11:21:30Z"
+              required: true
+
+            lastUpdateBy:
+              type: string
+              description: ID of the user who last updated the Service Request
+              example: "2-976ZNLG"
+              required: true
+              minLength: 1
+
+            modificationNumber:
+              type: integer
+              description: Number of record Updates
+              example: 8
+              required: true
+              minimum: 1
+
+            conflictId:
+              type: string
+              description: Siebel system field for handling conflicts
+              example: "0"
+              required: true
+              minLength: 1
+        id:
+          type: string
+          description: Email ID
+          example: "2-A77HOQG"
+          minLength: 1
+          required: true
+
+        createdDate:
+          type: datetime
+          description: Date and time when the email was created
+          example: "2024-07-08T11:21:30Z"
+          required: false
+
+        parentId:
+          type: string
+          description: Siebel system field for hierarchical purpose (parent/child definition)
+          example: "2-A77HOQG"
+          required: true
+          minLength: 1
+
+        threadId:
+          type: string
+          description: Thread ID
+          example: "2-A6VU59I"
+          required: false
+
+        type:
+          type: string
+          description: Type of the email
+          example: "Email - Inbound"
+          enum: ["Email - Inbound", "Email - Outbound"]
+          required: false
+
+        catalogId:
+          type: string
+          description: Email Catalog Id
+          example: "0-7775H"
+          required: false
+
+        format:
+          type: string
+          description: Email Format
+          example: "Plain Text"
+          enum: ["HTML", "Plain Text"]
+          required: false
+
+        bodyLanguage:
+          type: string
+          description: Language of the email body
+          example: "ENU"
+          required: false
+
+        mimeType:
+          type: string
+          description: Email Charset
+          example: "utf-8"
+          required: false
+
+        subject:
+          type: string
+          description: Subject of the email
+          example: "Re: 51806959 [SR Number: 2-22184095019]"
+          required: false
+
+        body:
+          type: string
+          description: "Body of the email. This field may contain HTML tags if 'formatTypeCode' is set to 'HTML'. Ensure proper sanitization when rendering to avoid XSS attacks."
+          example: "Thanks for getting back to me and keeping me informed Craig, I appreciate it, hope you have a great day!"
+
+        isAttachmentIncluded:
+          type: boolean
+          description: Flag indicating if the email includes an attachment
+          example: false
+          required: true
+
+        isForwarded:
+          type: boolean
+          description: Flag indicating if the email has been forwarded
+          example: true
+
+        isManuallyEdited:
+          type: boolean
+          description: Flag indicating if the email was manually edited
+          example: true
+
+        recipient:
+          type: object
+          properties:
+            email:
+              type: email
+              description: Recipient's (Receiver) email address
+              example: "customerservice@msccruises.co.uk"
+              required: false
+
+            name:
+              type: string
+              description: Recipient's (Receiver) name
+              example: "customerservice@msccruises.co.uk"
+              required: false
+
+            cc:
+              type: string
+              required: false
+              description: "CC Line of the email, a single email address or a comma-separated list of email addresses,Each email should be in a valid format."
+              pattern: ^$|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(,\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})*$
+              example: "test@test.com"
+
+            bcc:
+              type: string
+              required: false
+              description: "BCC Line of the email, a single email address or a comma-separated list of email addresses,Each email should be in a valid format."
+              pattern: ^$|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(,\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})*$
+              example: "test@test.com"
+
+        sender:
+          type: object
+          properties:
+            email:
+              type: email
+              description: Sender's email address
+              example: "sender@test.com"
+              required: false
+
+            name:
+              type: string
+              description: Sender's name
+              example: "Jack"
+              required: false
+
+            to:
+              type: string
+              required: false
+              description: "Email To Line of the email, a single email address or a comma-separated list of email addresses.Each email should be in a valid format."
+              pattern: ^$|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(,\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})*$
+              example: "customerservice@msccruises.co.uk"
+
+        databaseInfo:
+          type: object
+          properties:
+            lastUpdateDate:
+              type: datetime
+              description: SR Last Update Date made by at DB level
+              example: "2024-07-08T11:21:30Z"
+              required: false
+
+            lastUpdateChannelSource:
+              type: string
+              description: Channel on which has been made the last update at DB level
+              example: "Object Manager - Default"
+              required: false
+
+  _pagination:
+    type: object
+    description:
+    additionalProperties: false
+    properties:
+      currentPage:
+        description: The current page index
+        type: number
+        required: true
+        example: 2
+      pageSize:
+        description: The number of records returned
+        type: number
+        required: true
+        example: 10
+examples: !include ../../examples/serviceRequests/get-service-request-emails-response.raml

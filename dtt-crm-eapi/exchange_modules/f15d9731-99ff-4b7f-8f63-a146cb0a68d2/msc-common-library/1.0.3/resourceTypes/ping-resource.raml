@@ -1,0 +1,13 @@
+#%RAML 1.0 ResourceType
+
+usage: Provides common resource for ping endpoint
+
+is: [correlatable, errorLibrary.baseErrorJsonResponses]
+get:
+  description: Ping endpoint
+  responses:
+    200:
+      description: Retrieves static operational metadata information about the API.
+      body:
+        application/json:
+          type: !include ../dataTypes/ping.raml

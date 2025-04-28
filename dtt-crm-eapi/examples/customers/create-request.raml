@@ -1,0 +1,47 @@
+#%RAML 1.0 NamedExample
+
+FullRequest:
+  name: GARRETZENOTEST
+  surname: DOOLEYZENOTEST
+  dateOfBirth: 2001-08-05
+  customerId: "00300000000ABCAAO"
+  gender: MALE
+  language: ITA
+  nationality: ITA
+  marketCode: USA
+  officeCode: GBR
+  email:
+    address: abcd@gmail.com.au
+    isBlackListed: FALSE
+  loyaltyClubEmail:
+    address: abcd@gmail.com.au
+    isBlackListed: FALSE
+  mobilePhone:
+    number: "+3918452089123"
+  phone:
+    number: "+3913724685"
+  address:
+    addressLine1: TEST ADDRESS 2
+    state: GBR
+    districtName: VIERA
+    postCode: "28001"
+    region: CAMPANIA
+    country: ITALY
+    province: RM
+    town: DARLINGTON
+    acquisitionChannel: WEB CHECK-IN
+  marketingConsents:
+    email: true
+    loyaltyClubEmail: true
+    mobilePhone: true
+    phone: true
+    post: true
+  customerType: Prospect
+
+Only mandatory field request:
+  name: GARRETZENOTEST
+  surname: DOOLEYZENOTEST
+  customerId: "00300000000ABCAAO"
+  dateOfBirth: 2001-08-05
+  officeCode: GBR
+  customerType: Prospect

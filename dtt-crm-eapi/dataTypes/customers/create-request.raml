@@ -1,0 +1,24 @@
+#%RAML 1.0 DataType
+type: !include base-customer.raml
+description: Create customer details
+additionalProperties: false
+properties:
+  name:
+    description: Customer's name
+    type: string
+    required: true
+    example: "GARRETZENOTEST"
+  surname:
+    description: Customer's surname
+    type: string
+    required: true
+    example: "DOOLEYZENOTEST"
+  customerType:
+    description: Type of customer
+    type: string
+    enum:
+      - Prospect
+    required: true
+    example: Prospect
+
+examples: !include ../../examples/customers/create-request.raml
